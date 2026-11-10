@@ -84,7 +84,7 @@ function FacetGroup({
         >
           <span>
             {label}
-            {selected.length > 0 && <span className="ml-2 font-sans text-sm font-semibold normal-case text-red">{selected.length}</span>}
+            {selected.length > 0 && <span className="ml-2 font-sans text-sm font-semibold normal-case text-sign">{selected.length}</span>}
           </span>
           <ChevronIcon size={18} className={`transition-transform ${open ? "rotate-90" : ""}`} />
         </button>
@@ -138,7 +138,7 @@ function FilterPanel({
         <span className="font-semibold">In stock only</span>
         <span className="relative inline-flex">
           <input type="checkbox" role="switch" checked={f.inStock} onChange={(e) => onStock(e.target.checked)} className="peer sr-only" />
-          <span className="h-7 w-12 rounded-full bg-ink/20 transition-colors peer-checked:bg-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-red" />
+          <span className="h-7 w-12 rounded-full bg-ink/20 transition-colors peer-checked:bg-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sign" />
           <span className="absolute left-1 top-1 size-5 rounded-full bg-chalk shadow transition-transform peer-checked:translate-x-5" />
         </span>
       </label>
@@ -261,7 +261,7 @@ export function ShopView() {
             </p>
             <div className="flex items-center gap-2">
               <button type="button" onClick={() => setSheet(true)} className="inline-flex h-11 items-center gap-2 rounded-sm border-[1.5px] border-ink/30 px-4 font-semibold lg:hidden" aria-haspopup="dialog">
-                <FilterIcon size={18} /> Filters {active.length + (f.inStock ? 1 : 0) > 0 && <span className="grid size-5 place-items-center rounded-full bg-red text-xs text-white">{active.length + (f.inStock ? 1 : 0)}</span>}
+                <FilterIcon size={18} /> Filters {active.length + (f.inStock ? 1 : 0) > 0 && <span className="grid size-5 place-items-center rounded-full bg-sign text-xs text-white">{active.length + (f.inStock ? 1 : 0)}</span>}
               </button>
               <label htmlFor="sort" className="sr-only">
                 Sort by

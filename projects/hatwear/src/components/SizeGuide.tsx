@@ -10,14 +10,14 @@ export function HeadDiagram() {
   return (
     <svg viewBox="0 0 220 160" className="w-full max-w-[16rem]" aria-hidden="true">
       <ellipse cx="110" cy="96" rx="58" ry="60" fill="#e2dcd2" />
-      <path d="M52 92 C52 50 78 26 110 26 C142 26 168 50 168 92" fill="#2b2a28" />
-      <ellipse cx="110" cy="88" rx="66" ry="14" fill="none" stroke="#d2261c" strokeWidth="3" strokeDasharray="7 5" />
-      <path d="M176 88 L206 88" stroke="#d2261c" strokeWidth="2" />
-      <text x="206" y="80" textAnchor="end" fontSize="11" fontWeight="700" fill="#1a1918" fontFamily="var(--font-sans)">
+      <path d="M52 92 C52 50 78 26 110 26 C142 26 168 50 168 92" fill="#1d3557" />
+      <ellipse cx="110" cy="88" rx="66" ry="14" fill="none" stroke="#2557b8" strokeWidth="3" strokeDasharray="7 5" />
+      <path d="M176 88 L206 88" stroke="#2557b8" strokeWidth="2" />
+      <text x="206" y="80" textAnchor="end" fontSize="11" fontWeight="700" fill="#13233a" fontFamily="var(--font-sans)">
         tape here
       </text>
-      <circle cx="88" cy="104" r="3" fill="#1a1918" />
-      <circle cx="132" cy="104" r="3" fill="#1a1918" />
+      <circle cx="88" cy="104" r="3" fill="#13233a" />
+      <circle cx="132" cy="104" r="3" fill="#13233a" />
     </svg>
   );
 }
@@ -105,7 +105,7 @@ export function SizeGuideContent({ product, onPick }: { product?: Product; onPic
             {FITTED_SIZE_CHART.map((r) => {
               const hit = rec && !outOfRange && rec.size === r.size;
               return (
-                <tr key={r.size} className={`border-b border-ink/10 ${hit ? "bg-red/10 font-semibold" : ""}`}>
+                <tr key={r.size} className={`border-b border-ink/10 ${hit ? "bg-sign/10 font-semibold" : ""}`}>
                   <td className="py-2.5 font-semibold">{r.size}</td>
                   <td className="py-2.5">{r.inches}″</td>
                   <td className="py-2.5">{r.cm}</td>

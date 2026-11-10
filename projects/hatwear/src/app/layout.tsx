@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { display, sans, script } from "./fonts";
+import { sans, script } from "./fonts";
 import { Providers } from "@/components/Providers";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1a1918",
+  themeColor: "#1d3557",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${script.variable}`}>
+    <html lang="en" className={`${sans.variable} ${script.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <a href="#main" className="sr-only-focusable fixed left-3 top-3 z-[70] bg-ink px-4 py-3 font-semibold text-bone">
           Skip to content

@@ -74,7 +74,7 @@ export function AnnouncementBar() {
         {announcements.length > 1 && (
           <div className="hidden shrink-0 gap-1.5 sm:flex" aria-hidden="true">
             {announcements.map((x, n) => (
-              <span key={x.id} className={`h-1 w-4 rounded-full transition-colors ${n === i ? "bg-red" : "bg-bone/25"}`} />
+              <span key={x.id} className={`h-1 w-4 rounded-full transition-colors ${n === i ? "bg-sign" : "bg-bone/25"}`} />
             ))}
           </div>
         )}

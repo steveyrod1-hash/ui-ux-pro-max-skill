@@ -90,7 +90,7 @@ export default function StorePage() {
                       <ProductArt
                         type="fitted"
                         mark="HW"
-                        colors={{ crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#d2261c" }}
+                        colors={{ crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#2557b8" }}
                         className="mx-auto w-1/2 opacity-90"
                       />
                     )}
@@ -138,7 +138,7 @@ export default function StorePage() {
       </section>
 
       <section className="shell">
-        <div className="twill flex flex-col items-start justify-between gap-6 bg-red p-8 text-white sm:flex-row sm:items-center sm:p-12">
+        <div className="twill flex flex-col items-start justify-between gap-6 bg-sign p-8 text-white sm:flex-row sm:items-center sm:p-12">
           <p className="max-w-xl font-display text-[clamp(2rem,1.4rem+2.6vw,3.4rem)] font-black uppercase leading-[0.92]">
             Got an embroidery idea? Start it online, finish it at the counter.
           </p>

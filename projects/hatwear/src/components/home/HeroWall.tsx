@@ -32,10 +32,10 @@ export function HeroWall({ wall }: { wall: { product: Product; colorIndex: numbe
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1, duration: 0.6 }} className="text-[0.95rem] text-bone/70">
             Sports hats, beanies, streetwear and custom embroidery · Stockton, CA
           </motion.p>
-          <h1 id="hero-title" className="mt-4 font-display text-[clamp(4.2rem,1.6rem+11vw,10.5rem)] font-black uppercase leading-[0.82] tracking-[-0.01em]">
+          <h1 id="hero-title" className="mt-4 font-display text-[clamp(3.3rem,1rem+8.2vw,8.4rem)] font-black uppercase leading-[0.82] tracking-[-0.01em]">
             <Line delay={0.15}>More than</Line>
             <Line delay={0.27}>
-              a hat<span className="text-red">.</span>
+              a hat.
             </Line>
           </h1>
           <motion.p

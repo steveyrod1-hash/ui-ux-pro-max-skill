@@ -5,10 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { ProductArt } from "../ProductArt";
 
 const SAMPLES: { text: string; font: "block" | "athletic" | "script"; thread: string; crown: string }[] = [
-  { text: "209", font: "block", thread: "#d2261c", crown: "#1c1b1a" },
+  { text: "209", font: "block", thread: "#2557b8", crown: "#1c1b1a" },
   { text: "Lupe", font: "script", thread: "#efebe4", crown: "#1b2840" },
   { text: "TEAM", font: "athletic", thread: "#1c1b1a", crown: "#e9e4da" },
-  { text: "J.R.", font: "block", thread: "#e9b631", crown: "#2b2a28" },
+  { text: "J.R.", font: "block", thread: "#e9b631", crown: "#1d3557" },
 ];
 
 /** A close-up crown that re-stitches sample text while it is on screen. */

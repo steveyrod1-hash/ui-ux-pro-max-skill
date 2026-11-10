@@ -61,7 +61,7 @@ function NavList({
                 aria-current={active ? "page" : undefined}
                 className="group flex items-center justify-between border-b border-bone/12 py-3.5 font-display text-[2.1rem] font-extrabold uppercase leading-none tracking-wide"
               >
-                <span className={active ? "text-red" : ""}>{n.label}</span>
+                <span className={active ? "text-sign-light" : ""}>{n.label}</span>
                 <ArrowIcon size={22} className="text-bone/40 transition-transform group-hover:translate-x-1 group-hover:text-bone" />
               </Link>
             </motion.li>
@@ -71,7 +71,7 @@ function NavList({
     );
   }
   return (
-    <ul className="flex items-center gap-[clamp(0.6rem,1.4vw,1.6rem)]">
+    <ul className="flex items-center gap-[clamp(0.9rem,1.5vw,1.75rem)]">
       {NAV.map((n) => {
         const active = n.match(pathname, type);
         return (
@@ -79,13 +79,13 @@ function NavList({
             <Link
               href={n.href}
               aria-current={active ? "page" : undefined}
-              className="relative block py-2 font-display text-[1.02rem] font-bold uppercase tracking-[0.06em] text-ink/80 transition-colors hover:text-ink"
+              className="relative block whitespace-nowrap py-2 font-sans text-[0.8rem] font-extrabold uppercase tracking-[0.06em] text-ink/80 transition-colors hover:text-ink"
             >
               {n.label}
               {active && (
                 <motion.span
                   layoutId="nav-underline"
-                  className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-red"
+                  className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-sign"
                   transition={{ type: "spring", stiffness: 500, damping: 40 }}
                 />
               )}
@@ -363,7 +363,7 @@ export function Header() {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.4, opacity: 0 }}
                   transition={{ type: "spring", stiffness: 600, damping: 20 }}
-                  className="absolute right-0.5 top-0.5 grid min-w-[1.15rem] place-items-center rounded-full bg-red px-1 text-[0.72rem] font-bold leading-[1.15rem] text-white"
+                  className="absolute right-0.5 top-0.5 grid min-w-[1.15rem] place-items-center rounded-full bg-sign px-1 text-[0.72rem] font-bold leading-[1.15rem] text-white"
                 >
                   {count}
                 </motion.span>

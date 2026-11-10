@@ -90,25 +90,26 @@ These are the steps needed for a live store. None of them is done yet.
 
 ## Design system
 
-- **Concept:** "The Wall". A hat store's identity is its wall of crowns. The hero racks hats onto shelves, and everything else stays quiet.
-- **Colour:**
-  - Crown Black `#1a1918` and Charcoal `#2b2a28`
-  - Bone `#efebe4` and Felt `#e2dcd2`
-  - Stitch Red `#d2261c`, used only for actions, thread and the crown button
-- **Type:** Big Shoulders (condensed athletic display, wordmark) and Archivo (UI and body). Yellowtail is only for the "script" embroidery option.
-- **Signature details:** running-stitch dividers, woven-label badges, twill texture, and the six-panel crown mark with a red button.
-- **Imagery:** `src/components/ProductArt.tsx` draws every product as an SVG illustration, with views, satin-stitch embroidery and mesh or knit textures. Every image is labelled as an illustration, so nothing is passed off as a photo of real stock.
+- **Source:** the HatWear storefront sign, white letters on a navy facade, with the HW snapback between HAT and WEAR.
+- **Logo:** `src/components/Brand.tsx` redraws the sign as `Wordmark` (HAT [cap] WEAR) and `CapMark` (the HW snapback, also the favicon). Swap in the official vector logo files when available.
+- **Colour** (`src/app/globals.css` `@theme`):
+  - Navy: Ink `#13233a` and Charcoal `#1d3557`
+  - White and cool tints: Bone `#ffffff`, Chalk `#f4f7fb`, Felt `#e9eff6`
+  - Sign Blue `#2557b8` for buttons, links and focus, and Sign Light `#9cc0ff` for accents on navy
+- **Type:** Archivo throughout. Headings and the wordmark use its wide, heavy cut (`wdth` 118–125, weight 900) to match the sign. Yellowtail is only for the "script" embroidery option.
+- **Details:** running-stitch dividers, woven-label badges, and twill texture on navy sections.
+- **Imagery:** `src/components/ProductArt.tsx` draws every product as a labelled SVG illustration until real photos are added.
 - **Motion:** Motion for React.
-  - One orchestrated hero entrance.
-  - Clip-path image reveals on scroll.
-  - Spring cart and menu sheets.
-  - Shared-layout indicators for nav, tabs and size selection.
+  - One hero entrance.
+  - Clip-path reveals on scroll.
+  - Spring sheets for the cart and menu.
+  - Shared-layout indicators.
   - Crossfades for galleries and variants.
-  - `MotionConfig reducedMotion="user"` respects the visitor's reduced-motion setting everywhere.
+  - `MotionConfig reducedMotion="user"` respects the visitor's setting.
 - **Accessibility:**
   - skip link, labelled landmarks, focus-trapped modals, and Escape to close
   - visible focus and 44px touch targets
-  - AA contrast checked with the Impeccable detector (see below)
+  - AA contrast
 
 ## Audit notes
 
@@ -119,9 +120,6 @@ The rendered pages were checked with Impeccable's detector. Fixed:
 - heading order
 - line length
 
-Two flags are kept on purpose:
-
-- **"Cream background":** the off-white Bone surface was specified in the brief.
-- **"Purple palette":** the purple comes from the Kings and Lakers team colourways, not the brand palette.
+One flag is kept on purpose: the **"purple palette"** comes from the Kings and Lakers team colourways, not the brand palette.
 
 The disabled sold-out size chips are below 4.5:1, which WCAG permits for disabled controls.

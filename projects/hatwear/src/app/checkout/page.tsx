@@ -53,7 +53,7 @@ export default function CheckoutPage() {
       <h1 className="text-[clamp(2.8rem,1.6rem+5vw,6rem)] uppercase">Review your order</h1>
 
       {DEMO_CHECKOUT && (
-        <div className="mt-6 border-l-4 border-red bg-chalk p-5" role="note">
+        <div className="mt-6 border-l-4 border-sign bg-chalk p-5" role="note">
           <p className="font-display text-2xl font-black uppercase">Online payment isn't connected yet</p>
           <p className="mt-1 max-w-2xl text-graphite">
             This is a preview of the shop. Nothing is charged and no order is placed from this page. To get these items, send the list to the store or call, and HatWear will confirm stock and price with you.

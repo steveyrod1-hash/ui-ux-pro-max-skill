@@ -28,7 +28,7 @@ export function OpenNow({ className = "" }: { className?: string }) {
   if (!label) return <span className={`inline-block h-6 ${className}`} aria-hidden="true" />;
   return (
     <span className={`inline-flex items-center gap-2 font-semibold ${className}`}>
-      <span className={`size-2.5 rounded-full ${label.open ? "bg-ok" : "bg-red"}`} aria-hidden="true" />
+      <span className={`size-2.5 rounded-full ${label.open ? "bg-ok" : "bg-sign"}`} aria-hidden="true" />
       {label.text}
     </span>
   );

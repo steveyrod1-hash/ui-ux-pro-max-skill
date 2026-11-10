@@ -17,7 +17,7 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
     label: "Fitted Hats",
     href: "/shop?type=fitted",
     types: ["fitted"],
-    art: { type: "fitted", mark: "HW", colors: { crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#d2261c" } },
+    art: { type: "fitted", mark: "HW", colors: { crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#2557b8" } },
     tone: "dark",
     blurb: "Sized to your head, from 6 7/8 to 8.",
   },
@@ -41,7 +41,7 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
     label: "Beanies",
     href: "/shop?type=beanie",
     types: ["beanie"],
-    art: { type: "beanie", mark: "HATWEAR", colors: { crown: "#2b2a28", visor: "#2b2a28", under: "#2b2a28", button: "#2b2a28", mark: "#d2261c", trim: "#232221" } },
+    art: { type: "beanie", mark: "HATWEAR", colors: { crown: "#1d3557", visor: "#1d3557", under: "#1d3557", button: "#1d3557", mark: "#2557b8", trim: "#232221" } },
     tone: "felt",
     blurb: "Cuffed rib knits.",
   },
@@ -58,7 +58,7 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
 const TONE: Record<(typeof STYLES)[number]["tone"], string> = {
   dark: "bg-ink text-bone twill",
   felt: "bg-felt text-ink",
-  red: "bg-red text-white",
+  red: "bg-sign text-white",
   bone: "bg-chalk text-ink",
 };
 
@@ -106,7 +106,7 @@ export default function Home() {
             >
               <Link href={s.href} className={`group relative flex h-full flex-col justify-between overflow-hidden p-5 sm:p-6 ${TONE[s.tone]} ${i === 0 ? "min-h-[21rem] lg:min-h-[34rem]" : "min-h-[15rem] lg:min-h-[16.5rem]"}`}>
                 <div className="relative z-10">
-                  <h3 className={`uppercase ${i === 0 ? "text-[clamp(2.6rem,2rem+3vw,4.6rem)]" : "text-[clamp(1.9rem,1.5rem+1.4vw,2.6rem)]"}`}>{s.label}</h3>
+                  <h3 className={`uppercase ${i === 0 ? "text-[clamp(2.2rem,1.6rem+2.6vw,4rem)]" : "text-[clamp(1.35rem,1rem+1.1vw,1.95rem)]"}`}>{s.label}</h3>
                   <p className={`mt-2 max-w-[13rem] text-sm ${s.tone === "dark" ? "text-bone/70" : "text-graphite"}`}>{s.blurb}</p>
                 </div>
                 <div
@@ -185,7 +185,7 @@ export default function Home() {
                 ["Send the request", "HatWear checks the details and contacts you with a quote."],
               ].map(([t, d], i) => (
                 <li key={t} className="grid grid-cols-[2.6rem_1fr] gap-3 border-b border-bone/15 py-4">
-                  <span className="font-display text-3xl font-black text-red">{i + 1}</span>
+                  <span className="font-display text-3xl font-black text-sign-light">{i + 1}</span>
                   <span>
                     <span className="block font-semibold">{t}</span>
                     <span className="text-bone/70">{d}</span>

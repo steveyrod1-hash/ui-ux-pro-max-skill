@@ -1,12 +1,6 @@
-import { Archivo, Big_Shoulders, Yellowtail } from "next/font/google";
+import { Archivo, Yellowtail } from "next/font/google";
 
-export const display = Big_Shoulders({
-  subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
-  variable: "--font-hw-display",
-  display: "swap",
-});
-
+/** Archivo carries everything; headings use its wide, heavy cut to match the store sign. */
 export const sans = Archivo({
   subsets: ["latin"],
   axes: ["wdth"],
