@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/design-toolkit/demo/index.html"
+        ],
+        "createdAt": "2026-11-10T00:57:52.096Z",
+        "reason": "Claude: static parse cannot resolve clamp()/var() padding on .shore; rendered-page detect on localhost reports 0 anti-patterns"
+      }
+    ]
+  }
+}
