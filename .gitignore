@@ -57,3 +57,6 @@ ui-ux-pro-max-website/*
 
 cli/playwright-report/
 cli/test-results/
+
+# Impeccable design-hook cache (per machine)
+.impeccable/hook.cache.json

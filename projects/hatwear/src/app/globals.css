@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   HatWear design tokens
+   Crown Black and Charcoal carry the brand; Bone and Felt are the paper;
+   Stitch Red is reserved for actions, the thread, and the crown button.
+---------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #1a1918;
+  --color-charcoal: #2b2a28;
+  --color-graphite: #4a4844;
+  --color-stone: #6b675f;
+  --color-bone: #efebe4;
+  --color-felt: #e2dcd2;
+  --color-chalk: #f8f6f2;
+  --color-red: #d2261c;
+  --color-red-deep: #b01f17;
+  --color-ok: #2f6b3a;
+  --color-warn: #8a5a00;
+
+  --font-display: var(--font-hw-display), Impact, "Arial Narrow", sans-serif;
+  --font-sans: var(--font-hw-sans), system-ui, sans-serif;
+  --font-script: var(--font-hw-script), "Brush Script MT", cursive;
+
+  --text-display: clamp(3.4rem, 1.2rem + 10.5vw, 11.5rem);
+  --text-mega: clamp(2.6rem, 1.4rem + 5vw, 6rem);
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --radius-label: 3px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-bone);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-red);
+    color: var(--color-chalk);
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-stone);
+    opacity: 1;
+  }
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  /* Running stitch: the brand's divider. */
+  .stitch {
+    height: 2px;
+    background-image: repeating-linear-gradient(90deg, currentColor 0 9px, transparent 9px 15px);
+    opacity: 0.55;
+  }
+  .stitch-v {
+    width: 2px;
+    background-image: repeating-linear-gradient(180deg, currentColor 0 9px, transparent 9px 15px);
+    opacity: 0.55;
+  }
+
+  /* Woven label badge with a stitched inner border. */
+  .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.28rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 650;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    border-radius: var(--radius-label);
+    background: var(--color-ink);
+    color: var(--color-bone);
+    box-shadow: inset 0 0 0 2px var(--color-ink), inset 0 0 0 3px rgba(239, 235, 228, 0.35);
+  }
+  .label-red {
+    background: var(--color-red);
+    box-shadow: inset 0 0 0 2px var(--color-red), inset 0 0 0 3px rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
+  .label-bone {
+    background: var(--color-chalk);
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 2px var(--color-chalk), inset 0 0 0 3px rgba(26, 25, 24, 0.25);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition:
+      background-color 160ms var(--ease-out-quart),
+      color 160ms var(--ease-out-quart),
+      box-shadow 160ms var(--ease-out-quart),
+      transform 160ms var(--ease-out-quart);
+    cursor: pointer;
+    user-select: none;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--color-red);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-red-deep);
+  }
+  .btn-dark {
+    background: var(--color-ink);
+    color: var(--color-bone);
+  }
+  .btn-dark:hover:not(:disabled) {
+    background: var(--color-charcoal);
+  }
+  .btn-ghost {
+    box-shadow: inset 0 0 0 2px currentColor;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: currentColor;
+  }
+  .btn-ghost:hover:not(:disabled) > * {
+    color: var(--color-bone);
+  }
+  .btn-ghost-dark:hover:not(:disabled) {
+    background: var(--color-ink);
+    color: var(--color-bone);
+  }
+  .btn-ghost-light:hover:not(:disabled) {
+    background: var(--color-bone);
+    color: var(--color-ink);
+  }
+
+  .link {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
+  }
+  .link:hover {
+    text-decoration-color: var(--color-red);
+  }
+
+  .field {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--color-chalk);
+    border: 1.5px solid #bdb6aa;
+    border-radius: 2px;
+    color: var(--color-ink);
+    font: inherit;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-ink);
+    box-shadow: 0 0 0 3px rgba(210, 38, 28, 0.25);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-red);
+  }
+
+  .shell {
+    width: 100%;
+    max-width: 92rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3rem);
+  }
+
+  /* Twill texture for dark surfaces. */
+  .twill {
+    background-image: repeating-linear-gradient(
+      130deg,
+      rgba(255, 255, 255, 0.025) 0 2px,
+      transparent 2px 6px
+    );
+  }
+  .twill-light {
+    background-image: repeating-linear-gradient(130deg, rgba(26, 25, 24, 0.035) 0 2px, transparent 2px 6px);
+  }
+}
+
+/* Visually hidden but available to assistive tech. */
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
