@@ -44,7 +44,7 @@ function cw(
   };
 }
 
-interface Team {
+export interface Team {
   name: string;
   league: League;
   code: string;
@@ -52,7 +52,7 @@ interface Team {
   secondary: string;
 }
 
-const TEAMS: Team[] = [
+export const TEAMS: Team[] = [
   { name: "San Francisco Giants", league: "MLB", code: "SF", primary: ["#1c1b1a", "Black"], secondary: "#e8622c" },
   { name: "Athletics", league: "MLB", code: "ATH", primary: ["#123a2f", "Green"], secondary: "#e9b631" },
   { name: "Los Angeles Dodgers", league: "MLB", code: "LA", primary: ["#1f4f8f", "Royal"], secondary: "#f4f1ea" },
@@ -91,7 +91,7 @@ const BASE_PRICE: Record<ProductType, number> = {
   windbreaker: 76,
 };
 
-const DETAILS: Record<ProductType, string[]> = {
+export const DETAILS: Record<ProductType, string[]> = {
   fitted: ["Structured high crown, six panels", "Flat visor with tonal underbrim", "Closed back, sized fit", "Raised front embroidery"],
   snapback: ["Structured high crown, six panels", "Flat visor", "Adjustable snap closure", "Raised front embroidery"],
   trucker: ["Foam-backed front panels", "Breathable mesh back", "Pre-curved visor", "Adjustable snap closure"],
@@ -101,7 +101,7 @@ const DETAILS: Record<ProductType, string[]> = {
   windbreaker: ["Lightweight woven shell", "Full zip with chin guard", "Elastic cuffs", "Packable"],
 };
 
-const CARE: Record<ProductType, string[]> = {
+export const CARE: Record<ProductType, string[]> = {
   fitted: ["Spot clean with a damp cloth", "Do not machine wash or tumble dry", "Store on a crown form to keep its shape"],
   snapback: ["Spot clean with a damp cloth", "Do not machine wash or tumble dry", "Keep out of hot cars to protect the visor"],
   trucker: ["Spot clean the front, rinse mesh gently", "Air dry only"],
@@ -383,7 +383,8 @@ const originals: Parameters<typeof add>[0][] = [
 ];
 originals.forEach(add);
 
-export const catalog: Product[] = products;
+/** Sample products used until a real catalog (Clover) is connected. */
+export const sampleCatalog: Product[] = products;
 
 export const LEAGUES: League[] = ["MLB", "NFL", "NBA"];
 

@@ -10,6 +10,7 @@ import { ProductMedia, hasPhotos } from "../ProductMedia";
 import type { ArtView } from "../ProductArt";
 import { PurchasePanel } from "../PurchasePanel";
 import { ChevronIcon } from "../Icons";
+import { DEMO_CHECKOUT } from "@/content/site";
 
 const VIEWS: { id: ArtView; label: string }[] = [
   { id: "front", label: "Front" },
@@ -186,7 +187,10 @@ export function ProductDetail({ product }: { product: Product }) {
             </Disclosure>
             <Disclosure title="Pickup and returns">
               <p>
-                Online ordering is not switched on yet. Call the store to check stock, or come in and try it on. Return and exchange terms will be published here once the store confirms them.
+                {DEMO_CHECKOUT
+                  ? "Online ordering is not switched on yet. Call the store to check stock, or come in and try it on."
+                  : "Order online and pick up free at the store inside Sherwood Place. HatWear lets you know when it's ready."}{" "}
+                Return and exchange terms will be published here once the store confirms them.
               </p>
             </Disclosure>
           </div>

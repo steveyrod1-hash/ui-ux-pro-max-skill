@@ -7,7 +7,7 @@ import { ProductArt } from "@/components/ProductArt";
 import { RevealImage, Stagger, StaggerItem } from "@/components/Reveal";
 import { AddressBlock, HoursList, MapFrame, StoreActions } from "@/components/StoreVisit";
 import { ArrowIcon } from "@/components/Icons";
-import { getAllProducts, getNewArrivals, LEAGUES, TEAMS_BY_LEAGUE, teamCounts } from "@/lib/catalog";
+import { getAllProducts, getNewArrivals, LEAGUES, TEAMS_BY_LEAGUE, teamCounts, unitsFor } from "@/lib/catalog";
 import { TEAM_CODES } from "@/data/catalog";
 import type { ArtColors, ProductType } from "@/data/types";
 import { DEMO_CATALOG } from "@/content/site";
@@ -81,6 +81,16 @@ export default function Home() {
     const product = find(slug);
     return product ? [{ product, colorIndex }] : [];
   });
+  // With a real catalog the curated sample picks won't exist: fill the wall with in-stock hats.
+  if (wall.length < 9) {
+    const used = new Set(wall.map((w) => w.product.id));
+    for (const product of all) {
+      if (wall.length >= 9) break;
+      if (used.has(product.id) || !["fitted", "snapback", "trucker", "adjustable"].includes(product.type) || unitsFor(product) === 0) continue;
+      wall.push({ product, colorIndex: 0 });
+      used.add(product.id);
+    }
+  }
   const countFor = (types: ProductType[]) => all.filter((p) => types.includes(p.type)).length;
 
   return (
@@ -126,6 +136,7 @@ export default function Home() {
       </section>
 
       {/* New arrivals */}
+      {arrivals.length > 0 && (
       <section className="bg-chalk py-16 sm:py-24" aria-labelledby="new-title">
         <div className="shell">
           <div className="flex flex-wrap items-end justify-between gap-4">
@@ -148,6 +159,7 @@ export default function Home() {
           </Stagger>
         </div>
       </section>
+      )}
 
       {/* Shop by team */}
       <section className="shell grid gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.6fr] lg:gap-16" aria-labelledby="teams-title">

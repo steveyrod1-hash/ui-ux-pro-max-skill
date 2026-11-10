@@ -4,10 +4,20 @@
  * (Shopify Storefront API, Square, a headless CMS) only means changing the
  * implementations below, not the UI.
  */
-import { catalog, LEAGUES, TEAMS_BY_LEAGUE, TYPE_LABELS } from "@/data/catalog";
+import { LEAGUES, sampleCatalog, TEAMS_BY_LEAGUE, TYPE_LABELS } from "@/data/catalog";
+import cloverRaw from "@/data/clover-raw.generated.json";
+import { mapCloverCatalog, type CloverRaw } from "@/lib/clover/map";
 import type { Availability, League, Product, ProductType } from "@/data/types";
 
 export { LEAGUES, TEAMS_BY_LEAGUE, TYPE_LABELS };
+
+// Live Clover inventory when the build synced it; the sample catalog otherwise.
+const live = cloverRaw ? mapCloverCatalog(cloverRaw as unknown as CloverRaw) : [];
+const catalog: Product[] = live.length > 0 ? live : sampleCatalog;
+
+/** True when products, prices and stock come from Clover. */
+export const IS_LIVE_CATALOG = live.length > 0;
+export const CATALOG_SYNCED_AT: string | null = cloverRaw ? (cloverRaw as unknown as CloverRaw).fetchedAt : null;
 
 export const HAT_TYPES: ProductType[] = ["fitted", "snapback", "trucker", "adjustable", "beanie"];
 export const APPAREL_TYPES: ProductType[] = ["hoodie", "windbreaker"];

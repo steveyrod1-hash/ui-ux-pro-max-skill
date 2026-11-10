@@ -1,3 +1,6 @@
+import { IS_LIVE_CATALOG } from "@/lib/catalog";
+import { cloverPublic } from "@/lib/clover/config";
+
 /**
  * Business facts and owner-editable content.
  *
@@ -100,8 +103,8 @@ export const embroideryPricing = {
   customArtworkSetup: null as number | null,
 };
 
-/** While true, every product, price and stock level is sample data. */
-export const DEMO_CATALOG = true;
+/** True while products, prices and stock are sample data (no Clover catalog synced). */
+export const DEMO_CATALOG = !IS_LIVE_CATALOG;
 
-/** While true, checkout never charges or submits an order. */
-export const DEMO_CHECKOUT = true;
+/** True while online payment isn't connected (no Clover public key). */
+export const DEMO_CHECKOUT = !cloverPublic.enabled;

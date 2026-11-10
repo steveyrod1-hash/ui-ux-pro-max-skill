@@ -77,6 +77,10 @@ export interface Product {
   images?: Record<string, ProductImage[]>;
   /** Can be sent to the embroidery studio as a base item. */
   embroideryReady?: boolean;
+  /** Clover inventory item id for each colourway + size (live catalog only). */
+  variantIds?: Record<string, Record<string, string>>;
+  /** Where the product came from. */
+  source?: "sample" | "clover";
 }
 
 export type Availability = "in-stock" | "low-stock" | "sold-out";

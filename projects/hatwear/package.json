@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/sync-clover.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/sync-clover.mjs",
     "build": "next build",
     "start": "next start",
+    "sync:clover": "node scripts/sync-clover.mjs",
     "typecheck": "tsc --noEmit",
-    "test:e2e": "node tests/e2e.mjs"
+    "test:e2e": "node tests/e2e.mjs",
+    "test:clover": "node tests/clover-checkout.mjs"
   },
   "dependencies": {
     "motion": "14.7.1",
@@ -23,5 +27,8 @@
     "@types/react-dom": "19.3.0",
     "tailwindcss": "4.3.3",
     "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=20.9"
   }
 }

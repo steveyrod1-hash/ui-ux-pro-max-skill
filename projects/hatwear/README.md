@@ -73,12 +73,78 @@ SEO includes:
 | Embroidery options (bases, threads, placements, limits) | `src/lib/embroidery.ts` |
 | Brand colours, type, buttons | `src/app/globals.css` (`@theme` tokens) |
 
+## Connect Clover (products, stock and payments)
+
+The site is built to run on HatWear's Clover account:
+
+- **Products:** products, sizes, colours, prices and stock are read from Clover inventory at every build.
+- **Payments:** online payments are charged through Clover, using Clover's secure card form plus Google Pay.
+- **Orders:** each sale is created as a Clover order, with the customer's name and phone in the order note, for **in-store pickup**.
+
+Until the values below are set, the site stays in preview mode: sample products and no payments.
+
+### 1. Turn on online payments in Clover
+In the Clover web dashboard, open **Settings → View all settings → Ecommerce**. If you don't see Ecommerce or online payments, ask Clover or Fiserv support to enable **Clover Ecommerce (card-not-present) payments** for the account.
+
+### 2. Create the payment keys
+1. **Settings → View all settings → Ecommerce → Ecommerce API Tokens.** Clover asks you to switch on two-factor sign-in the first time.
+2. Choose **Create New Token**, with integration type **Hosted iFrame + API/SDK**.
+3. Copy:
+   - the **public token** → `NEXT_PUBLIC_CLOVER_PUBLIC_KEY`
+   - the **private token** → `CLOVER_ECOMM_PRIVATE_KEY`
+
+   Keep the private token secret.
+
+### 3. Create the inventory/orders key
+1. In the dashboard's **API Tokens** page (under Setup or Account settings), create a token with these permissions:
+   - **Inventory: Read**
+   - **Orders: Read and Write**
+   - **Merchant: Read**
+2. Save it as `CLOVER_API_TOKEN`.
+
+### 4. Find the merchant ID
+It's on the dashboard's account or merchant settings page, and in the dashboard URL after `/m/`. Set it as both `CLOVER_MERCHANT_ID` and `NEXT_PUBLIC_CLOVER_MERCHANT_ID`.
+
+### 5. Get the inventory ready
+- **One product = one item group.** For example, "Giants 59FIFTY Fitted Black" is a group with a **Size** attribute (7, 7 1/8, …) and optionally **Color**. Each size is its own item with its own stock.
+- **Category:** put the style (Fitted, Snapback, Trucker, Dad Hat, Beanie, Hoodie, Windbreaker) in the category or name.
+- **Team names:** include them in the name ("Giants", "49ers", "Warriors").
+- **Online category:** create a category such as **Website**, add the items you want online, and set `CLOVER_ONLINE_CATEGORY=Website`.
+- **Stock and price:** turn on stock tracking and give each item a fixed price. Unpriced and hidden items never appear online.
+- **Optional order type:** create an order type such as "Website pickup" and set `CLOVER_ORDER_TYPE_ID`.
+
+### 6. Add the values to Vercel and test first
+1. In Vercel, go to **Project → Settings → Environment Variables** and add the variables above (see `.env.example`).
+2. **Start with a sandbox test merchant:**
+   - Clover Global Developer Dashboard → test merchant → its own tokens
+   - set `CLOVER_ENV=sandbox` and `NEXT_PUBLIC_CLOVER_ENV=sandbox`
+   - pay with Clover test cards
+3. Check that the test order appears in Clover with the right items, tax and note.
+4. Check that the item's stock went down. If it didn't, set `CLOVER_DECREMENT_STOCK=1`.
+5. Switch everything to the production keys, with both env settings set to `production`, and redeploy.
+
+### 7. Keep products fresh
+- **Daily refresh:** create a Deploy Hook in Vercel (**Settings → Git → Deploy Hooks**), save its URL as `VERCEL_DEPLOY_HOOK_URL`, and set a random `CRON_SECRET`. The site then rebuilds every day (`vercel.json`).
+- **Refresh now:** open `/api/catalog/refresh?token=ADMIN_TOKEN`.
+- **Overselling is impossible:** checkout always re-checks the live Clover price and stock before charging, so a page that's a day old can't oversell.
+
+### What's tested
+`npm run test:clover` runs 12 checks against a local stand-in for Clover's APIs (`tests/clover-mock.mjs`):
+
+- catalog sync and filtering
+- product pages built from Clover variants
+- live price, stock and tax checks
+- a paid order with the customer note
+- no double charges on retry
+- declined cards cancelling the order
+- the full browser checkout
+
+It doesn't replace one real sandbox order with HatWear's own Clover account (step 6).
+
 ## Before accepting real customer orders
 
-These are the steps needed for a live store. None of them is done yet.
-
-1. **Real catalog.** Replace the sample data with HatWear's inventory. The cleanest path is a commerce backend: the store already uses a `src/lib/catalog.ts` access layer, so connect Shopify (Storefront API), Square Online or a headless CMS there and the pages keep working. Set `DEMO_CATALOG = false`.
-2. **Payments.** Connect a provider and its hosted checkout (Shopify Checkout, Stripe Checkout or Square). Replace the cart persistence in `src/lib/store.tsx` with the provider's cart API, point "Checkout" at the hosted checkout, and set `DEMO_CHECKOUT = false`. Card details should never touch this server.
+1. **Connect Clover**, following the steps above. Until then the site shows sample products and checkout stays in preview mode.
+2. **Add real inventory to Clover's "Website" category.** Products, prices and stock then come from Clover automatically.
 3. **Policies.** Shipping or local pickup, returns and exchanges, sales tax, a privacy policy and terms. The product page currently says returns terms are pending.
 4. **Business details.** Hours (Mon–Fri 11–7, Sat 11–8, Sun 11–7), the Sherwood Place location, and the advertised "embroidery from $7.99" now come from the store's Google listing and Instagram. Keep `src/content/site.ts` in step if they change, and confirm which brands and leagues the store stocks.
 5. **Embroidery request delivery.** Set `EMBROIDERY_WEBHOOK_URL` (Slack, Zapier, Make or an email service) so each request reaches the owner immediately. Requests are also saved under `.data/`, but on serverless hosting that folder is temporary, so use the webhook or swap `src/lib/requests-store.ts` for a database or object storage. Set `ADMIN_TOKEN` to use `/admin/requests`.

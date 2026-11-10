@@ -7,13 +7,14 @@ import { money, plural } from "@/lib/format";
 import { ProductMedia } from "@/components/ProductMedia";
 import { CheckIcon, PhoneIcon } from "@/components/Icons";
 import { DEMO_CATALOG, DEMO_CHECKOUT, site } from "@/content/site";
+import { CloverCheckout } from "@/components/checkout/CloverCheckout";
 
 /**
  * Checkout. In demo mode nothing is charged or submitted: the page lets the
  * customer send their list to the store instead. To go live, replace the
  * "Payment" section with the commerce provider's hosted checkout (see README).
  */
-export default function CheckoutPage() {
+function DemoCheckout() {
   const { lines, subtotal, count, hydrated } = useStore();
   const [copied, setCopied] = useState(false);
 
@@ -131,4 +132,9 @@ export default function CheckoutPage() {
       </div>
     </div>
   );
+}
+
+/** Live Clover checkout once the public key is configured; the demo page until then. */
+export default function CheckoutPage() {
+  return DEMO_CHECKOUT ? <DemoCheckout /> : <CloverCheckout />;
 }
