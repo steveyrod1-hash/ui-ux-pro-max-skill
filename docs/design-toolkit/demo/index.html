@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saltmarrow Rockpool Club</title>
+  <meta name="description" content="Low-water times for Saltmarrow Bay and what each tide uncovers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to tide times</a>
+
+  <header class="masthead">
+    <p class="club">Saltmarrow Rockpool Club</p>
+    <nav aria-label="Sections">
+      <a href="#tides">Tides</a>
+      <a href="#shore">The shore</a>
+      <a href="#pooling">Before you go</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="tides" aria-labelledby="hero-title">
+      <h1 id="hero-title">
+        Low water <span class="when" data-low-time>--:--</span>
+      </h1>
+      <p class="lede" data-low-summary aria-live="polite">Working out today's tide.</p>
+
+      <figure class="chart">
+        <svg viewBox="0 0 1000 300" role="img" aria-labelledby="chart-title" preserveAspectRatio="none">
+          <title id="chart-title">Tide height over 24 hours</title>
+          <g class="grid" aria-hidden="true">
+            <line x1="0" x2="1000" y1="60" y2="60"/>
+            <line x1="0" x2="1000" y1="150" y2="150"/>
+            <line x1="0" x2="1000" y1="240" y2="240"/>
+          </g>
+          <path class="water" data-water d=""/>
+          <path class="curve" data-curve d=""/>
+          <line class="low-rule" data-low-rule x1="0" x2="0" y1="0" y2="300"/>
+          <circle class="low-dot" data-low-dot r="9" cx="0" cy="0"/>
+        </svg>
+        <div class="axis" aria-hidden="true">
+          <span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span>
+        </div>
+        <figcaption>Height above chart datum, 0–5 m. Sample data for a fictional bay.</figcaption>
+      </figure>
+
+      <fieldset class="days">
+        <legend>Choose a day</legend>
+        <div class="day-list" data-days></div>
+      </fieldset>
+    </section>
+
+    <section class="shore" id="shore" aria-labelledby="shore-title">
+      <div class="shore-copy">
+        <h2 id="shore-title">What the water uncovers</h2>
+        <p>Keep scrolling and the tide goes out. Each band of the shore is dry for less of the day than the one above it, so the lowest pools hold the strangest residents.</p>
+      </div>
+
+      <div class="shore-body">
+        <div class="shore-diagram" aria-hidden="true">
+          <div class="band band-splash"></div>
+          <div class="band band-upper"></div>
+          <div class="band band-middle"></div>
+          <div class="band band-lower"></div>
+          <div class="sea" data-sea></div>
+        </div>
+
+        <ol class="zones">
+          <li>
+            <h3>Splash zone</h3>
+            <p class="height">Above 4.5 m. Dry except in storms.</p>
+            <p>Black lichen and small periwinkles that can go weeks without a wave.</p>
+          </li>
+          <li>
+            <h3>Upper shore</h3>
+            <p class="height">3.5 to 4.5 m. Dry most of the day.</p>
+            <p>Channelled wrack, limpets clamped tight, acorn barnacles closed against the sun.</p>
+          </li>
+          <li>
+            <h3>Middle shore</h3>
+            <p class="height">1.5 to 3.5 m. Exposed twice a day.</p>
+            <p>Beadlet anemones, shore crabs under bladderwrack, blennies in the deeper pools.</p>
+          </li>
+          <li>
+            <h3>Lower shore</h3>
+            <p class="height">Below 1.5 m. Open only near low water.</p>
+            <p>Kelp holdfasts, brittlestars, squat lobsters and, on the best spring tides, a cushion star.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="pooling" id="pooling" aria-labelledby="pooling-title">
+      <h2 id="pooling-title">Before you go</h2>
+      <ul>
+        <li><strong>Arrive an hour before low water</strong> and turn back as soon as it turns. The lower shore floods first.</li>
+        <li><strong>Put every rock back the way you found it.</strong> The underside is someone's roof.</li>
+        <li><strong>Look with your eyes, then a tub.</strong> Fill it with pool water, keep it in the shade, and return animals to the same pool.</li>
+      </ul>
+      <button class="remind" type="button" data-remind>Download calendar reminder</button>
+      <p class="remind-status" data-remind-status aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Tide figures are generated for this demo and are not for navigation.</p>
+  </footer>
+
+  <script src="vendor/motion-14.6.0.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
