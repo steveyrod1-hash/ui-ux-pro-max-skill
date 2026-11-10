@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HatWear Stockton</title>
+<meta name="description" content="HatWear is a specialty headwear and streetwear shop in Stockton, CA. Officially licensed MLB, NFL and NBA fitteds, snapbacks, beanies, exclusive drops and custom embroidery from $7.99.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0f;
+    --ink-2: #17171b;
+    --ink-3: #222228;
+    --paper: #f4efe6;
+    --paper-dim: #c9c3b8;
+    --muted: #9a958c;
+    --red: #e23b2e;
+    --red-hi: #ff5a4b;
+    --gold: #e9b949;
+    --line: rgba(244, 239, 230, .14);
+    --radius: 14px;
+    --max: 1200px;
+    --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+    --body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: min(100% - 32px, var(--max)); margin-inline: auto; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 16px; top: 16px; z-index: 100; background: var(--paper); color: var(--ink); padding: 8px 14px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    min-height: 48px; padding: 0 22px;
+    font: 700 15px/1 var(--body); letter-spacing: .06em; text-transform: uppercase;
+    text-decoration: none; border-radius: 999px; cursor: pointer;
+    border: 2px solid transparent;
+    transition: background-color .2s, color .2s, border-color .2s, transform .2s;
+  }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-primary:hover { background: var(--red-hi); transform: translateY(-2px); }
+  .btn-ghost { border-color: var(--line); color: var(--paper); }
+  .btn-ghost:hover { border-color: var(--paper); transform: translateY(-2px); }
+  .btn-dark { background: var(--ink); color: var(--paper); }
+  .btn-dark:hover { background: var(--ink-3); transform: translateY(-2px); }
+
+  /* ---------- Header ---------- */
+  header.top {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(13, 13, 15, .82);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+  .logo { font: 400 30px/1 var(--display); letter-spacing: .02em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  .logo .dot { color: var(--red); }
+  .logo svg { width: 34px; height: 34px; }
+  .nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav ul a { text-decoration: none; font-weight: 600; font-size: 15px; color: var(--paper-dim); transition: color .2s; }
+  .nav ul a:hover { color: var(--paper); }
+  .nav .btn { min-height: 42px; padding: 0 18px; font-size: 13px; }
+  @media (max-width: 820px) { .nav ul { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; padding: 72px 0 40px; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold);
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+  h1 {
+    font: 400 clamp(64px, 11vw, 148px)/.86 var(--display);
+    letter-spacing: -.005em; text-transform: uppercase; margin: 18px 0 22px;
+  }
+  h1 .red { color: var(--red); }
+  h1 .outline { color: transparent; -webkit-text-stroke: 2px var(--paper); }
+  .lede { font-size: clamp(17px, 2vw, 20px); color: var(--paper-dim); max-width: 34ch; margin: 0 0 30px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .rating {
+    display: flex; align-items: center; gap: 14px; margin-top: 34px;
+    font-size: 14px; color: var(--paper-dim);
+  }
+  .stars { display: flex; gap: 2px; color: var(--gold); }
+  .stars svg { width: 18px; height: 18px; }
+  .stars .off { color: var(--ink-3); }
+  .rating strong { color: var(--paper); font-size: 16px; }
+
+  /* Cap wall */
+  .wall {
+    position: relative; aspect-ratio: 1 / 1.02;
+    background:
+      repeating-linear-gradient(0deg, transparent 0 calc(25% - 6px), #2d2a26 calc(25% - 6px) 25%),
+      linear-gradient(180deg, #1c1a18, #141311);
+    border-radius: 22px; padding: 22px 18px;
+    display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr);
+    gap: 6px 10px; align-items: end;
+    box-shadow: 0 40px 80px -30px rgba(0,0,0,.8), inset 0 0 0 1px var(--line);
+    transform: rotate(1.5deg);
+  }
+  .wall .cap { width: 100%; height: auto; transition: transform .25s ease; }
+  .wall .cap:hover { transform: translateY(-6px) rotate(-4deg); }
+  .sticker {
+    position: absolute; left: -18px; bottom: 34px;
+    background: var(--gold); color: var(--ink);
+    font: 400 22px/1 var(--display); text-transform: uppercase; letter-spacing: .02em;
+    padding: 14px 18px; border-radius: 10px; transform: rotate(-6deg);
+    box-shadow: 0 14px 30px -10px rgba(0,0,0,.6);
+  }
+  .sticker small { display: block; font: 700 11px/1.2 var(--body); letter-spacing: .12em; margin-bottom: 4px; }
+  @media (max-width: 900px) {
+    .hero { padding-top: 44px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .wall { max-width: 520px; width: 100%; margin-inline: auto; transform: none; }
+    .sticker { left: 8px; }
+  }
+
+  /* ---------- Marquee ---------- */
+  .marquee { background: var(--red); color: #fff; overflow: hidden; border-block: 2px solid var(--ink); margin-top: 40px; }
+  .marquee-track { display: flex; width: max-content; animation: scroll 32s linear infinite; }
+  .marquee span {
+    font: 400 30px/1 var(--display); text-transform: uppercase; letter-spacing: .03em;
+    padding: 16px 26px; white-space: nowrap; display: flex; align-items: center; gap: 26px;
+  }
+  .marquee span::after { content: "✦"; font-size: 18px; color: var(--ink); }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ---------- Sections ---------- */
+  section { padding: 104px 0; }
+  .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 44px; }
+  h2 { font: 400 clamp(44px, 6.5vw, 84px)/.92 var(--display); text-transform: uppercase; margin: 12px 0 0; }
+  .sec-head p { max-width: 40ch; color: var(--paper-dim); margin: 0; }
+
+  /* Shop grid */
+  .shop { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+  .tile {
+    position: relative; overflow: hidden; border-radius: var(--radius);
+    padding: 28px; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
+    background: var(--ink-2); border: 1px solid var(--line);
+    transition: transform .25s ease, border-color .25s;
+  }
+  .tile:hover { transform: translateY(-4px); border-color: rgba(244,239,230,.35); }
+  .tile .num { font: 700 13px/1 var(--body); letter-spacing: .14em; color: var(--muted); }
+  .tile h3 { font: 400 clamp(34px, 4vw, 48px)/.95 var(--display); text-transform: uppercase; margin: 0 0 10px; }
+  .tile p { margin: 0; color: var(--paper-dim); max-width: 36ch; }
+  .tile .art { position: absolute; right: -24px; top: 18px; width: 52%; max-width: 260px; opacity: .95; transition: transform .35s ease; }
+  .tile:hover .art { transform: rotate(-8deg) scale(1.04); }
+  .t1 { grid-column: span 7; background: linear-gradient(135deg, #1f1b17, #121112); }
+  .t2 { grid-column: span 5; background: var(--paper); color: var(--ink); }
+  .t2 p, .t2 .num { color: #4a463f; }
+  .t3 { grid-column: span 5; background: #1a2340; }
+  .t4 { grid-column: span 7; background: #222; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .tags li { list-style: none; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1px solid currentColor; opacity: .85; }
+  .tags { padding: 0; margin-bottom: 0; }
+  @media (max-width: 900px) { .t1, .t2, .t3, .t4 { grid-column: span 12; } .tile { min-height: 260px; } .tile .art { width: 34%; right: -10px; top: 14px; } .tile:has(.art) { padding-top: 110px; } }
+
+  /* Leagues strip */
+  .leagues { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: var(--radius); margin-top: 16px; overflow: hidden; }
+  .leagues div { padding: 26px 24px; border-right: 1px solid var(--line); }
+  .leagues div:last-child { border-right: 0; }
+  .leagues b { display: block; font: 400 44px/1 var(--display); letter-spacing: .02em; }
+  .leagues span { color: var(--muted); font-size: 14px; }
+  @media (max-width: 640px) { .leagues { grid-template-columns: 1fr; } .leagues div { border-right: 0; border-bottom: 1px solid var(--line); } .leagues div:last-child { border-bottom: 0; } }
+
+  /* Embroidery */
+  .embroidery { background: var(--gold); color: var(--ink); }
+  .emb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .embroidery .eyebrow { color: var(--ink); }
+  .price { display: flex; align-items: flex-start; gap: 6px; margin: 18px 0 8px; }
+  .price .from { font: 700 14px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; margin-top: 18px; }
+  .price .amt { font: 400 clamp(110px, 17vw, 200px)/.8 var(--display); letter-spacing: -.02em; }
+  .embroidery p { font-size: 18px; max-width: 38ch; color: #2b2410; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; counter-reset: s; }
+  .steps li {
+    counter-increment: s; background: var(--ink); color: var(--paper);
+    border-radius: var(--radius); padding: 22px 24px 22px 84px; position: relative;
+  }
+  .steps li::before {
+    content: counter(s, decimal-leading-zero); position: absolute; left: 24px; top: 20px;
+    font: 400 34px/1 var(--display); color: var(--gold);
+  }
+  .steps b { display: block; font-size: 18px; margin-bottom: 2px; }
+  .steps span { color: var(--paper-dim); font-size: 15px; }
+  .embroidery .cta-row { margin-top: 28px; }
+  @media (max-width: 900px) { .emb-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* Visit */
+  .visit-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 16px; }
+  .info { background: var(--ink-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; display: grid; gap: 26px; align-content: start; }
+  .info-row { display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+  .ico { width: 44px; height: 44px; border-radius: 12px; background: var(--ink-3); display: grid; place-items: center; color: var(--red-hi); }
+  .ico svg { width: 22px; height: 22px; }
+  .info h3 { margin: 0 0 2px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .info p { margin: 0; font-size: 18px; }
+  .info p a { text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s; }
+  .info p a:hover { border-color: var(--paper); }
+  .info .note { font-size: 14px; color: var(--paper-dim); margin-top: 4px; }
+  .info .cta-row { padding-top: 6px; }
+  .map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); min-height: 420px; background: var(--ink-2); }
+  .map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; filter: grayscale(.4) contrast(1.05); }
+  @media (max-width: 900px) { .visit-grid { grid-template-columns: 1fr; } .map, .map iframe { min-height: 320px; } }
+
+  /* Instagram CTA */
+  .ig { padding: 0 0 104px; }
+  .ig-card {
+    border-radius: 22px; padding: clamp(32px, 6vw, 64px);
+    background: radial-gradient(120% 140% at 0% 0%, #3b1d5e 0%, #8a1d4a 45%, var(--red) 100%);
+    display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap;
+  }
+  .ig-card h2 { margin: 0; }
+  .ig-card p { margin: 10px 0 0; font-size: 18px; color: rgba(255,255,255,.88); }
+  .ig-card .btn-dark { background: #fff; color: var(--ink); }
+  .ig-card .btn-dark:hover { background: var(--paper); }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--muted); font-size: 14px; }
+  .foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .foot a { text-decoration: none; }
+  .foot a:hover { color: var(--paper); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .marquee-track { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    *, *::before, *::after { transition-duration: 0s !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Reusable cap drawing: colors come from CSS custom properties on each <svg> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="cap" viewBox="0 0 120 92">
+      <path d="M14 66 C10 30 34 8 62 8 C90 8 108 30 106 62 Z" fill="var(--crown)"/>
+      <path d="M60 8 C58 26 58 46 60 64" stroke="var(--seam)" stroke-width="1.6" fill="none" opacity=".55"/>
+      <path d="M36 14 C30 30 28 48 30 64" stroke="var(--seam)" stroke-width="1.4" fill="none" opacity=".4"/>
+      <path d="M86 14 C92 30 94 48 92 64" stroke="var(--seam)" stroke-width="1.4" fill="none" opacity=".4"/>
+      <circle cx="61" cy="9" r="4" fill="var(--crown)" stroke="var(--seam)" stroke-width="1" />
+      <path d="M8 64 C30 58 92 58 112 64 C116 66 118 74 114 78 C90 72 34 72 8 80 C2 78 2 66 8 64 Z" fill="var(--brim)"/>
+      <rect x="44" y="30" width="30" height="20" rx="3" fill="var(--patch)" opacity=".95"/>
+      <rect x="92" y="52" width="9" height="7" rx="1.5" fill="var(--sticker, #c9a640)"/>
+    </symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="logo" href="#top" aria-label="HatWear home">
+      <svg style="--crown:#e23b2e;--brim:#b52a20;--seam:#0d0d0f;--patch:#f4efe6;--sticker:#e9b949"><use href="#cap"/></svg>
+      HatWear<span class="dot">.</span>
+    </a>
+    <ul>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#embroidery">Embroidery</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+    <a class="btn btn-primary" href="tel:+12096883466">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      Call
+    </a>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Stockton, CA · Sherwood Place</span>
+        <h1>Fitted<br>for the <span class="red">209.</span></h1>
+        <p class="lede">Specialty headwear &amp; streetwear. Officially licensed MLB, NFL and NBA caps, exclusive drops, and custom embroidery done in-store.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=HatWear+5340+W+Yokuts+Ave+Stockton+CA+95207" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Get directions
+          </a>
+          <a class="btn btn-ghost" href="#shop">See what's on the wall</a>
+        </div>
+        <div class="rating" aria-label="Rated 4.0 out of 5 from 12 Google reviews">
+          <div class="stars" aria-hidden="true">
+            <svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg class="off"><use href="#star"/></svg>
+          </div>
+          <span><strong>4.0</strong> · 12 Google reviews · Small business</span>
+        </div>
+      </div>
+
+      <div style="position:relative">
+        <div class="wall" aria-hidden="true">
+          <svg class="cap" style="--crown:#13274f;--brim:#0b1a38;--seam:#000;--patch:#f4efe6"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#f4efe6;--brim:#e9b949;--seam:#7a6a3a;--patch:#3a2b12"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#c8102e;--brim:#8f0b20;--seam:#000;--patch:#f4efe6"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#111;--brim:#fd5a1e;--seam:#444;--patch:#fd5a1e"><use href="#cap"/></svg>
+
+          <svg class="cap" style="--crown:#005a9c;--brim:#003e6b;--seam:#000;--patch:#fff"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#1d1d1f;--brim:#1d1d1f;--seam:#555;--patch:#e23b2e"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#5a2d82;--brim:#fdb927;--seam:#2a1340;--patch:#fdb927"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#aa0000;--brim:#b3995d;--seam:#500;--patch:#b3995d"><use href="#cap"/></svg>
+
+          <svg class="cap" style="--crown:#006bb6;--brim:#ffc72c;--seam:#003a63;--patch:#ffc72c"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#2b2b2b;--brim:#a5acaf;--seam:#000;--patch:#a5acaf"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#003831;--brim:#efb21e;--seam:#00201c;--patch:#efb21e"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#e9dcc3;--brim:#5b3a29;--seam:#8a7a5c;--patch:#5b3a29"><use href="#cap"/></svg>
+
+          <svg class="cap" style="--crown:#0c2340;--brim:#bd3039;--seam:#000;--patch:#fff"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#e23b2e;--brim:#111;--seam:#600;--patch:#111"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#4b2e83;--brim:#4b2e83;--seam:#200;--patch:#f4efe6"><use href="#cap"/></svg>
+          <svg class="cap" style="--crown:#f4efe6;--brim:#13274f;--seam:#999;--patch:#13274f"><use href="#cap"/></svg>
+        </div>
+        <div class="sticker"><small>Custom embroidery</small>From $7.99</div>
+      </div>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>MLB</span><span>NFL</span><span>NBA</span><span>59Fifty Fitteds</span><span>Snapbacks</span><span>Beanies</span><span>Exclusive Drops</span><span>Custom Embroidery</span><span>Hoodies</span><span>Windbreakers</span>
+        <span>MLB</span><span>NFL</span><span>NBA</span><span>59Fifty Fitteds</span><span>Snapbacks</span><span>Beanies</span><span>Exclusive Drops</span><span>Custom Embroidery</span><span>Hoodies</span><span>Windbreakers</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOP -->
+  <section id="shop">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">What we carry</span>
+          <h2>Wall-to-wall<br>headwear.</h2>
+        </div>
+        <p>A big selection of officially licensed team gear — plus the streetwear to match. Stock moves fast, so follow along for what just landed.</p>
+      </div>
+
+      <div class="shop">
+        <article class="tile t1 reveal">
+          <svg class="art" style="--crown:#13274f;--brim:#0b1a38;--seam:#000;--patch:#f4efe6;--sticker:#e9b949" aria-hidden="true"><use href="#cap"/></svg>
+          <span class="num">01</span>
+          <div>
+            <h3>Fitteds</h3>
+            <p>Structured 59Fifty fitted caps for your team, in classic colorways and hard-to-find looks.</p>
+            <ul class="tags"><li>59Fifty</li><li>MLB</li><li>NFL</li><li>NBA</li></ul>
+          </div>
+        </article>
+        <article class="tile t2 reveal">
+          <svg class="art" style="--crown:#e23b2e;--brim:#111;--seam:#600;--patch:#f4efe6" aria-hidden="true"><use href="#cap"/></svg>
+          <span class="num">02</span>
+          <div>
+            <h3>Snapbacks</h3>
+            <p>Adjustable snapbacks that fit everyone — easy to grab, easy to gift.</p>
+          </div>
+        </article>
+        <article class="tile t3 reveal">
+          <span class="num">03</span>
+          <div>
+            <h3>Exclusive<br>drops</h3>
+            <p>Limited releases that don't stick around. Watch our Instagram so you don't miss one.</p>
+          </div>
+        </article>
+        <article class="tile t4 reveal">
+          <span class="num">04</span>
+          <div>
+            <h3>Beanies &amp; apparel</h3>
+            <p>Cold-weather beanies, plus windbreakers and hoodies to complete the fit.</p>
+            <ul class="tags"><li>Beanies</li><li>Hoodies</li><li>Windbreakers</li></ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="leagues reveal">
+        <div><b>MLB</b><span>Officially licensed baseball caps</span></div>
+        <div><b>NFL</b><span>Football team headwear &amp; gear</span></div>
+        <div><b>NBA</b><span>Basketball snapbacks &amp; fitteds</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMBROIDERY -->
+  <section class="embroidery" id="embroidery">
+    <div class="wrap emb-grid">
+      <div class="reveal">
+        <span class="eyebrow">Custom embroidery</span>
+        <div class="price"><span class="from">From</span><span class="amt">$7.99</span></div>
+        <p>Make it yours. Add a name, number, date or your own design to a hat — stitched right here in Stockton.</p>
+        <div class="cta-row">
+          <a class="btn btn-dark" href="tel:+12096883466">Call about a custom order</a>
+        </div>
+      </div>
+      <ol class="steps reveal">
+        <li><b>Pick your hat</b><span>Choose from the wall, or bring in the one you already love.</span></li>
+        <li><b>Tell us the idea</b><span>Text, initials, numbers, a logo — talk it through with us at the counter.</span></li>
+        <li><b>Wear it out</b><span>We stitch it and you rock something nobody else has.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section id="visit">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">Come through</span>
+          <h2>Visit the shop.</h2>
+        </div>
+        <p>Find us in Sherwood Place, right next to Dick's Sporting Goods and Macy's.</p>
+      </div>
+
+      <div class="visit-grid">
+        <div class="info reveal">
+          <div class="info-row">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <h3>Address</h3>
+              <p><a href="https://www.google.com/maps/search/?api=1&amp;query=HatWear+5340+W+Yokuts+Ave+Stockton+CA+95207" target="_blank" rel="noopener">5340 W Yokuts Ave<br>Stockton, CA 95207</a></p>
+              <p class="note">Located in Sherwood Place, next to Dick's Sporting Goods and Macy's.</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
+            <div>
+              <h3>Phone</h3>
+              <p><a href="tel:+12096883466">(209) 688-3466</a></p>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div>
+              <h3>Hours</h3>
+              <p>Closes 7 PM</p>
+              <p class="note">Hours can change — give us a call to confirm before a special trip.</p>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=HatWear+5340+W+Yokuts+Ave+Stockton+CA+95207" target="_blank" rel="noopener">Directions</a>
+            <a class="btn btn-ghost" href="tel:+12096883466">Call the shop</a>
+          </div>
+        </div>
+        <div class="map reveal">
+          <iframe title="Map showing HatWear at 5340 W Yokuts Ave, Stockton, CA" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=5340%20W%20Yokuts%20Ave%2C%20Stockton%2C%20CA%2095207&amp;z=15&amp;output=embed"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <div class="ig">
+    <div class="wrap">
+      <div class="ig-card reveal">
+        <div>
+          <h2>New drops<br>hit IG first.</h2>
+          <p>Follow <strong>@hatwear209</strong> for restocks, exclusives and what's new on the wall.</p>
+        </div>
+        <a class="btn btn-dark" href="https://www.instagram.com/hatwear209/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          Follow @hatwear209
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="yr">2026</span> HatWear · Stockton, California</span>
+    <span><a href="tel:+12096883466">(209) 688-3466</a> · <a href="https://www.instagram.com/hatwear209/" target="_blank" rel="noopener">Instagram</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>
