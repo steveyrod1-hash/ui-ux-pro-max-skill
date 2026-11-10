@@ -1,0 +1,234 @@
+import Link from "next/link";
+import { HeroWall } from "@/components/home/HeroWall";
+import { TeamBrowser } from "@/components/home/TeamBrowser";
+import { EmbroideryShowcase } from "@/components/home/EmbroideryShowcase";
+import { ProductCard } from "@/components/ProductCard";
+import { ProductArt } from "@/components/ProductArt";
+import { RevealImage, Stagger, StaggerItem } from "@/components/Reveal";
+import { AddressBlock, HoursList, MapFrame, StoreActions } from "@/components/StoreVisit";
+import { ArrowIcon } from "@/components/Icons";
+import { getAllProducts, getNewArrivals, LEAGUES, TEAMS_BY_LEAGUE, teamCounts } from "@/lib/catalog";
+import { TEAM_CODES } from "@/data/catalog";
+import type { ArtColors, ProductType } from "@/data/types";
+import { DEMO_CATALOG } from "@/content/site";
+
+const STYLES: { label: string; href: string; types: ProductType[]; art: { type: ProductType; colors: ArtColors; mark: string }; tone: "dark" | "felt" | "red" | "bone"; blurb: string }[] = [
+  {
+    label: "Fitted Hats",
+    href: "/shop?type=fitted",
+    types: ["fitted"],
+    art: { type: "fitted", mark: "HW", colors: { crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#d2261c" } },
+    tone: "dark",
+    blurb: "Sized to your head, from 6 7/8 to 8.",
+  },
+  {
+    label: "Snapbacks",
+    href: "/shop?type=snapback",
+    types: ["snapback"],
+    art: { type: "snapback", mark: "209", colors: { crown: "#e9e4da", visor: "#1c1b1a", under: "#3d4a3c", button: "#1c1b1a", mark: "#1c1b1a" } },
+    tone: "felt",
+    blurb: "Flat brim, one size, snap closure.",
+  },
+  {
+    label: "Trucker Hats",
+    href: "/shop?type=trucker",
+    types: ["trucker"],
+    art: { type: "trucker", mark: "HW", colors: { crown: "#c4231b", visor: "#c4231b", under: "#2f3a2f", button: "#c4231b", mark: "#efebe4", trim: "#e9e4da" } },
+    tone: "bone",
+    blurb: "Foam front, mesh back.",
+  },
+  {
+    label: "Beanies",
+    href: "/shop?type=beanie",
+    types: ["beanie"],
+    art: { type: "beanie", mark: "HATWEAR", colors: { crown: "#2b2a28", visor: "#2b2a28", under: "#2b2a28", button: "#2b2a28", mark: "#d2261c", trim: "#232221" } },
+    tone: "felt",
+    blurb: "Cuffed rib knits.",
+  },
+  {
+    label: "Apparel",
+    href: "/shop?type=hoodie,windbreaker",
+    types: ["hoodie", "windbreaker"],
+    art: { type: "windbreaker", mark: "HW", colors: { crown: "#1c1b1a", visor: "#c4231b", under: "#1c1b1a", button: "#1c1b1a", mark: "#efebe4", trim: "#c4231b" } },
+    tone: "dark",
+    blurb: "Hoodies and windbreakers.",
+  },
+];
+
+const TONE: Record<(typeof STYLES)[number]["tone"], string> = {
+  dark: "bg-ink text-bone twill",
+  felt: "bg-felt text-ink",
+  red: "bg-red text-white",
+  bone: "bg-chalk text-ink",
+};
+
+export default function Home() {
+  const all = getAllProducts();
+  const arrivals = getNewArrivals(8);
+  const find = (slug: string) => all.find((p) => p.slug.startsWith(slug));
+  const wallPicks: [string, number][] = [
+    ["crown-mark-fitted", 0],
+    ["san-francisco-giants-fitted", 0],
+    ["209-patch-snapback", 0],
+    ["golden-state-warriors-fitted", 0],
+    ["stitch-script-trucker", 0],
+    ["sacramento-kings-snapback", 0],
+    ["los-angeles-dodgers-fitted", 0],
+    ["crown-mark-fitted", 1],
+    ["san-francisco-49ers-fitted", 0],
+  ];
+  const wall = wallPicks.flatMap(([slug, colorIndex]) => {
+    const product = find(slug);
+    return product ? [{ product, colorIndex }] : [];
+  });
+  const countFor = (types: ProductType[]) => all.filter((p) => types.includes(p.type)).length;
+
+  return (
+    <>
+      <HeroWall wall={wall} />
+
+      {/* Shop by style */}
+      <section className="shell py-16 sm:py-24" aria-labelledby="styles-title">
+        <div className="flex items-end justify-between gap-6">
+          <h2 id="styles-title" className="text-[clamp(2.6rem,1.6rem+4vw,5rem)] uppercase">
+            Shop by style
+          </h2>
+          <Link href="/shop" className="link hidden shrink-0 items-center gap-2 font-semibold sm:inline-flex">
+            Shop all <ArrowIcon size={18} />
+          </Link>
+        </div>
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2">
+          {STYLES.map((s, i) => (
+            <RevealImage
+              key={s.label}
+              delay={i * 0.06}
+              className={i === 0 ? "col-span-2 row-span-1 lg:row-span-2" : ""}
+            >
+              <Link href={s.href} className={`group relative flex h-full flex-col justify-between overflow-hidden p-5 sm:p-6 ${TONE[s.tone]} ${i === 0 ? "min-h-[21rem] lg:min-h-[34rem]" : "min-h-[15rem] lg:min-h-[16.5rem]"}`}>
+                <div className="relative z-10">
+                  <h3 className={`uppercase ${i === 0 ? "text-[clamp(2.6rem,2rem+3vw,4.6rem)]" : "text-[clamp(1.9rem,1.5rem+1.4vw,2.6rem)]"}`}>{s.label}</h3>
+                  <p className={`mt-2 max-w-[13rem] text-sm ${s.tone === "dark" ? "text-bone/70" : "text-graphite"}`}>{s.blurb}</p>
+                </div>
+                <div
+                  className={`pointer-events-none absolute transition-transform duration-500 ease-[cubic-bezier(.25,1,.5,1)] group-hover:-translate-y-2 group-hover:scale-[1.03] ${
+                    i === 0 ? "-bottom-[12%] -right-[6%] w-[66%] sm:w-[58%] lg:-bottom-[6%] lg:-right-[8%] lg:w-[86%]" : "-bottom-[10%] -right-[12%] w-[78%]"
+                  }`}
+                >
+                  <ProductArt {...s.art} className="w-full" />
+                </div>
+                <span className="relative z-10 inline-flex items-center gap-2 text-sm font-semibold">
+                  {countFor(s.types)} styles <ArrowIcon size={16} className="transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </RevealImage>
+          ))}
+        </div>
+      </section>
+
+      {/* New arrivals */}
+      <section className="bg-chalk py-16 sm:py-24" aria-labelledby="new-title">
+        <div className="shell">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 id="new-title" className="text-[clamp(2.6rem,1.6rem+4vw,5rem)] uppercase">
+                New on the wall
+              </h2>
+              {DEMO_CATALOG && <p className="mt-2 text-sm text-stone">Sample products for this preview. Real arrivals will appear here once the catalog is connected.</p>}
+            </div>
+            <Link href="/shop?sort=newest" className="link inline-flex items-center gap-2 font-semibold">
+              All new arrivals <ArrowIcon size={18} />
+            </Link>
+          </div>
+          <Stagger className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-4">
+            {arrivals.map((p, i) => (
+              <StaggerItem key={p.id}>
+                <ProductCard product={p} priority={i < 4} />
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* Shop by team */}
+      <section className="shell grid gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.6fr] lg:gap-16" aria-labelledby="teams-title">
+        <div>
+          <h2 id="teams-title" className="text-[clamp(2.6rem,1.6rem+4vw,5rem)] uppercase">
+            Rep your team
+          </h2>
+          <p className="mt-4 max-w-sm text-lg text-graphite">
+            Baseball, football and basketball. Pick a league, then a team.
+          </p>
+          <p className="mt-4 max-w-sm text-sm text-stone">Team merchandise shown here is sample data. Official logos appear only on genuine licensed products and their photos.</p>
+        </div>
+        <TeamBrowser leagues={LEAGUES} teams={TEAMS_BY_LEAGUE} counts={teamCounts()} codes={TEAM_CODES} />
+      </section>
+
+      {/* Embroidery */}
+      <section className="twill bg-ink text-bone" aria-labelledby="custom-title">
+        <div className="shell grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-2 lg:gap-16">
+          <RevealImage>
+            <EmbroideryShowcase />
+          </RevealImage>
+          <div>
+            <h2 id="custom-title" className="text-[clamp(3rem,1.8rem+5vw,6.4rem)] uppercase">
+              Your hat.
+              <br />
+              Your mark.
+            </h2>
+            <p className="mt-5 max-w-md text-lg text-bone/80">
+              Names, numbers, a crew logo or your business mark, stitched onto a hat or hoodie. The store reviews every request and confirms price and timing with you before anything is made.
+            </p>
+            <ol className="mt-8 space-y-0 border-t border-bone/15">
+              {[
+                ["Pick the piece", "Fitted, snapback, trucker, beanie, hoodie or windbreaker, in the colour you want."],
+                ["Add your mark", "Type your text or upload artwork, choose thread and placement, and see a live preview."],
+                ["Send the request", "HatWear checks the details and contacts you with a quote."],
+              ].map(([t, d], i) => (
+                <li key={t} className="grid grid-cols-[2.6rem_1fr] gap-3 border-b border-bone/15 py-4">
+                  <span className="font-display text-3xl font-black text-red">{i + 1}</span>
+                  <span>
+                    <span className="block font-semibold">{t}</span>
+                    <span className="text-bone/70">{d}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <Link href="/custom" className="btn btn-primary group mt-8">
+              Start customizing <ArrowIcon size={20} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Visit */}
+      <section className="shell grid gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.1fr] lg:gap-16" aria-labelledby="visit-title">
+        <div className="flex flex-col">
+          <h2 id="visit-title" className="text-lg font-semibold text-stone [font-family:var(--font-sans)]">
+            Visit the store
+          </h2>
+          <div className="mt-3">
+            <AddressBlock />
+          </div>
+          <p className="mt-6 max-w-md text-lg text-graphite">
+            The site shows a slice. The wall shows the rest. Come try on fitteds in your size, see the colours in person, and talk through an embroidery idea face to face.
+          </p>
+          <div className="mt-6">
+            <p className="font-semibold">Hours</p>
+            <div className="mt-1">
+              <HoursList />
+            </div>
+          </div>
+          <div className="mt-8">
+            <StoreActions />
+          </div>
+          <Link href="/store" className="link mt-5 inline-flex items-center gap-2 self-start font-semibold">
+            More about the store <ArrowIcon size={18} />
+          </Link>
+        </div>
+        <RevealImage>
+          <MapFrame className="aspect-[4/3] w-full lg:aspect-auto lg:h-full lg:min-h-[28rem]" />
+        </RevealImage>
+      </section>
+    </>
+  );
+}
