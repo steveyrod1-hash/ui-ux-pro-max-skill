@@ -43,7 +43,7 @@ export default function StorePage() {
               the wall
             </h1>
             <p className="mt-6 max-w-xl text-lg text-bone/80">
-              HatWear is a headwear and streetwear shop on West Yokuts Avenue: fitted caps, snapbacks, truckers, beanies, team gear, hoodies, windbreakers and custom embroidery under one roof.
+              HatWear is a sports hat and streetwear shop inside Sherwood Place, next to Macy's and Dick's Sporting Goods: fitted caps, snapbacks, truckers, beanies, team gear, hoodies and custom embroidery under one roof.
             </p>
           </div>
           <div className="space-y-6">

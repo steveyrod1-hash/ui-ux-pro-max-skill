@@ -176,7 +176,7 @@ export default function Home() {
               Your mark.
             </h2>
             <p className="mt-5 max-w-md text-lg text-bone/80">
-              Names, numbers, a crew logo or your business mark, stitched onto a hat or hoodie. The store reviews every request and confirms price and timing with you before anything is made.
+              Names, numbers, a crew logo or your business mark, stitched onto a hat or hoodie. Starting at $7.99. The store reviews every request and confirms the exact price and timing with you before anything is made.
             </p>
             <ol className="mt-8 space-y-0 border-t border-bone/15">
               {[

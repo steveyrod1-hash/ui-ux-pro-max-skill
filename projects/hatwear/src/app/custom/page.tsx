@@ -20,7 +20,7 @@ export default async function CustomPage({ searchParams }: { searchParams: Promi
             Your mark.
           </h1>
           <p className="max-w-md text-lg text-bone/80">
-            Design it here, see an approximate preview, and send it to the store. HatWear replies with a quote and timing. Nothing is made or charged until you say yes. Questions? Call{" "}
+            Embroidery starts at $7.99. Design it here, see an approximate preview, and send it to the store. HatWear replies with an exact quote and timing. Nothing is made or charged until you say yes. Questions? Call{" "}
             <a href={`tel:${site.phone.tel}`} className="link font-semibold text-white">
               {site.phone.display}
             </a>

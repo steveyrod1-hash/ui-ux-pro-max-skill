@@ -572,11 +572,13 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                     ))}
                   </dl>
                   <div className="mt-6 bg-chalk p-5">
-                    <p className="font-display text-2xl font-black uppercase">{estimate != null ? `Estimate ${money(estimate)}` : "Request a quote"}</p>
+                    <p className="font-display text-2xl font-black uppercase">
+                      {estimate != null ? `Estimate ${money(estimate)}` : embroideryPricing.advertisedFrom != null ? `From ${money(embroideryPricing.advertisedFrom)} · request a quote` : "Request a quote"}
+                    </p>
                     <p className="mt-1 text-graphite">
                       {estimate != null
                         ? "Estimated from the store's current pricing. The final price is confirmed before work starts."
-                        : "Price depends on the item, stitch count, placement and quantity. HatWear will reply with an exact quote before anything is made."}
+                        : `Embroidery starts at ${embroideryPricing.advertisedFrom != null ? money(embroideryPricing.advertisedFrom) : "a low base price"}. The exact price depends on the item, stitch count, placement and quantity, and HatWear confirms it with you before anything is made.`}
                     </p>
                   </div>
                 </div>
