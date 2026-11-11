@@ -1,5 +1,7 @@
 import { fullAddress, mapLinks, site } from "@/content/site";
 import { InstagramIcon, PhoneIcon, PinIcon } from "./Icons";
+import { OpenNow } from "./OpenNow";
+import { formatTime } from "@/lib/format";
 
 export function HoursList({ dark = false }: { dark?: boolean }) {
   if (!site.hours) {
@@ -14,16 +16,20 @@ export function HoursList({ dark = false }: { dark?: boolean }) {
     );
   }
   return (
-    <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1 tabular-nums">
-      {site.hours.map((h) => (
-        <div key={h.days} className="contents">
-          <dt className="font-semibold">{h.days}</dt>
-          <dd>
-            {h.opens} to {h.closes}
-          </dd>
-        </div>
-      ))}
-    </dl>
+    <div>
+      <OpenNow className={dark ? "text-bone" : "text-ink"} />
+      <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-6 gap-y-1 tabular-nums">
+        {site.hours.map((h) => (
+          <div key={h.days} className="contents">
+            <dt className="font-semibold">{h.days}</dt>
+            <dd>
+              {formatTime(h.opens)} to {formatTime(h.closes)}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p className={`mt-2 text-sm ${dark ? "text-bone/70" : "text-stone"}`}>Holiday hours can differ. Call ahead on holidays.</p>
+    </div>
   );
 }
 
@@ -71,6 +77,9 @@ export function AddressBlock({ dark = false }: { dark?: boolean }) {
       </span>
       <span className={`mt-2 block text-lg ${dark ? "text-bone/80" : "text-graphite"}`}>
         {site.address.city}, {site.address.region} {site.address.postalCode}
+      </span>
+      <span className={`mt-1 block font-semibold ${dark ? "text-bone" : "text-ink"}`}>
+        Inside {site.locatedIn} · {site.landmark}
       </span>
       <a href={`tel:${site.phone.tel}`} className="mt-1 inline-block text-lg font-semibold hover:underline">
         {site.phone.display}

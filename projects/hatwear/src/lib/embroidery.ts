@@ -71,54 +71,51 @@ export const BASES: BaseItem[] = [
     colors: [c("black", "Black", "#1c1b1a", "#1c1b1a", { trim: "#2a2927" }), c("red", "Stitch Red", "#b8241c", "#b8241c", { trim: "#a51f18" }), c("oat", "Oatmeal", "#d8cdb9", "#d8cdb9", { trim: "#cbbfa8" })],
   },
   {
-    type: "hoodie",
-    label: "Hoodie",
-    note: "Midweight fleece",
+    type: "bucket",
+    label: "Bucket hat",
+    note: "Soft crown, all-round brim",
     placements: [
-      { id: "left-chest", label: "Left chest" },
-      { id: "center-chest", label: "Centre chest" },
-      { id: "full-back", label: "Back" },
+      { id: "front", label: "Front" },
+      { id: "back", label: "Back" },
     ],
-    colors: [c("charcoal", "Charcoal", "#353431", "#353431", { trim: "#efebe4" }), c("black", "Black", "#1c1b1a", "#1c1b1a", { trim: "#efebe4" }), c("bone", "Bone", "#e6e0d5", "#e6e0d5", { trim: "#1c1b1a" })],
-  },
-  {
-    type: "windbreaker",
-    label: "Windbreaker",
-    note: "Light shell, full zip",
-    placements: [
-      { id: "left-chest", label: "Left chest" },
-      { id: "full-back", label: "Back" },
-    ],
-    colors: [c("black-red", "Black / Red", "#1c1b1a", "#c4231b", { trim: "#c4231b" }), c("bone-char", "Bone / Charcoal", "#e6e0d5", "#353431", { trim: "#353431" })],
+    colors: [c("navy", "Navy", "#1d3557", "#1d3557", { under: "#1d3557" }), c("black", "Black", "#1c1b1a", "#1c1b1a", { under: "#1c1b1a" }), c("tan", "Tan", "#c9b48f", "#c9b48f", { under: "#c9b48f" })],
   },
 ];
 
 /** Placements offered when the customer brings their own item. */
 export const OWN_PLACEMENTS: BaseItem["placements"] = [
-  { id: "front", label: "Front of a hat" },
-  { id: "side", label: "Side of a hat" },
-  { id: "back", label: "Back of a hat" },
-  { id: "left-chest", label: "Left chest" },
-  { id: "full-back", label: "Back of a garment" },
+  { id: "front", label: "Front of the hat" },
+  { id: "side", label: "Side of the hat" },
+  { id: "back", label: "Back of the hat" },
+  { id: "cuff", label: "Beanie cuff" },
 ];
 
 export function placementsFor(type: ProductType | "own") {
   return type === "own" ? OWN_PLACEMENTS : BASES.find((b) => b.type === type)?.placements ?? [];
 }
 
+/** The Madeira thread colours on HatWear's embroidery wall. */
 export const THREADS: { id: string; name: string; hex: string }[] = [
-  { id: "white", name: "White", hex: "#f4f1ea" },
-  { id: "bone", name: "Bone", hex: "#d9cfbd" },
-  { id: "black", name: "Black", hex: "#1c1b1a" },
-  { id: "red", name: "Stitch Red", hex: "#d2261c" },
-  { id: "orange", name: "Orange", hex: "#e8622c" },
-  { id: "gold", name: "Gold", hex: "#e9b631" },
-  { id: "kelly", name: "Kelly Green", hex: "#1f8a4c" },
-  { id: "forest", name: "Forest", hex: "#123a2f" },
-  { id: "royal", name: "Royal", hex: "#24468a" },
-  { id: "navy", name: "Navy", hex: "#14223b" },
-  { id: "purple", name: "Purple", hex: "#4b2a72" },
-  { id: "silver", name: "Silver", hex: "#b9c0c4" },
+  { id: "black", name: "Black", hex: "#1c1c1e" },
+  { id: "white", name: "White", hex: "#f4f2ec" },
+  { id: "silver", name: "Silver", hex: "#b8bcc2" },
+  { id: "navy", name: "Navy", hex: "#1b2a55" },
+  { id: "royal", name: "Royal Blue", hex: "#1f5fc4" },
+  { id: "turquoise", name: "Turquoise", hex: "#19b6c9" },
+  { id: "purple", name: "Purple", hex: "#4a2a9a" },
+  { id: "magenta", name: "Magenta", hex: "#a3195b" },
+  { id: "hot-pink", name: "Hot Pink", hex: "#ef4f6b" },
+  { id: "light-pink", name: "Light Pink", hex: "#f2b6c0" },
+  { id: "peach", name: "Peach", hex: "#f3b896" },
+  { id: "cream", name: "Cream", hex: "#efe3a9" },
+  { id: "gold", name: "Gold", hex: "#f5b81c" },
+  { id: "orange", name: "Orange", hex: "#f07a12" },
+  { id: "red", name: "Red", hex: "#d8202a" },
+  { id: "maroon", name: "Maroon", hex: "#7a1a26" },
+  { id: "brown", name: "Brown", hex: "#4f3b25" },
+  { id: "forest", name: "Forest Green", hex: "#154a33" },
+  { id: "kelly", name: "Kelly Green", hex: "#179a4a" },
+  { id: "lime", name: "Lime", hex: "#b5d334" },
 ];
 
 export const FONTS: { id: "block" | "athletic" | "script"; label: string }[] = [

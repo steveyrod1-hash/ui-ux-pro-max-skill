@@ -11,6 +11,7 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from "react";
 import { getProductById, unitsFor } from "@/lib/catalog";
+import { priceFor } from "@/lib/deals";
 import type { Product } from "@/data/types";
 
 export interface CartLine {
@@ -154,7 +155,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         if (!product) return [];
         const color = product.colorways.find((c) => c.id === l.colorId);
         const maxQty = Math.max(0, unitsFor(product, l.colorId, l.size));
-        return [{ ...l, key: lineKey(l), product, colorName: color?.name ?? "", maxQty, lineTotal: product.price * l.qty }];
+        return [{ ...l, key: lineKey(l), product, colorName: color?.name ?? "", maxQty, lineTotal: priceFor(product).price * l.qty }];
       }),
     [state.lines],
   );

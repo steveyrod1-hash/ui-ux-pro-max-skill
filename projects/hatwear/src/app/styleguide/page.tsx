@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProductArt, type ArtView } from "@/components/ProductArt";
 import { CrownMark, Wordmark } from "@/components/Brand";
-import { getAllProducts } from "@/lib/catalog";
+import { sampleCatalog } from "@/data/catalog";
 import type { ProductType } from "@/data/types";
 
 export const metadata: Metadata = { title: "Style guide", robots: { index: false } };
@@ -9,7 +9,8 @@ export const metadata: Metadata = { title: "Style guide", robots: { index: false
 const VIEWS: ArtView[] = ["front", "side", "back", "detail"];
 
 export default function StyleGuide() {
-  const all = getAllProducts();
+  // Always the sample catalog: this page is a reference for the illustration system.
+  const all = sampleCatalog;
   const types: ProductType[] = ["fitted", "snapback", "trucker", "adjustable", "beanie", "hoodie", "windbreaker"];
   return (
     <main className="shell py-12">

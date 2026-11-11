@@ -11,6 +11,7 @@ import { money } from "@/lib/format";
 import { QtyStepper } from "./CartDrawer";
 import { CheckIcon, HeartIcon, RulerIcon } from "./Icons";
 import { SizeGuideDialog } from "./SizeGuide";
+import { useUnitPrice } from "./PriceTag";
 
 export function ColorSwatches({
   product,
@@ -43,7 +44,7 @@ export function ColorSwatches({
                 className="peer sr-only"
               />
               <span
-                className="block size-10 rounded-full ring-1 ring-ink/20 ring-offset-2 ring-offset-bone transition-shadow peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:ring-2 peer-focus-visible:ring-red"
+                className="block size-10 rounded-full ring-1 ring-ink/20 ring-offset-2 ring-offset-bone transition-shadow peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:ring-2 peer-focus-visible:ring-sign"
                 style={{ background: `linear-gradient(135deg, ${c.art.crown} 0 58%, ${c.art.mark} 58% 100%)` }}
               />
               {soldOut && <span className="absolute left-1/2 top-1/2 h-[2px] w-11 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-ink/60" />}
@@ -72,7 +73,8 @@ export function SizeSelector({
   onChange: (s: string) => void;
   name: string;
 }) {
-  const fitted = product.type === "fitted";
+  // The fitted size guide only applies to true fitted sizes (not stretch-fit S/M, L/XL).
+  const fitted = product.type === "fitted" && product.sizes.some((s) => /^\d/.test(s));
   const [guideOpen, setGuideOpen] = useState(false);
   const chart = fitted && value ? chartFor(value) : undefined;
   if (product.sizes.length === 1) {
@@ -115,7 +117,7 @@ export function SizeSelector({
                 className="peer sr-only"
               />
               <span
-                className={`relative grid h-12 place-items-center rounded-sm border-[1.5px] text-[0.95rem] font-semibold tabular-nums transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-red ${
+                className={`relative grid h-12 place-items-center rounded-sm border-[1.5px] text-[0.95rem] font-semibold tabular-nums transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sign ${
                   out
                     ? "border-ink/15 text-ink/50 line-through"
                     : selected
@@ -159,7 +161,7 @@ export function WishButton({ id, name, className = "" }: { id: string; name: str
       onClick={() => toggleWish(id)}
       aria-pressed={on}
       aria-label={on ? `Remove ${name} from wishlist` : `Save ${name} to wishlist`}
-      className={`grid place-items-center rounded-full transition-colors ${on ? "text-red" : "text-ink hover:text-red"} ${className}`}
+      className={`grid place-items-center rounded-full transition-colors ${on ? "text-sign" : "text-ink hover:text-sign"} ${className}`}
     >
       <motion.span key={String(on)} initial={on ? { scale: 0.6 } : false} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 600, damping: 14 }}>
         <HeartIcon filled={on} />
@@ -184,6 +186,7 @@ export function PurchasePanel({
 }) {
   const uid = useId();
   const { add } = useStore();
+  const unitPrice = useUnitPrice(product);
   const single = product.sizes.length === 1 ? product.sizes[0] : "";
   const [size, setSize] = useState(single);
   const [qty, setQty] = useState(1);
@@ -245,7 +248,7 @@ export function PurchasePanel({
                   <CheckIcon size={20} /> Added
                 </>
               ) : (
-                `Add to bag · ${money(product.price * qty)}`
+                `Add to bag · ${money(unitPrice * qty)}`
               )}
             </motion.span>
           </AnimatePresence>
@@ -253,7 +256,7 @@ export function PurchasePanel({
         <WishButton id={product.id} name={product.name} className="size-12 shrink-0 border-[1.5px] border-ink/25 !rounded-sm" />
       </div>
       {error && (
-        <p id={`${uid}-err`} role="alert" className="-mt-3 text-sm font-semibold text-red-deep">
+        <p id={`${uid}-err`} role="alert" className="-mt-3 text-sm font-semibold text-sign-deep">
           {error}
         </p>
       )}

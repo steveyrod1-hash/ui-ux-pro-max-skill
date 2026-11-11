@@ -14,16 +14,18 @@ import {
   type SortKey,
 } from "@/lib/catalog";
 import { TYPE_LABELS } from "@/data/catalog";
+import { STYLE_BY_ID } from "@/data/styles";
 import type { ProductType } from "@/data/types";
 import { ProductCard } from "../ProductCard";
 import { CloseIcon, FilterIcon, ChevronIcon, SearchIcon } from "../Icons";
 import { plural } from "@/lib/format";
 import { DEMO_CATALOG } from "@/content/site";
 
-type ListKey = "type" | "league" | "team" | "brand" | "size" | "color" | "price";
+type ListKey = "type" | "style" | "league" | "team" | "brand" | "size" | "color" | "price";
 
 const GROUPS: { key: ListKey; label: string; open?: boolean }[] = [
-  { key: "type", label: "Style", open: true },
+  { key: "type", label: "Category", open: true },
+  { key: "style", label: "Style", open: true },
   { key: "league", label: "League", open: true },
   { key: "team", label: "Team" },
   { key: "size", label: "Size" },
@@ -48,6 +50,7 @@ const COLOR_DOT: Record<string, string> = {
 
 function titleFor(f: Filters) {
   if (f.q) return `“${f.q}”`;
+  if (f.style.length === 1) return STYLE_BY_ID[f.style[0]]?.label ?? "Shop";
   if (f.team.length === 1) return f.team[0];
   if (f.league.length === 1 && !f.type.length) return `${f.league[0]} headwear and gear`;
   if (f.type.length === 1) return TYPE_LABELS[f.type[0]] === "Fitted" ? "Fitted hats" : `${TYPE_LABELS[f.type[0]]}s`;
@@ -84,7 +87,7 @@ function FacetGroup({
         >
           <span>
             {label}
-            {selected.length > 0 && <span className="ml-2 font-sans text-sm font-semibold normal-case text-red">{selected.length}</span>}
+            {selected.length > 0 && <span className="ml-2 font-sans text-sm font-semibold normal-case text-sign">{selected.length}</span>}
           </span>
           <ChevronIcon size={18} className={`transition-transform ${open ? "rotate-90" : ""}`} />
         </button>
@@ -138,7 +141,7 @@ function FilterPanel({
         <span className="font-semibold">In stock only</span>
         <span className="relative inline-flex">
           <input type="checkbox" role="switch" checked={f.inStock} onChange={(e) => onStock(e.target.checked)} className="peer sr-only" />
-          <span className="h-7 w-12 rounded-full bg-ink/20 transition-colors peer-checked:bg-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-red" />
+          <span className="h-7 w-12 rounded-full bg-ink/20 transition-colors peer-checked:bg-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-sign" />
           <span className="absolute left-1 top-1 size-5 rounded-full bg-chalk shadow transition-transform peer-checked:translate-x-5" />
         </span>
       </label>
@@ -247,7 +250,7 @@ export function ShopView() {
           <div className="sticky top-24 max-h-[calc(100dvh-7rem)] overflow-y-auto pr-2">
             <FilterPanel f={f} facets={result.facets} onToggle={toggle} onStock={(v) => push({ inStock: v })} />
             {anyFilter && (
-              <button type="button" onClick={() => push({ q: "", type: [], league: [], team: [], brand: [], size: [], color: [], price: [], inStock: false })} className="mt-4 text-sm font-semibold underline">
+              <button type="button" onClick={() => push({ q: "", type: [], style: [], league: [], team: [], brand: [], size: [], color: [], price: [], inStock: false })} className="mt-4 text-sm font-semibold underline">
                 Clear all filters
               </button>
             )}
@@ -261,7 +264,7 @@ export function ShopView() {
             </p>
             <div className="flex items-center gap-2">
               <button type="button" onClick={() => setSheet(true)} className="inline-flex h-11 items-center gap-2 rounded-sm border-[1.5px] border-ink/30 px-4 font-semibold lg:hidden" aria-haspopup="dialog">
-                <FilterIcon size={18} /> Filters {active.length + (f.inStock ? 1 : 0) > 0 && <span className="grid size-5 place-items-center rounded-full bg-red text-xs text-white">{active.length + (f.inStock ? 1 : 0)}</span>}
+                <FilterIcon size={18} /> Filters {active.length + (f.inStock ? 1 : 0) > 0 && <span className="grid size-5 place-items-center rounded-full bg-sign text-xs text-white">{active.length + (f.inStock ? 1 : 0)}</span>}
               </button>
               <label htmlFor="sort" className="sr-only">
                 Sort by
@@ -304,7 +307,7 @@ export function ShopView() {
             <div className="grid place-items-center rounded-sm bg-felt px-6 py-20 text-center">
               <p className="font-display text-4xl font-black uppercase">No match on the site</p>
               <p className="mt-2 max-w-md text-graphite">Try removing a filter. The store carries more than this preview shows, so a call is the fastest way to check something specific.</p>
-              <button type="button" onClick={() => push({ q: "", type: [], league: [], team: [], brand: [], size: [], color: [], price: [], inStock: false })} className="btn btn-dark mt-6">
+              <button type="button" onClick={() => push({ q: "", type: [], style: [], league: [], team: [], brand: [], size: [], color: [], price: [], inStock: false })} className="btn btn-dark mt-6">
                 Clear filters
               </button>
             </div>
@@ -363,7 +366,7 @@ export function ShopView() {
                 <FilterPanel f={f} facets={result.facets} onToggle={toggle} onStock={(v) => push({ inStock: v })} />
               </div>
               <div className="grid grid-cols-[auto_1fr] gap-2 border-t border-ink/15 p-4">
-                <button type="button" onClick={() => push({ type: [], league: [], team: [], brand: [], size: [], color: [], price: [], inStock: false })} className="btn btn-ghost btn-ghost-dark">
+                <button type="button" onClick={() => push({ type: [], style: [], league: [], team: [], brand: [], size: [], color: [], price: [], inStock: false })} className="btn btn-ghost btn-ghost-dark">
                   Clear
                 </button>
                 <button type="button" onClick={() => setSheet(false)} className="btn btn-dark">

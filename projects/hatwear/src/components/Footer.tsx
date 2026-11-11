@@ -46,19 +46,19 @@ export function Footer() {
           <ul className="mt-6 space-y-2.5">
             <li>
               <a href={mapLinks.google} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-2.5 hover:text-white">
-                <PinIcon size={18} className="mt-0.5 shrink-0 text-red" />
+                <PinIcon size={18} className="mt-0.5 shrink-0 text-sign-light" />
                 {fullAddress}
               </a>
             </li>
             <li>
               <a href={`tel:${site.phone.tel}`} className="inline-flex items-center gap-2.5 hover:text-white">
-                <PhoneIcon size={18} className="shrink-0 text-red" />
+                <PhoneIcon size={18} className="shrink-0 text-sign-light" />
                 {site.phone.display}
               </a>
             </li>
             <li>
               <a href={site.instagram.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 hover:text-white">
-                <InstagramIcon size={18} className="shrink-0 text-red" />@{site.instagram.handle}
+                <InstagramIcon size={18} className="shrink-0 text-sign-light" />@{site.instagram.handle}
               </a>
             </li>
           </ul>

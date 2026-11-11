@@ -48,8 +48,8 @@ const browser = await chromium.launch();
   await check("home renders hero, wordmark and nav", async () => {
     await page.goto(BASE + "/", { waitUntil: "networkidle" });
     expect((await page.textContent("#hero-title")).toLowerCase().includes("more than"), "hero headline missing");
-    for (const label of ["Shop All", "Fitted Hats", "Snapbacks", "Teams", "Streetwear", "Custom Embroidery", "Our Store"]) {
-      expect(await page.locator(`header nav a:has-text("${label}")`).count(), `nav link ${label} missing`);
+    for (const label of ["Shop", "Fitted Hats", "Snapbacks", "Beanies", "Teams", "Custom Embroidery", "Our Store"]) {
+      expect(await page.locator(`header nav :is(a, button):has-text("${label}")`).count(), `nav item ${label} missing`);
     }
   });
 
@@ -62,6 +62,62 @@ const browser = await chromium.launch();
     expect(await page.locator('a[href="tel:+12096883466"]').count(), "no tap-to-call link");
     expect(await page.locator('a[href*="google.com/maps/dir"]').count(), "no directions link");
     expect(await page.locator('a[href="https://www.instagram.com/hatwear209/"]').count(), "no Instagram link");
+  });
+
+  await check("Shop dropdown lists hat styles and filters the catalog", async () => {
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await page.click('header nav button:has-text("Shop")');
+    const panel = page.locator("#menu-shop");
+    await panel.waitFor();
+    for (const label of ["Caps", "Beanies", "Hats", "Stretch Fit", "Pom Beanie", "Docker", "Bucket", "Fedora"]) {
+      expect(await panel.locator(`text=${label}`).count(), `${label} missing from menu`);
+    }
+    await page.keyboard.press("Escape");
+    await panel.waitFor({ state: "detached" });
+    await page.click('header nav button:has-text("Shop")');
+    await page.locator('#menu-shop a:has-text("Pom Beanie")').click();
+    await page.waitForURL(/style=pom-beanie/);
+    await page.waitForSelector("#results article h3");
+    const names = await page.locator("#results article h3").allTextContents();
+    expect(names.length > 0 && names.every((n) => /pom/i.test(n)), `unexpected: ${names}`);
+    expect((await page.textContent("h1")).toLowerCase().includes("pom beanie"), "title not set from style");
+  });
+
+  await check("Teams dropdown links to a team", async () => {
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await page.hover('header nav button:has-text("Teams")');
+    await page.locator("#menu-teams").waitFor();
+    await page.locator('#menu-teams a:has-text("Sacramento Kings")').click();
+    await page.waitForURL(/team=Sacramento/);
+  });
+
+  await check("deals: homepage section, countdown, sale prices and Deals link", async () => {
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    const section = page.locator('section[aria-labelledby="deals-title"]');
+    await section.waitFor();
+    expect(await section.locator('[role="timer"]').count() === 1, "no countdown");
+    const cards = await section.locator("article").count();
+    expect(cards === 4, `expected 4 deal cards, got ${cards}`);
+    const card = await section.locator("article", { hasText: "Crown Mark Fitted" }).textContent();
+    expect(card.includes("$35.00") && card.includes("$44.00") && /\d+% off/.test(card), card);
+    expect(await page.locator('header nav a:has-text("Deals")').count() === 1, "Deals nav link missing");
+  });
+
+  await check("deals: sale price flows to product page, bag and checkout", async () => {
+    await page.goto(BASE + "/product/crown-mark-fitted", { waitUntil: "networkidle" });
+    const price = await page.locator("main").textContent();
+    expect(price.includes("$35.00") && price.includes("$44.00") && /ends in/i.test(price), "product page missing deal");
+    await page.locator('#buy label:not(.cursor-not-allowed) input[type="radio"][value^="7"]').first().check({ force: true });
+    const btn = await page.locator('#buy button:has-text("Add to bag")').textContent();
+    expect(btn.includes("$35.00"), btn);
+    await page.locator('#buy button:has-text("Add to bag")').click();
+    await page.waitForSelector('[role="dialog"][aria-labelledby="cart-title"]');
+    const sub = await page.locator("aside .font-display.tabular-nums").textContent();
+    expect(sub.includes("$35.00"), `subtotal ${sub}`);
+    await page.click('aside button:has-text("Remove")');
+    await page.keyboard.press("Escape");
+    await page.goto(BASE + "/deals", { waitUntil: "networkidle" });
+    expect((await page.locator("main article").count()) === 4, "deals page should list 4 deals");
   });
 
   await check("header search shows instant results and opens the shop", async () => {
@@ -105,7 +161,8 @@ const browser = await chromium.launch();
 
   await check("sorting by price low to high", async () => {
     await page.goto(BASE + "/shop?sort=price-asc", { waitUntil: "networkidle" });
-    const prices = (await page.locator("#results article p.tabular-nums").allTextContents()).map((p) => parseFloat(p.replace(/[^0-9.]/g, "")));
+    // First dollar amount on each card is the price paid (the sale price when on deal).
+    const prices = (await page.locator("#results article p.tabular-nums").allTextContents()).map((p) => parseFloat((p.match(/\$([0-9.]+)/) ?? [])[1]));
     expect(prices.every((p, i) => i === 0 || p >= prices[i - 1]), "prices not ascending");
   });
 
@@ -120,7 +177,7 @@ const browser = await chromium.launch();
 
   let productUrl;
   await check("product page: gallery, size required, add to bag", async () => {
-    await page.goto(BASE + "/shop?type=fitted&instock=1", { waitUntil: "networkidle" });
+    await page.goto(BASE + "/shop?style=fitted&instock=1", { waitUntil: "networkidle" });
     await page.locator("#results article h3 a").first().click();
     await page.waitForURL(/\/product\//);
     productUrl = page.url();
@@ -272,6 +329,17 @@ const browser = await chromium.launch();
     await menu.locator('a:has-text("Our Store")').click();
     await page.waitForURL(/\/store/);
     await menu.waitFor({ state: "detached" });
+  });
+
+  await check("mobile menu Shop section expands to hat styles", async () => {
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await page.click('button[aria-label="Open menu"]');
+    const menu = page.locator('[role="dialog"][aria-label="Menu"]');
+    await menu.waitFor();
+    await menu.locator('button:has-text("Shop")').click();
+    await menu.locator('a:has-text("Bucket")').click();
+    await page.waitForURL(/style=bucket/);
+    await page.waitForSelector("#results article h3");
   });
 
   await check("mobile filter sheet filters the catalog", async () => {

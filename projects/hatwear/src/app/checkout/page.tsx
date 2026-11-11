@@ -7,13 +7,14 @@ import { money, plural } from "@/lib/format";
 import { ProductMedia } from "@/components/ProductMedia";
 import { CheckIcon, PhoneIcon } from "@/components/Icons";
 import { DEMO_CATALOG, DEMO_CHECKOUT, site } from "@/content/site";
+import { CloverCheckout } from "@/components/checkout/CloverCheckout";
 
 /**
  * Checkout. In demo mode nothing is charged or submitted: the page lets the
  * customer send their list to the store instead. To go live, replace the
  * "Payment" section with the commerce provider's hosted checkout (see README).
  */
-export default function CheckoutPage() {
+function DemoCheckout() {
   const { lines, subtotal, count, hydrated } = useStore();
   const [copied, setCopied] = useState(false);
 
@@ -53,7 +54,7 @@ export default function CheckoutPage() {
       <h1 className="text-[clamp(2.8rem,1.6rem+5vw,6rem)] uppercase">Review your order</h1>
 
       {DEMO_CHECKOUT && (
-        <div className="mt-6 border-l-4 border-red bg-chalk p-5" role="note">
+        <div className="mt-6 border-l-4 border-sign bg-chalk p-5" role="note">
           <p className="font-display text-2xl font-black uppercase">Online payment isn't connected yet</p>
           <p className="mt-1 max-w-2xl text-graphite">
             This is a preview of the shop. Nothing is charged and no order is placed from this page. To get these items, send the list to the store or call, and HatWear will confirm stock and price with you.
@@ -131,4 +132,9 @@ export default function CheckoutPage() {
       </div>
     </div>
   );
+}
+
+/** Live Clover checkout once the public key is configured; the demo page until then. */
+export default function CheckoutPage() {
+  return DEMO_CHECKOUT ? <DemoCheckout /> : <CloverCheckout />;
 }

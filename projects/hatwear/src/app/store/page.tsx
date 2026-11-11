@@ -43,7 +43,7 @@ export default function StorePage() {
               the wall
             </h1>
             <p className="mt-6 max-w-xl text-lg text-bone/80">
-              HatWear is a headwear and streetwear shop on West Yokuts Avenue: fitted caps, snapbacks, truckers, beanies, team gear, hoodies, windbreakers and custom embroidery under one roof.
+              HatWear is a sports hat and streetwear shop inside Sherwood Place, next to Macy's and Dick's Sporting Goods: fitted caps, snapbacks, truckers, beanies, team gear, hoodies and custom embroidery under one roof.
             </p>
           </div>
           <div className="space-y-6">
@@ -74,7 +74,11 @@ export default function StorePage() {
         {photos.length > 0 ? (
           <div className="mt-6 grid auto-rows-[14rem] grid-cols-2 gap-3 md:grid-cols-4">
             {photos.map((p, i) => (
-              <RevealImage key={p.src} delay={i * 0.05} className={`relative overflow-hidden ${i === 0 ? "col-span-2 row-span-2" : ""}`}>
+              <RevealImage
+                key={p.src}
+                delay={i * 0.05}
+                className={`relative overflow-hidden ${i === 0 ? "col-span-2 row-span-2" : ""} ${i > 0 && i === photos.length - 1 && (photos.length - 1) % 2 === 1 ? "col-span-2" : ""}`}
+              >
                 <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
               </RevealImage>
             ))}
@@ -90,7 +94,7 @@ export default function StorePage() {
                       <ProductArt
                         type="fitted"
                         mark="HW"
-                        colors={{ crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#d2261c" }}
+                        colors={{ crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#2557b8" }}
                         className="mx-auto w-1/2 opacity-90"
                       />
                     )}
@@ -138,7 +142,7 @@ export default function StorePage() {
       </section>
 
       <section className="shell">
-        <div className="twill flex flex-col items-start justify-between gap-6 bg-red p-8 text-white sm:flex-row sm:items-center sm:p-12">
+        <div className="twill flex flex-col items-start justify-between gap-6 bg-sign p-8 text-white sm:flex-row sm:items-center sm:p-12">
           <p className="max-w-xl font-display text-[clamp(2rem,1.4rem+2.6vw,3.4rem)] font-black uppercase leading-[0.92]">
             Got an embroidery idea? Start it online, finish it at the counter.
           </p>

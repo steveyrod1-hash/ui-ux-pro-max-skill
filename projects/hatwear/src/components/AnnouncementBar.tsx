@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
-import { announcements } from "@/content/site";
+import { announcements as baseAnnouncements } from "@/content/site";
+import { activeDeals } from "@/lib/deals";
+import { useNow } from "@/lib/use-now";
 import { CloseIcon, PauseIcon, PlayIcon } from "./Icons";
 
 const ROTATE_MS = 6000;
@@ -13,6 +15,11 @@ export function AnnouncementBar() {
   const [paused, setPaused] = useState(false);
   const [hidden, setHidden] = useState(false);
   const reduce = useReducedMotion();
+  const deals = activeDeals(useNow());
+  const best = deals.length ? Math.max(...deals.map((d) => d.percentOff)) : 0;
+  const announcements = deals.length
+    ? [{ id: "deals", text: `Limited-time deals: up to ${best}% off hats and hoodies.`, href: "/deals", cta: "Shop deals" }, ...baseAnnouncements]
+    : baseAnnouncements;
 
   useEffect(() => {
     try {
@@ -24,10 +31,10 @@ export function AnnouncementBar() {
     if (paused || reduce || announcements.length < 2) return;
     const t = setInterval(() => setI((n) => (n + 1) % announcements.length), ROTATE_MS);
     return () => clearInterval(t);
-  }, [paused, reduce]);
+  }, [paused, reduce, announcements.length]);
 
   if (hidden || announcements.length === 0) return null;
-  const a = announcements[i];
+  const a = announcements[i % announcements.length];
   const external = a.href?.startsWith("http");
 
   return (
@@ -74,7 +81,7 @@ export function AnnouncementBar() {
         {announcements.length > 1 && (
           <div className="hidden shrink-0 gap-1.5 sm:flex" aria-hidden="true">
             {announcements.map((x, n) => (
-              <span key={x.id} className={`h-1 w-4 rounded-full transition-colors ${n === i ? "bg-red" : "bg-bone/25"}`} />
+              <span key={x.id} className={`h-1 w-4 rounded-full transition-colors ${n === i ? "bg-sign" : "bg-bone/25"}`} />
             ))}
           </div>
         )}

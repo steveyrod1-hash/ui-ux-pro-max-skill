@@ -6,6 +6,7 @@
  * no league or club logos are reproduced anywhere in the site.
  */
 import type { ColorFamily, Colorway, League, Product, ProductType } from "./types";
+import { DEFAULT_STYLE } from "./styles";
 
 export const FITTED_SIZES = ["6 7/8", "7", "7 1/8", "7 1/4", "7 3/8", "7 1/2", "7 5/8", "7 3/4", "7 7/8", "8"];
 export const APPAREL_SIZES = ["S", "M", "L", "XL", "2XL"];
@@ -44,7 +45,7 @@ function cw(
   };
 }
 
-interface Team {
+export interface Team {
   name: string;
   league: League;
   code: string;
@@ -52,7 +53,7 @@ interface Team {
   secondary: string;
 }
 
-const TEAMS: Team[] = [
+export const TEAMS: Team[] = [
   { name: "San Francisco Giants", league: "MLB", code: "SF", primary: ["#1c1b1a", "Black"], secondary: "#e8622c" },
   { name: "Athletics", league: "MLB", code: "ATH", primary: ["#123a2f", "Green"], secondary: "#e9b631" },
   { name: "Los Angeles Dodgers", league: "MLB", code: "LA", primary: ["#1f4f8f", "Royal"], secondary: "#f4f1ea" },
@@ -77,6 +78,7 @@ const TYPE_LABEL: Record<ProductType, string> = {
   trucker: "Trucker",
   adjustable: "Adjustable Cap",
   beanie: "Cuffed Beanie",
+  bucket: "Bucket Hat",
   hoodie: "Hoodie",
   windbreaker: "Windbreaker",
 };
@@ -87,26 +89,29 @@ const BASE_PRICE: Record<ProductType, number> = {
   trucker: 32,
   adjustable: 30,
   beanie: 28,
+  bucket: 34,
   hoodie: 68,
   windbreaker: 76,
 };
 
-const DETAILS: Record<ProductType, string[]> = {
+export const DETAILS: Record<ProductType, string[]> = {
   fitted: ["Structured high crown, six panels", "Flat visor with tonal underbrim", "Closed back, sized fit", "Raised front embroidery"],
   snapback: ["Structured high crown, six panels", "Flat visor", "Adjustable snap closure", "Raised front embroidery"],
   trucker: ["Foam-backed front panels", "Breathable mesh back", "Pre-curved visor", "Adjustable snap closure"],
   adjustable: ["Unstructured low crown", "Pre-curved visor", "Adjustable strap with metal buckle", "Washed cotton twill"],
   beanie: ["Rib knit body", "Fold-over cuff", "Embroidered cuff mark"],
+  bucket: ["Cotton twill crown", "Stitched downturned brim", "Breathable eyelets", "Embroidered front mark"],
   hoodie: ["Midweight brushed fleece", "Lined hood with drawcord", "Kangaroo pocket", "Ribbed cuffs and hem"],
   windbreaker: ["Lightweight woven shell", "Full zip with chin guard", "Elastic cuffs", "Packable"],
 };
 
-const CARE: Record<ProductType, string[]> = {
+export const CARE: Record<ProductType, string[]> = {
   fitted: ["Spot clean with a damp cloth", "Do not machine wash or tumble dry", "Store on a crown form to keep its shape"],
   snapback: ["Spot clean with a damp cloth", "Do not machine wash or tumble dry", "Keep out of hot cars to protect the visor"],
   trucker: ["Spot clean the front, rinse mesh gently", "Air dry only"],
   adjustable: ["Hand wash cold", "Reshape and air dry"],
   beanie: ["Hand wash cold", "Lay flat to dry"],
+  bucket: ["Hand wash cold", "Reshape the brim and air dry"],
   hoodie: ["Machine wash cold, inside out", "Tumble dry low", "Do not iron embroidery"],
   windbreaker: ["Machine wash cold, gentle", "Hang to dry"],
 };
@@ -119,6 +124,7 @@ function sizesFor(type: ProductType): string[] {
     return FITTED_SIZES.slice(start, end);
   }
   if (type === "hoodie" || type === "windbreaker") return APPAREL_SIZES.slice(0, 4 + Math.floor(rand() * 2));
+  if (type === "bucket") return ["S/M", "L/XL"];
   return [ONE_SIZE];
 }
 
@@ -139,9 +145,11 @@ let arrival = 0;
 
 function add(p: Omit<Product, "id" | "slug" | "sizes" | "stock" | "details" | "care" | "arrival"> & { sizes?: string[] }) {
   const sizes = p.sizes ?? sizesFor(p.type);
+  const style = p.style ?? DEFAULT_STYLE[p.type];
   const slug = slugify(p.name) + (products.some((x) => x.slug === slugify(p.name)) ? `-${products.length}` : "");
   products.push({
     ...p,
+    style,
     id: `hw-${String(products.length + 1).padStart(3, "0")}`,
     slug,
     sizes,
@@ -249,9 +257,9 @@ const originals: Parameters<typeof add>[0][] = [
     mark: "HW",
     price: 44,
     colorways: [
-      cw("Black / Stitch Red", "Black", BLACK, BLACK, "#d2261c", { under: "#2a2a2a" }),
-      cw("Bone / Black", "White", "#e9e4da", BLACK, BLACK, { under: "#3d4a3c" }),
-      cw("Charcoal / Bone", "Charcoal", "#3a3936", "#3a3936", "#efebe4"),
+      cw("Navy / White", "Navy", "#1d3557", "#1d3557", "#ffffff", { under: "#2a3a52" }),
+      cw("White / Navy", "White", "#f1f3f6", "#1d3557", "#1d3557", { under: "#3d4a3c" }),
+      cw("Black / White", "Black", BLACK, BLACK, "#ffffff", { under: "#2a2a2a" }),
     ],
     description: "HatWear's own high-crown fitted with the six-panel crown mark stitched on the front. Concept design for this preview.",
     isNew: true,
@@ -263,8 +271,8 @@ const originals: Parameters<typeof add>[0][] = [
     mark: "209",
     price: 36,
     colorways: [
-      cw("Black / Red", "Black", BLACK, BLACK, "#d2261c", { under: "#2a2a2a" }),
-      cw("Navy / Bone", "Navy", "#1b2840", "#1b2840", "#efebe4"),
+      cw("Navy / White", "Navy", "#1d3557", "#1d3557", "#ffffff", { under: "#2a3a52" }),
+      cw("Black / Sign Blue", "Black", BLACK, BLACK, "#5b8def", { under: "#2a2a2a" }),
     ],
     description: "A structured snapback with a stitched 209 front. Concept design for this preview.",
     isNew: true,
@@ -290,8 +298,8 @@ const originals: Parameters<typeof add>[0][] = [
     mark: "HW",
     price: 30,
     colorways: [
-      cw("Red / Bone Mesh", "Red", "#c4231b", "#c4231b", "#efebe4", { trim: "#e9e4da" }),
-      cw("Black / Black Mesh", "Black", BLACK, BLACK, "#d2261c", { trim: "#2a2927" }),
+      cw("Navy / White Mesh", "Navy", "#1d3557", "#1d3557", "#ffffff", { trim: "#eef1f5" }),
+      cw("Black / Black Mesh", "Black", BLACK, BLACK, "#ffffff", { trim: "#2a2927" }),
     ],
     description: "Foam-front trucker with a stitched HW mark. Concept design for this preview.",
     isNew: true,
@@ -303,8 +311,8 @@ const originals: Parameters<typeof add>[0][] = [
     mark: "HATWEAR",
     price: 24,
     colorways: [
-      cw("Black", "Black", BLACK, BLACK, "#d2261c", { trim: "#2a2927" }),
-      cw("Stitch Red", "Red", "#b8241c", "#b8241c", "#efebe4", { trim: "#a51f18" }),
+      cw("Navy", "Navy", "#1d3557", "#1d3557", "#ffffff", { trim: "#182d4a" }),
+      cw("Black", "Black", BLACK, BLACK, "#ffffff", { trim: "#2a2927" }),
       cw("Oatmeal", "Tan", "#d8cdb9", "#d8cdb9", "#1c1b1a", { trim: "#cbbfa8" }),
     ],
     description: "A heavy rib-knit beanie with a woven HATWEAR cuff label. Concept design for this preview.",
@@ -317,8 +325,8 @@ const originals: Parameters<typeof add>[0][] = [
     mark: "HW",
     price: 64,
     colorways: [
-      cw("Charcoal", "Charcoal", "#353431", "#353431", "#d2261c", { trim: "#2a2927" }),
-      cw("Bone", "White", "#e6e0d5", "#e6e0d5", "#1c1b1a", { trim: "#d6cfc2" }),
+      cw("Navy", "Navy", "#1d3557", "#1d3557", "#ffffff", { trim: "#ffffff" }),
+      cw("White", "White", "#eef1f5", "#eef1f5", "#1d3557", { trim: "#1d3557" }),
     ],
     description: "Heavyweight fleece hoodie with the crown mark stitched at the chest. Concept design for this preview.",
     isNew: true,
@@ -330,8 +338,8 @@ const originals: Parameters<typeof add>[0][] = [
     mark: "HW",
     price: 72,
     colorways: [
-      cw("Black / Red", "Black", BLACK, "#c4231b", "#efebe4", { trim: "#c4231b" }),
-      cw("Bone / Charcoal", "White", "#e6e0d5", "#353431", "#1c1b1a", { trim: "#353431" }),
+      cw("Navy / White", "Navy", "#1d3557", "#eef1f5", "#ffffff", { trim: "#ffffff" }),
+      cw("White / Navy", "White", "#eef1f5", "#1d3557", "#1d3557", { trim: "#1d3557" }),
     ],
     description: "A light colour-blocked windbreaker that packs into its own pocket. Concept design for this preview.",
     isNew: true,
@@ -344,9 +352,8 @@ const originals: Parameters<typeof add>[0][] = [
     price: 32,
     colorways: [
       cw("Black", "Black", BLACK, BLACK, "#efebe4", { under: "#2a2a2a" }),
-      cw("Navy", "Navy", "#1b2840", "#1b2840", "#efebe4"),
-      cw("Stitch Red", "Red", "#b8241c", "#b8241c", "#efebe4"),
-      cw("Bone", "White", "#e9e4da", "#e9e4da", "#1c1b1a"),
+      cw("Navy", "Navy", "#1d3557", "#1d3557", "#ffffff"),
+      cw("White", "White", "#eef1f5", "#eef1f5", "#1d3557"),
     ],
     description: "A clean fitted with nothing on it yet. Send it to the embroidery studio and put your own mark on the front.",
     isNew: false,
@@ -382,9 +389,54 @@ const originals: Parameters<typeof add>[0][] = [
     embroideryReady: true,
   },
 ];
+originals.push(
+  {
+    name: "HatWear Navy Bucket Hat",
+    type: "bucket",
+    brand: "HatWear",
+    mark: "HW",
+    price: 34,
+    colorways: [
+      cw("Navy", "Navy", "#1d3557", "#1d3557", "#ffffff", { under: "#1d3557" }),
+      cw("Black", "Black", BLACK, BLACK, "#ffffff", { under: BLACK }),
+      cw("Tan", "Tan", "#c9b48f", "#c9b48f", "#1d3557", { under: "#c9b48f" }),
+    ],
+    description: "A soft cotton bucket hat with a stitched HW front. Concept design for this preview.",
+    isNew: true,
+  },
+  {
+    name: "HatWear Pom Beanie",
+    type: "beanie",
+    style: "pom-beanie",
+    brand: "HatWear",
+    mark: "HATWEAR",
+    price: 28,
+    colorways: [
+      cw("Navy / White", "Navy", "#1d3557", "#1d3557", "#ffffff", { trim: "#ffffff" }),
+      cw("White / Navy", "White", "#eef1f5", "#eef1f5", "#1d3557", { trim: "#1d3557" }),
+    ],
+    description: "A cuffed rib-knit beanie topped with a pom, with a woven HATWEAR label. Concept design for this preview.",
+    isNew: true,
+  },
+  {
+    name: "Golden State Warriors Stretch Fit",
+    type: "fitted",
+    style: "stretch-fit",
+    brand: "New Era",
+    league: "NBA",
+    team: "Golden State Warriors",
+    mark: "GSW",
+    price: 40,
+    sizes: ["S/M", "M/L", "L/XL"],
+    colorways: [cw("Royal / Gold", "Royal", "#24468a", "#24468a", "#f6c445")],
+    description: "A stretch-fit cap in Warriors colours: structured crown and a flexible band that fits without sizing.",
+    isNew: true,
+  },
+);
 originals.forEach(add);
 
-export const catalog: Product[] = products;
+/** Sample products used until a real catalog (Clover) is connected. */
+export const sampleCatalog: Product[] = products;
 
 export const LEAGUES: League[] = ["MLB", "NFL", "NBA"];
 

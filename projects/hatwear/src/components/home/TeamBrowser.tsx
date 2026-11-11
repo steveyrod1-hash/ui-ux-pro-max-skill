@@ -62,12 +62,12 @@ export function TeamBrowser({
               <motion.li key={t} variants={{ hidden: { opacity: 0, x: -14 }, show: { opacity: 1, x: 0 } }}>
                 <Link
                   href={`/shop?team=${encodeURIComponent(t)}`}
-                  className="group grid grid-cols-[3.6rem_1fr_auto] items-center gap-4 border-b border-ink/15 py-3.5 transition-colors hover:bg-felt sm:grid-cols-[5rem_1fr_auto_auto] sm:py-4"
+                  className="group grid grid-cols-[3.8rem_1fr_auto] items-center gap-4 border-b border-ink/15 py-3.5 transition-colors hover:bg-felt sm:grid-cols-[6.2rem_1fr_auto_auto] sm:py-4"
                 >
-                  <span className="font-display text-[1.7rem] font-black leading-none text-stone transition-colors group-hover:text-red sm:text-[2.2rem]">
+                  <span className="font-display text-[1.25rem] font-black leading-none text-stone transition-colors group-hover:text-sign sm:text-[1.7rem]">
                     {codes[t]}
                   </span>
-                  <span className="font-display text-[1.55rem] font-extrabold uppercase leading-none tracking-wide sm:text-[2.2rem]">{t}</span>
+                  <span className="font-display text-[1.15rem] font-extrabold uppercase leading-none sm:text-[1.7rem]">{t}</span>
                   <span className="hidden text-sm text-stone sm:block">{counts[t] ?? 0} styles</span>
                   <ArrowIcon size={22} className="mr-1 text-ink/40 transition-transform group-hover:translate-x-1 group-hover:text-ink" />
                 </Link>

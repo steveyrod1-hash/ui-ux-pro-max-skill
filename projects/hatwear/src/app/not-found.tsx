@@ -21,7 +21,7 @@ export default function NotFound() {
         type="fitted"
         view="side"
         mark="404"
-        colors={{ crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#d2261c", mark: "#d2261c" }}
+        colors={{ crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#2557b8", mark: "#2557b8" }}
         className="mx-auto w-full max-w-md"
       />
     </div>

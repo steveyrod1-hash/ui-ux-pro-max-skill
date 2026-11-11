@@ -9,7 +9,10 @@ import { money } from "@/lib/format";
 import { ProductMedia, hasPhotos } from "../ProductMedia";
 import type { ArtView } from "../ProductArt";
 import { PurchasePanel } from "../PurchasePanel";
+import { PriceTag, useUnitPrice } from "../PriceTag";
+import { DealCountdown } from "../deals/Countdown";
 import { ChevronIcon } from "../Icons";
+import { DEMO_CHECKOUT } from "@/content/site";
 
 const VIEWS: { id: ArtView; label: string }[] = [
   { id: "front", label: "Front" },
@@ -117,6 +120,7 @@ function Disclosure({ title, children, open: initial = false }: { title: string;
 
 export function ProductDetail({ product }: { product: Product }) {
   const [colorId, setColorId] = useState(product.colorways[0].id);
+  const unitPrice = useUnitPrice(product);
   const panelRef = useRef<HTMLDivElement>(null);
   const panelVisible = useInView(panelRef, { margin: "0px 0px -20% 0px" });
   const [scrolled, setScrolled] = useState(false);
@@ -156,12 +160,14 @@ export function ProductDetail({ product }: { product: Product }) {
             )}
           </p>
           <h1 className="mt-2 text-[clamp(2.6rem,1.8rem+3vw,4.4rem)] uppercase">{product.name}</h1>
-          <p className="mt-3 font-display text-4xl font-black tabular-nums">{money(product.price)}</p>
+          <PriceTag product={product} size="lg" className="mt-3" />
+          <DealCountdown productId={product.id} />
           <p className="mt-4 max-w-prose text-[1.05rem] text-graphite">{product.description}</p>
           <div className="stitch my-7 text-ink/40" aria-hidden="true" />
           <div ref={panelRef} id="buy">
             <PurchasePanel product={product} colorId={colorId} onColorChange={changeColor} />
           </div>
+          {product.type !== "hoodie" && product.type !== "windbreaker" && (
           <p className="mt-6 text-sm text-stone">
             Want it embroidered?{" "}
             <Link href={`/custom?base=${product.type}&color=${colorId}`} className="link font-semibold text-ink">
@@ -169,6 +175,7 @@ export function ProductDetail({ product }: { product: Product }) {
             </Link>{" "}
             and mention this hat.
           </p>
+          )}
           <div className="mt-8 border-t border-ink/15">
             <Disclosure title="Details" open>
               <ul className="list-disc space-y-1 pl-5">
@@ -186,7 +193,10 @@ export function ProductDetail({ product }: { product: Product }) {
             </Disclosure>
             <Disclosure title="Pickup and returns">
               <p>
-                Online ordering is not switched on yet. Call the store to check stock, or come in and try it on. Return and exchange terms will be published here once the store confirms them.
+                {DEMO_CHECKOUT
+                  ? "Online ordering is not switched on yet. Call the store to check stock, or come in and try it on."
+                  : "Order online and pick up free at the store inside Sherwood Place. HatWear lets you know when it's ready."}{" "}
+                Return and exchange terms will be published here once the store confirms them.
               </p>
             </Disclosure>
           </div>
@@ -205,7 +215,7 @@ export function ProductDetail({ product }: { product: Product }) {
             <div className="flex items-center gap-3">
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-semibold">{product.name}</p>
-                <p className="font-display text-xl font-black tabular-nums">{money(product.price)}</p>
+                <p className="font-display text-xl font-black tabular-nums">{money(unitPrice)}</p>
               </div>
               <button
                 type="button"

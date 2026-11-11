@@ -48,6 +48,7 @@ export function ProductMedia({
       mark={product.mark}
       view={view}
       shadow={shadow}
+      pom={product.style === "pom-beanie"}
       className={className}
       title={`Illustration of the ${product.name} in ${color.name}${view !== "front" ? `, ${view} view` : ""}`}
     />

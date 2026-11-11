@@ -1,3 +1,6 @@
+import { IS_LIVE_CATALOG } from "@/lib/catalog";
+import { cloverPublic } from "@/lib/clover/config";
+
 /**
  * Business facts and owner-editable content.
  *
@@ -11,8 +14,11 @@ export const site = {
   name: "HatWear",
   tagline: "Find your fit. Rep your team. Make it yours.",
   description:
-    "HatWear is a sports hat and headwear store in Stockton, California: MLB, NFL and NBA fitteds and snapbacks, beanies, truckers, streetwear and custom embroidery.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    "HatWear is a sports hat and headwear store inside Sherwood Place in Stockton, California, next to Macy's and Dick's Sporting Goods: MLB, NFL and NBA fitteds and snapbacks, beanies, hoodies, streetwear and custom embroidery from $7.99.",
+  /** Official address. Preview deployments also point here so search engines index one site. */
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://hatwear209.vercel.app"),
 
   address: {
     street: "5340 W Yokuts Ave",
@@ -21,20 +27,37 @@ export const site = {
     postalCode: "95207",
     country: "US",
   },
+  /** Where to find the store, as listed on Google and Instagram. */
+  locatedIn: "Sherwood Place",
+  landmark: "Next to Macy's and Dick's Sporting Goods",
   phone: { display: "(209) 688-3466", tel: "+12096883466" },
   instagram: { handle: "hatwear209", url: "https://www.instagram.com/hatwear209/" },
 
   /**
-   * Opening hours. `null` until the store confirms them.
-   * Example once verified:
-   *   [{ days: "Mon–Sat", opens: "10:00", closes: "19:00" }, { days: "Sun", opens: "11:00", closes: "17:00" }]
-   * For structured data, also fill `hoursSchema` with schema.org day names.
+   * Opening hours, from the store's Google Business listing (November 2026).
+   * Holidays can differ; the site says so next to the hours.
    */
-  hours: null as null | { days: string; opens: string; closes: string }[],
-  hoursSchema: null as null | { dayOfWeek: string[]; opens: string; closes: string }[],
+  hours: [
+    { days: "Monday to Friday", opens: "11:00", closes: "19:00" },
+    { days: "Saturday", opens: "11:00", closes: "20:00" },
+    { days: "Sunday", opens: "11:00", closes: "19:00" },
+  ] as null | { days: string; opens: string; closes: string }[],
+  /** Same hours in schema.org form, plus a per-weekday table for "open now". 0 = Sunday. */
+  hoursSchema: [
+    { dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "11:00", closes: "19:00" },
+    { dayOfWeek: ["Saturday"], opens: "11:00", closes: "20:00" },
+    { dayOfWeek: ["Sunday"], opens: "11:00", closes: "19:00" },
+  ] as null | { dayOfWeek: string[]; opens: string; closes: string }[],
+  weeklyHours: { 0: ["11:00", "19:00"], 1: ["11:00", "19:00"], 2: ["11:00", "19:00"], 3: ["11:00", "19:00"], 4: ["11:00", "19:00"], 5: ["11:00", "19:00"], 6: ["11:00", "20:00"] } as Record<number, [string, string]>,
+  timeZone: "America/Los_Angeles",
 
   /** Store photos live in /public/store/. Empty until the business supplies them. */
-  storePhotos: [] as { src: string; alt: string }[],
+  storePhotos: [
+    { src: "/store/tajima-machine.jpg", alt: "The Tajima embroidery machine in the shop, loaded with Madeira thread, with team caps on the wall behind it" },
+    { src: "/store/thread-wall.jpg", alt: "A shelf of Madeira embroidery thread cones in navy, red, gold, green, pink and more" },
+    { src: "/store/embroidery-station.jpg", alt: "The embroidery station: the Tajima machine with thread cones beside it" },
+    { src: "/store/embroidery-bench.jpg", alt: "The embroidery bench with thread cones, machine oil and stitched backing paper" },
+  ] as { src: string; alt: string }[],
 } as const;
 
 export const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.region} ${site.address.postalCode}`;
@@ -53,13 +76,13 @@ export const mapLinks = {
 export const announcements: { id: string; text: string; href?: string; cta?: string }[] = [
   {
     id: "embroidery",
-    text: "Custom embroidery on hats and apparel, done for you in Stockton.",
+    text: "Custom embroidery from $7.99, done in store.",
     href: "/custom",
     cta: "Start a request",
   },
   {
     id: "visit",
-    text: "A whole wall of styles to try on at 5340 W Yokuts Ave.",
+    text: "Find us inside Sherwood Place, next to Macy's and Dick's.",
     href: "/store",
     cta: "Plan a visit",
   },
@@ -72,12 +95,15 @@ export const announcements: { id: string; text: string; href?: string; cta?: str
 ];
 
 /**
- * Embroidery pricing. Previously advertised as "from $7.99", but that figure
- * has not been re-confirmed, so it is not shown. Set `startingPrice` (and the
- * per-unit rules below) once the store confirms current pricing; the studio
- * then shows an estimate instead of "Request a quote".
+ * Embroidery pricing. The store currently advertises "starting low as $7.99"
+ * on Instagram, so the site shows that as a starting price and every request
+ * still gets an exact quote. Set `verified` and the per-unit rules below to
+ * switch the studio from "Request a quote" to a calculated estimate.
  */
 export const embroideryPricing = {
+  /** "Starting low as $7.99", as advertised on @hatwear209 (November 2026). Shown as a starting price only. */
+  advertisedFrom: 7.99 as number | null,
+  /** Set true (with per-item rules) to let the studio calculate full estimates. */
   verified: false,
   startingPrice: null as number | null,
   /** Optional add-ons, applied per item, once verified. */
@@ -85,8 +111,8 @@ export const embroideryPricing = {
   customArtworkSetup: null as number | null,
 };
 
-/** While true, every product, price and stock level is sample data. */
-export const DEMO_CATALOG = true;
+/** True while products, prices and stock are sample data (no Clover catalog synced). */
+export const DEMO_CATALOG = !IS_LIVE_CATALOG;
 
-/** While true, checkout never charges or submits an order. */
-export const DEMO_CHECKOUT = true;
+/** True while online payment isn't connected (no Clover public key). */
+export const DEMO_CHECKOUT = !cloverPublic.enabled;

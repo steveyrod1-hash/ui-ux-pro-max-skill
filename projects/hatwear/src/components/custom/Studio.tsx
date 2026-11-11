@@ -26,14 +26,13 @@ const STEPS = ["Product", "Customize", "Preview", "Send"] as const;
 
 const viewFor = (p: Placement): ArtView => (p === "side" ? "side" : p === "back" || p === "full-back" ? "back" : "front");
 
-const GARMENT: Placement[] = ["left-chest", "center-chest", "full-back"];
 
 type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; id: string } | { state: "error"; message: string };
 
 function FieldError({ id, msg }: { id: string; msg?: string }) {
   if (!msg) return null;
   return (
-    <p id={id} role="alert" className="mt-1.5 text-sm font-semibold text-red-deep">
+    <p id={id} role="alert" className="mt-1.5 text-sm font-semibold text-sign-deep">
       {msg}
     </p>
   );
@@ -84,14 +83,14 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
   const placements = placementsFor(r.baseType);
 
   // What the preview draws.
-  const previewType: ProductType = r.baseType === "own" ? (GARMENT.includes(r.placement) ? "hoodie" : "fitted") : r.baseType;
+  const previewType: ProductType = r.baseType === "own" ? (r.placement === "cuff" ? "beanie" : "fitted") : r.baseType;
   const previewColors =
     r.baseType === "own"
       ? (BASES.find((b) => b.type === previewType)?.colors[0].art ?? BASES[0].colors[0].art)
       : (base?.colors.find((c) => c.id === r.baseColor)?.art ?? BASES[0].colors[0].art);
   const thread = THREADS.find((t) => t.id === r.thread)!;
   const overlay = { placement: r.placement, text: r.text.trim() || undefined, font: r.font as "block" | "athletic" | "script", thread: thread.hex, image: fileUrl || undefined };
-  const availableViews: ArtView[] = previewType === "beanie" || previewType === "hoodie" || previewType === "windbreaker" ? ["front", "back"] : ["front", "side", "back"];
+  const availableViews: ArtView[] = previewType === "beanie" || previewType === "bucket" ? ["front", "back"] : ["front", "side", "back"];
 
   const onFile = (f: File | null) => {
     setFileError("");
@@ -180,7 +179,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
             <ProductArt type={previewType} colors={previewColors} view={viewFor(r.placement)} embroidery={overlay} className="size-full" />
           </div>
           <div className="self-center">
-            <span className="grid size-14 place-items-center rounded-full bg-red text-white">
+            <span className="grid size-14 place-items-center rounded-full bg-sign text-white">
               <CheckIcon size={28} />
             </span>
             <h2 className="mt-5 text-[clamp(2.6rem,1.8rem+3vw,4.4rem)] uppercase">Request sent</h2>
@@ -274,7 +273,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                 aria-current={i === step ? "step" : undefined}
                 className="w-full text-left disabled:cursor-default"
               >
-                <span className={`block h-1.5 rounded-full transition-colors ${i <= step ? "bg-red" : "bg-ink/15"}`} />
+                <span className={`block h-1.5 rounded-full transition-colors ${i <= step ? "bg-sign" : "bg-ink/15"}`} />
                 <span className={`mt-2 block text-sm ${i === step ? "font-semibold" : "text-stone"}`}>
                   {i + 1}. {s}
                 </span>
@@ -307,7 +306,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                   <fieldset>
                     <legend className="font-display text-3xl font-black uppercase">What are we stitching?</legend>
                     <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-                      {[...BASES.map((b) => ({ type: b.type as ProductType | "own", label: b.label, note: b.note })), { type: "own" as const, label: "My own item", note: "Bring it to the store" }].map((b) => {
+                      {[...BASES.map((b) => ({ type: b.type as ProductType | "own", label: b.label, note: b.note })), { type: "own" as const, label: "My own hat or beanie", note: "Bring it to the store" }].map((b) => {
                         const on = r.baseType === b.type;
                         const art = b.type === "own" ? null : BASES.find((x) => x.type === b.type)!;
                         return (
@@ -327,7 +326,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                               }}
                               className="peer sr-only"
                             />
-                            <span className="aspect-[5/4] bg-felt peer-focus-visible:outline-2 peer-focus-visible:outline-red">
+                            <span className="aspect-[5/4] bg-felt peer-focus-visible:outline-2 peer-focus-visible:outline-sign">
                               {art ? (
                                 <ProductArt type={art.type} colors={art.colors[0].art} className="size-full p-2" shadow={false} />
                               ) : (
@@ -360,7 +359,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                           <label key={c.id} className="cursor-pointer" title={c.name}>
                             <input type="radio" name={`${uid}-color`} checked={r.baseColor === c.id} onChange={() => set("baseColor", c.id)} className="peer sr-only" />
                             <span
-                              className="block size-11 rounded-full ring-1 ring-ink/20 ring-offset-2 ring-offset-bone peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:ring-red"
+                              className="block size-11 rounded-full ring-1 ring-ink/20 ring-offset-2 ring-offset-bone peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:ring-sign"
                               style={{ background: `linear-gradient(135deg, ${c.art.crown} 0 55%, ${c.art.visor} 55% 100%)` }}
                             />
                             <span className="sr-only">{c.name}</span>
@@ -379,7 +378,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                         id={`${uid}-own`}
                         value={r.ownItem}
                         onChange={(e) => set("ownItem", e.target.value)}
-                        placeholder="e.g. Black Carhartt beanie, my team's jerseys"
+                        placeholder="e.g. Black Carhartt beanie, a navy New Era fitted"
                         maxLength={120}
                         className="field mt-2"
                         aria-invalid={!!errors.ownItem}
@@ -423,7 +422,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                       {FONTS.map((f) => (
                         <label key={f.id} className="cursor-pointer">
                           <input type="radio" name={`${uid}-font`} checked={r.font === f.id} onChange={() => set("font", f.id)} className="peer sr-only" />
-                          <span className="flex h-16 flex-col items-center justify-center rounded-sm border-[1.5px] border-ink/20 peer-checked:border-ink peer-checked:bg-ink peer-checked:text-bone peer-focus-visible:outline-2 peer-focus-visible:outline-red">
+                          <span className="flex h-16 flex-col items-center justify-center rounded-sm border-[1.5px] border-ink/20 peer-checked:border-ink peer-checked:bg-ink peer-checked:text-bone peer-focus-visible:outline-2 peer-focus-visible:outline-sign">
                             <span
                               className="text-2xl leading-none"
                               style={{
@@ -457,7 +456,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                       </div>
                     ) : (
                       <label
-                        className="mt-2 flex cursor-pointer flex-col items-center justify-center gap-1 rounded-sm border-[1.5px] border-dashed border-ink/35 px-4 py-6 text-center hover:border-ink focus-within:outline-2 focus-within:outline-red"
+                        className="mt-2 flex cursor-pointer flex-col items-center justify-center gap-1 rounded-sm border-[1.5px] border-dashed border-ink/35 px-4 py-6 text-center hover:border-ink focus-within:outline-2 focus-within:outline-sign"
                         onDragOver={(e) => e.preventDefault()}
                         onDrop={(e) => {
                           e.preventDefault();
@@ -481,7 +480,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                       {placements.map((p) => (
                         <label key={p.id} className="cursor-pointer">
                           <input type="radio" name={`${uid}-place`} checked={r.placement === p.id} onChange={() => set("placement", p.id)} className="peer sr-only" />
-                          <span className="inline-flex h-11 items-center rounded-full border-[1.5px] border-ink/25 px-4 font-semibold peer-checked:border-ink peer-checked:bg-ink peer-checked:text-bone peer-focus-visible:outline-2 peer-focus-visible:outline-red">
+                          <span className="inline-flex h-11 items-center rounded-full border-[1.5px] border-ink/25 px-4 font-semibold peer-checked:border-ink peer-checked:bg-ink peer-checked:text-bone peer-focus-visible:outline-2 peer-focus-visible:outline-sign">
                             {p.label}
                           </span>
                         </label>
@@ -494,12 +493,13 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                     <legend className="font-semibold">
                       Thread <span className="font-normal text-stone">· {thread.name}</span>
                     </legend>
-                    <div className="mt-2 grid grid-cols-6 gap-2 sm:grid-cols-12">
+                    <p className="mt-1 text-sm text-stone">The Madeira colours on the shop's thread wall. Need an exact team match? Mention it in the notes.</p>
+                    <div className="mt-2 grid grid-cols-5 gap-2.5 sm:grid-cols-10">
                       {THREADS.map((t) => (
                         <label key={t.id} className="cursor-pointer" title={t.name}>
                           <input type="radio" name={`${uid}-thread`} checked={r.thread === t.id} onChange={() => set("thread", t.id)} className="peer sr-only" />
                           <span
-                            className="block aspect-square rounded-full ring-1 ring-ink/25 ring-offset-2 ring-offset-bone peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:ring-red"
+                            className="block aspect-square rounded-full ring-1 ring-ink/25 ring-offset-2 ring-offset-bone peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:ring-sign"
                             style={{ background: `repeating-linear-gradient(-35deg, ${t.hex} 0 3px, color-mix(in srgb, ${t.hex} 78%, black) 3px 4px)` }}
                           />
                           <span className="sr-only">{t.name}</span>
@@ -572,11 +572,13 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                     ))}
                   </dl>
                   <div className="mt-6 bg-chalk p-5">
-                    <p className="font-display text-2xl font-black uppercase">{estimate != null ? `Estimate ${money(estimate)}` : "Request a quote"}</p>
+                    <p className="font-display text-2xl font-black uppercase">
+                      {estimate != null ? `Estimate ${money(estimate)}` : embroideryPricing.advertisedFrom != null ? `From ${money(embroideryPricing.advertisedFrom)} · request a quote` : "Request a quote"}
+                    </p>
                     <p className="mt-1 text-graphite">
                       {estimate != null
                         ? "Estimated from the store's current pricing. The final price is confirmed before work starts."
-                        : "Price depends on the item, stitch count, placement and quantity. HatWear will reply with an exact quote before anything is made."}
+                        : `Embroidery starts at ${embroideryPricing.advertisedFrom != null ? money(embroideryPricing.advertisedFrom) : "a low base price"}. The exact price depends on the item, stitch count, placement and quantity, and HatWear confirms it with you before anything is made.`}
                     </p>
                   </div>
                 </div>
@@ -614,7 +616,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                       {(["text", "phone", "email"] as const).map((m) => (
                         <label key={m} className="cursor-pointer">
                           <input type="radio" name={`${uid}-method`} checked={r.contactMethod === m} onChange={() => set("contactMethod", m)} className="peer sr-only" />
-                          <span className="inline-flex h-11 items-center rounded-full border-[1.5px] border-ink/25 px-4 font-semibold capitalize peer-checked:border-ink peer-checked:bg-ink peer-checked:text-bone peer-focus-visible:outline-2 peer-focus-visible:outline-red">
+                          <span className="inline-flex h-11 items-center rounded-full border-[1.5px] border-ink/25 px-4 font-semibold capitalize peer-checked:border-ink peer-checked:bg-ink peer-checked:text-bone peer-focus-visible:outline-2 peer-focus-visible:outline-sign">
                             {m === "phone" ? "Call" : m}
                           </span>
                         </label>
@@ -630,7 +632,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                   </div>
                   <p className="text-sm text-stone">We only use your details to reply about this request.</p>
                   {status.state === "error" && (
-                    <p role="alert" className="border-l-4 border-red bg-chalk p-4 font-semibold">
+                    <p role="alert" className="border-l-4 border-sign bg-chalk p-4 font-semibold">
                       {status.message}
                     </p>
                   )}

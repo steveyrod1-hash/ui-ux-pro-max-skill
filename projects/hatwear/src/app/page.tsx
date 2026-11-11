@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HeroWall } from "@/components/home/HeroWall";
+import { DealsSection } from "@/components/deals/DealsSection";
 import { TeamBrowser } from "@/components/home/TeamBrowser";
 import { EmbroideryShowcase } from "@/components/home/EmbroideryShowcase";
 import { ProductCard } from "@/components/ProductCard";
@@ -7,7 +8,7 @@ import { ProductArt } from "@/components/ProductArt";
 import { RevealImage, Stagger, StaggerItem } from "@/components/Reveal";
 import { AddressBlock, HoursList, MapFrame, StoreActions } from "@/components/StoreVisit";
 import { ArrowIcon } from "@/components/Icons";
-import { getAllProducts, getNewArrivals, LEAGUES, TEAMS_BY_LEAGUE, teamCounts } from "@/lib/catalog";
+import { getAllProducts, getNewArrivals, LEAGUES, TEAMS_BY_LEAGUE, teamCounts, unitsFor } from "@/lib/catalog";
 import { TEAM_CODES } from "@/data/catalog";
 import type { ArtColors, ProductType } from "@/data/types";
 import { DEMO_CATALOG } from "@/content/site";
@@ -17,7 +18,7 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
     label: "Fitted Hats",
     href: "/shop?type=fitted",
     types: ["fitted"],
-    art: { type: "fitted", mark: "HW", colors: { crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#d2261c" } },
+    art: { type: "fitted", mark: "HW", colors: { crown: "#1c1b1a", visor: "#1c1b1a", under: "#2a2a2a", button: "#1c1b1a", mark: "#2557b8" } },
     tone: "dark",
     blurb: "Sized to your head, from 6 7/8 to 8.",
   },
@@ -41,7 +42,7 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
     label: "Beanies",
     href: "/shop?type=beanie",
     types: ["beanie"],
-    art: { type: "beanie", mark: "HATWEAR", colors: { crown: "#2b2a28", visor: "#2b2a28", under: "#2b2a28", button: "#2b2a28", mark: "#d2261c", trim: "#232221" } },
+    art: { type: "beanie", mark: "HATWEAR", colors: { crown: "#1d3557", visor: "#1d3557", under: "#1d3557", button: "#1d3557", mark: "#2557b8", trim: "#232221" } },
     tone: "felt",
     blurb: "Cuffed rib knits.",
   },
@@ -58,7 +59,7 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
 const TONE: Record<(typeof STYLES)[number]["tone"], string> = {
   dark: "bg-ink text-bone twill",
   felt: "bg-felt text-ink",
-  red: "bg-red text-white",
+  red: "bg-sign text-white",
   bone: "bg-chalk text-ink",
 };
 
@@ -81,11 +82,23 @@ export default function Home() {
     const product = find(slug);
     return product ? [{ product, colorIndex }] : [];
   });
+  // With a real catalog the curated sample picks won't exist: fill the wall with in-stock hats.
+  if (wall.length < 9) {
+    const used = new Set(wall.map((w) => w.product.id));
+    for (const product of all) {
+      if (wall.length >= 9) break;
+      if (used.has(product.id) || !["fitted", "snapback", "trucker", "adjustable"].includes(product.type) || unitsFor(product) === 0) continue;
+      wall.push({ product, colorIndex: 0 });
+      used.add(product.id);
+    }
+  }
   const countFor = (types: ProductType[]) => all.filter((p) => types.includes(p.type)).length;
 
   return (
     <>
       <HeroWall wall={wall} />
+
+      <DealsSection />
 
       {/* Shop by style */}
       <section className="shell py-16 sm:py-24" aria-labelledby="styles-title">
@@ -106,7 +119,7 @@ export default function Home() {
             >
               <Link href={s.href} className={`group relative flex h-full flex-col justify-between overflow-hidden p-5 sm:p-6 ${TONE[s.tone]} ${i === 0 ? "min-h-[21rem] lg:min-h-[34rem]" : "min-h-[15rem] lg:min-h-[16.5rem]"}`}>
                 <div className="relative z-10">
-                  <h3 className={`uppercase ${i === 0 ? "text-[clamp(2.6rem,2rem+3vw,4.6rem)]" : "text-[clamp(1.9rem,1.5rem+1.4vw,2.6rem)]"}`}>{s.label}</h3>
+                  <h3 className={`uppercase ${i === 0 ? "text-[clamp(2.2rem,1.6rem+2.6vw,4rem)]" : "text-[clamp(1.35rem,1rem+1.1vw,1.95rem)]"}`}>{s.label}</h3>
                   <p className={`mt-2 max-w-[13rem] text-sm ${s.tone === "dark" ? "text-bone/70" : "text-graphite"}`}>{s.blurb}</p>
                 </div>
                 <div
@@ -126,6 +139,7 @@ export default function Home() {
       </section>
 
       {/* New arrivals */}
+      {arrivals.length > 0 && (
       <section className="bg-chalk py-16 sm:py-24" aria-labelledby="new-title">
         <div className="shell">
           <div className="flex flex-wrap items-end justify-between gap-4">
@@ -148,6 +162,7 @@ export default function Home() {
           </Stagger>
         </div>
       </section>
+      )}
 
       {/* Shop by team */}
       <section className="shell grid gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.6fr] lg:gap-16" aria-labelledby="teams-title">
@@ -176,16 +191,16 @@ export default function Home() {
               Your mark.
             </h2>
             <p className="mt-5 max-w-md text-lg text-bone/80">
-              Names, numbers, a crew logo or your business mark, stitched onto a hat or hoodie. The store reviews every request and confirms price and timing with you before anything is made.
+              Names, numbers, a crew logo or your business mark, stitched onto a hat or beanie in the shop. Starting at $7.99. The store reviews every request and confirms the exact price and timing with you before anything is made.
             </p>
             <ol className="mt-8 space-y-0 border-t border-bone/15">
               {[
-                ["Pick the piece", "Fitted, snapback, trucker, beanie, hoodie or windbreaker, in the colour you want."],
+                ["Pick the hat", "Fitted, snapback, trucker, dad cap, beanie or bucket hat, in the colour you want."],
                 ["Add your mark", "Type your text or upload artwork, choose thread and placement, and see a live preview."],
                 ["Send the request", "HatWear checks the details and contacts you with a quote."],
               ].map(([t, d], i) => (
                 <li key={t} className="grid grid-cols-[2.6rem_1fr] gap-3 border-b border-bone/15 py-4">
-                  <span className="font-display text-3xl font-black text-red">{i + 1}</span>
+                  <span className="font-display text-3xl font-black text-sign-light">{i + 1}</span>
                   <span>
                     <span className="block font-semibold">{t}</span>
                     <span className="text-bone/70">{d}</span>
