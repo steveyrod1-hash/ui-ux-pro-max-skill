@@ -175,7 +175,7 @@ While a deal runs, the site shows:
    - Add product photos and real store photos to `site.storePhotos`.
    - Only use official MLB, NFL and NBA marks on genuine licensed merchandise and its photos.
    - Use Instagram content only with the business's permission, through Meta's API.
-7. **Domain and hosting.** Set `NEXT_PUBLIC_SITE_URL`, deploy (Vercel or any Node host), and add analytics if wanted.
+7. **Domain and hosting.** The live site is https://hatwear209.vercel.app (the default for `site.url`). If you buy a custom domain, set `NEXT_PUBLIC_SITE_URL` to it, deploy (Vercel or any Node host), and add analytics if wanted.
 
 ## Design system
 

@@ -15,7 +15,10 @@ export const site = {
   tagline: "Find your fit. Rep your team. Make it yours.",
   description:
     "HatWear is a sports hat and headwear store inside Sherwood Place in Stockton, California, next to Macy's and Dick's Sporting Goods: MLB, NFL and NBA fitteds and snapbacks, beanies, hoodies, streetwear and custom embroidery from $7.99.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  /** Official address. Preview deployments also point here so search engines index one site. */
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://hatwear209.vercel.app"),
 
   address: {
     street: "5340 W Yokuts Ave",
