@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Studio } from "@/components/custom/Studio";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Custom embroidery studio",
-  description: "Design custom embroidery on hats, beanies, hoodies and windbreakers, preview it live, and request a quote from HatWear in Stockton, CA.",
+  description: "Design custom embroidery on fitted caps, snapbacks, truckers, dad caps, beanies and bucket hats, preview it live, and request a quote from HatWear in Stockton, CA.",
   alternates: { canonical: "/custom" },
 };
 
@@ -31,6 +32,25 @@ export default async function CustomPage({ searchParams }: { searchParams: Promi
       <div className="shell pt-10 sm:pt-14">
         <Studio key={`${base}-${color}`} initialBase={base} initialColor={color} />
       </div>
+      <section className="shell mt-20" aria-labelledby="made-here">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h2 id="made-here" className="text-[clamp(2rem,1.4rem+2.6vw,3.6rem)] uppercase">
+            Stitched in the shop
+          </h2>
+          <p className="max-w-md text-graphite">Every design is stitched right here at HatWear on our Tajima machine, in the Madeira thread colours you pick above.</p>
+        </div>
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
+          {[
+            { src: "/store/tajima-machine.jpg", alt: "The Tajima embroidery machine loaded with Madeira thread", cls: "row-span-2" },
+            { src: "/store/thread-wall.jpg", alt: "Madeira thread cones on the shop's thread wall", cls: "" },
+            { src: "/store/embroidery-bench.jpg", alt: "Thread cones and stitched backing on the embroidery bench", cls: "" },
+          ].map((p) => (
+            <div key={p.src} className={`relative min-h-[12rem] overflow-hidden bg-felt md:min-h-[16rem] ${p.cls}`}>
+              <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover" />
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

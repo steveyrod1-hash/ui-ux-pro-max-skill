@@ -72,7 +72,8 @@ export function SizeSelector({
   onChange: (s: string) => void;
   name: string;
 }) {
-  const fitted = product.type === "fitted";
+  // The fitted size guide only applies to true fitted sizes (not stretch-fit S/M, L/XL).
+  const fitted = product.type === "fitted" && product.sizes.some((s) => /^\d/.test(s));
   const [guideOpen, setGuideOpen] = useState(false);
   const chart = fitted && value ? chartFor(value) : undefined;
   if (product.sizes.length === 1) {

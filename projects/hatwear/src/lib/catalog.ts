@@ -7,6 +7,7 @@
 import { LEAGUES, sampleCatalog, TEAMS_BY_LEAGUE, TYPE_LABELS } from "@/data/catalog";
 import cloverRaw from "@/data/clover-raw.generated.json";
 import { mapCloverCatalog, type CloverRaw } from "@/lib/clover/map";
+import { STYLES, STYLE_BY_ID } from "@/data/styles";
 import type { Availability, League, Product, ProductType } from "@/data/types";
 
 export { LEAGUES, TEAMS_BY_LEAGUE, TYPE_LABELS };
@@ -19,7 +20,7 @@ const catalog: Product[] = live.length > 0 ? live : sampleCatalog;
 export const IS_LIVE_CATALOG = live.length > 0;
 export const CATALOG_SYNCED_AT: string | null = cloverRaw ? (cloverRaw as unknown as CloverRaw).fetchedAt : null;
 
-export const HAT_TYPES: ProductType[] = ["fitted", "snapback", "trucker", "adjustable", "beanie"];
+export const HAT_TYPES: ProductType[] = ["fitted", "snapback", "trucker", "adjustable", "beanie", "bucket"];
 export const APPAREL_TYPES: ProductType[] = ["hoodie", "windbreaker"];
 export const isHat = (t: ProductType) => HAT_TYPES.includes(t);
 
@@ -91,6 +92,7 @@ export const SORT_LABELS: Record<SortKey, string> = {
 export interface Filters {
   q: string;
   type: ProductType[];
+  style: string[];
   league: League[];
   team: string[];
   brand: string[];
@@ -118,6 +120,7 @@ export function parseFilters(sp: URLSearchParams): Filters {
   return {
     q: sp.get("q")?.trim() ?? "",
     type: list(sp.get("type")) as ProductType[],
+    style: list(sp.get("style")),
     league: list(sp.get("league")) as League[],
     team: list(sp.get("team")),
     brand: list(sp.get("brand")),
@@ -133,7 +136,7 @@ export function parseFilters(sp: URLSearchParams): Filters {
 export function filtersToParams(f: Partial<Filters>): URLSearchParams {
   const sp = new URLSearchParams();
   if (f.q) sp.set("q", f.q);
-  for (const k of ["type", "league", "team", "brand", "size", "color", "price"] as const) {
+  for (const k of ["type", "style", "league", "team", "brand", "size", "color", "price"] as const) {
     const v = f[k];
     if (v && v.length) sp.set(k, v.join(","));
   }
@@ -151,7 +154,7 @@ function normalize(s: string) {
 export function matchesQuery(p: Product, q: string) {
   if (!q) return true;
   const hay = normalize(
-    [p.name, p.brand, p.team, p.league, TYPE_LABELS[p.type], p.mark, ...p.colorways.map((c) => `${c.name} ${c.family}`)].join(" "),
+    [p.name, p.brand, p.team, p.league, TYPE_LABELS[p.type], p.style && STYLE_BY_ID[p.style]?.label, p.mark, ...p.colorways.map((c) => `${c.name} ${c.family}`)].join(" "),
   );
   return normalize(q)
     .split(/\s+/)
@@ -159,11 +162,12 @@ export function matchesQuery(p: Product, q: string) {
     .every((w) => hay.includes(w) || (w.endsWith("s") && hay.includes(w.slice(0, -1))));
 }
 
-type FacetKey = "type" | "league" | "team" | "brand" | "size" | "color" | "price";
+type FacetKey = "type" | "style" | "league" | "team" | "brand" | "size" | "color" | "price";
 
 function passes(p: Product, f: Filters, skip?: FacetKey): boolean {
   if (!matchesQuery(p, f.q)) return false;
   if (skip !== "type" && f.type.length && !f.type.includes(p.type)) return false;
+  if (skip !== "style" && f.style.length && (!p.style || !f.style.includes(p.style))) return false;
   if (skip !== "league" && f.league.length && (!p.league || !f.league.includes(p.league))) return false;
   if (skip !== "team" && f.team.length && (!p.team || !f.team.includes(p.team))) return false;
   if (skip !== "brand" && f.brand.length && !f.brand.includes(p.brand)) return false;
@@ -234,6 +238,7 @@ export function queryProducts(f: Filters): QueryResult {
     values.filter((v) => m.has(v)).map((v) => ({ value: v, label: label(v), count: m.get(v) ?? 0 }));
 
   const typeCounts = count(facetBase("type"), (p) => [p.type]);
+  const styleCounts = count(facetBase("style"), (p) => (p.style ? [p.style] : []));
   const leagueCounts = count(facetBase("league"), (p) => (p.league ? [p.league] : []));
   const teamCounts = count(facetBase("team"), (p) => (p.team ? [p.team] : []));
   const brandCounts = count(facetBase("brand"), (p) => [p.brand]);
@@ -260,6 +265,7 @@ export function queryProducts(f: Filters): QueryResult {
     pages,
     facets: {
       type: withSelected(order(typeCounts, [...HAT_TYPES, ...APPAREL_TYPES], (v) => TYPE_LABELS[v]), f.type, (v) => TYPE_LABELS[v as ProductType]),
+      style: withSelected(order(styleCounts, STYLES.map((s) => s.id), (v) => STYLE_BY_ID[v].label), f.style, (v) => STYLE_BY_ID[v]?.label ?? v),
       league: withSelected(order(leagueCounts, LEAGUES), f.league),
       team: withSelected(order(teamCounts, allTeams), f.team),
       brand: withSelected(order(brandCounts, brands), f.brand),
@@ -277,6 +283,12 @@ export function queryProducts(f: Filters): QueryResult {
 export function searchProducts(q: string, limit = 6): Product[] {
   if (!q.trim()) return [];
   return catalog.filter((p) => matchesQuery(p, q)).slice(0, limit);
+}
+
+export function styleCounts(): Record<string, number> {
+  const m: Record<string, number> = {};
+  for (const p of catalog) if (p.style) m[p.style] = (m[p.style] ?? 0) + 1;
+  return m;
 }
 
 export function teamCounts(): Record<string, number> {

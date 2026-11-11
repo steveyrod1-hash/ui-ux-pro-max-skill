@@ -4,92 +4,166 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Wordmark } from "./Brand";
-import { BagIcon, CloseIcon, HeartIcon, MenuIcon, PhoneIcon, PinIcon, SearchIcon, ArrowIcon, InstagramIcon } from "./Icons";
+import { BagIcon, CloseIcon, HeartIcon, MenuIcon, PhoneIcon, PinIcon, SearchIcon, ArrowIcon, InstagramIcon, ChevronIcon } from "./Icons";
+import { GROUP_LINKS, ShopMenu, TeamsMenu } from "./MegaMenu";
+import { STYLE_GROUPS, STYLES } from "@/data/styles";
 import { ProductArt } from "./ProductArt";
 import { useStore } from "@/lib/store";
-import { searchProducts, TYPE_LABELS } from "@/lib/catalog";
+import { LEAGUES, searchProducts, styleCounts, TEAMS_BY_LEAGUE, TYPE_LABELS } from "@/lib/catalog";
 import { money } from "@/lib/format";
 import { mapLinks, site } from "@/content/site";
 
-export const NAV = [
-  { label: "Shop All", href: "/shop", match: (p: string, t: string | null) => p === "/shop" && !t },
-  { label: "Fitted Hats", href: "/shop?type=fitted", match: (p: string, t: string | null) => p === "/shop" && t === "fitted" },
-  { label: "Snapbacks", href: "/shop?type=snapback", match: (p: string, t: string | null) => p === "/shop" && t === "snapback" },
-  { label: "Teams", href: "/teams", match: (p: string) => p.startsWith("/teams") },
+type MenuId = "shop" | "teams";
+type NavItem = { label: string; href: string; menu?: MenuId; match: (p: string, q: URLSearchParams) => boolean };
+
+const onShop = (p: string, q: URLSearchParams, type: string) => p === "/shop" && q.get("type") === type;
+
+export const NAV: NavItem[] = [
   {
-    label: "Streetwear",
-    href: "/shop?type=hoodie,windbreaker",
-    match: (p: string, t: string | null) => p === "/shop" && t === "hoodie,windbreaker",
+    label: "Shop",
+    href: "/shop",
+    menu: "shop",
+    match: (p, q) => p === "/shop" && !["fitted", "snapback", "beanie"].includes(q.get("type") ?? "") && !q.get("team") && !q.get("league"),
   },
-  { label: "Custom Embroidery", href: "/custom", match: (p: string) => p.startsWith("/custom") },
-  { label: "Our Store", href: "/store", match: (p: string) => p.startsWith("/store") },
+  { label: "Fitted Hats", href: "/shop?type=fitted", match: (p, q) => onShop(p, q, "fitted") },
+  { label: "Snapbacks", href: "/shop?type=snapback", match: (p, q) => onShop(p, q, "snapback") },
+  { label: "Beanies", href: "/shop?type=beanie", match: (p, q) => onShop(p, q, "beanie") },
+  { label: "Teams", href: "/teams", menu: "teams", match: (p, q) => p.startsWith("/teams") || (p === "/shop" && !!(q.get("team") || q.get("league"))) },
+  { label: "Custom Embroidery", href: "/custom", match: (p) => p.startsWith("/custom") },
+  { label: "Our Store", href: "/store", match: (p) => p.startsWith("/store") },
 ];
 
-function NavLinks({ onNavigate, mobile = false }: { onNavigate?: () => void; mobile?: boolean }) {
-  const pathname = usePathname();
-  const type = useSearchParams().get("type");
-  return <NavList pathname={pathname} type={type} onNavigate={onNavigate} mobile={mobile} />;
-}
-
-function NavList({
-  pathname,
-  type,
-  onNavigate,
-  mobile,
-}: {
-  pathname: string;
-  type: string | null;
+type NavProps = {
   onNavigate?: () => void;
   mobile?: boolean;
-}) {
+  openMenu?: MenuId | null;
+  onMenu?: (m: MenuId | null, how?: "hover" | "click") => void;
+};
+
+function NavLinks(props: NavProps) {
+  const pathname = usePathname();
+  const query = useSearchParams();
+  return <NavList pathname={pathname} query={new URLSearchParams(query.toString())} {...props} />;
+}
+
+function MobileShopMenu({ onNavigate }: { onNavigate?: () => void }) {
+  const counts = styleCounts();
+  return (
+    <div className="space-y-5 pb-5 pt-1">
+      {STYLE_GROUPS.map((g) => (
+        <div key={g.id}>
+          <Link href={GROUP_LINKS[g.id].href} onClick={onNavigate} className="inline-flex items-center gap-2 font-display text-lg font-black uppercase">
+            {g.label} <ArrowIcon size={16} className="text-bone/50" />
+          </Link>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {STYLES.filter((s) => s.group === g.id).map((s) => (
+              <li key={s.id}>
+                <Link href={`/shop?style=${s.id}`} onClick={onNavigate} className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-bone/25 px-3.5 text-sm hover:border-bone">
+                  {s.label}
+                  {counts[s.id] ? <span className="text-xs text-bone/50">{counts[s.id]}</span> : null}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+      <Link href="/shop" onClick={onNavigate} className="link inline-flex items-center gap-2 font-semibold">
+        Shop everything <ArrowIcon size={16} />
+      </Link>
+    </div>
+  );
+}
+
+function MobileTeamsMenu({ onNavigate }: { onNavigate?: () => void }) {
+  return (
+    <div className="space-y-5 pb-5 pt-1">
+      {LEAGUES.map((l) => (
+        <div key={l}>
+          <Link href={`/shop?league=${l}`} onClick={onNavigate} className="inline-flex items-center gap-2 font-display text-lg font-black uppercase">
+            {l} <ArrowIcon size={16} className="text-bone/50" />
+          </Link>
+          <ul className="mt-1 grid grid-cols-2 gap-x-3">
+            {TEAMS_BY_LEAGUE[l].map((t) => (
+              <li key={t}>
+                <Link href={`/shop?team=${encodeURIComponent(t)}`} onClick={onNavigate} className="block py-2 text-sm text-bone/85 hover:text-bone">
+                  {t}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function NavList({ pathname, query, onNavigate, mobile, openMenu, onMenu }: NavProps & { pathname: string; query: URLSearchParams }) {
+  const [expanded, setExpanded] = useState<MenuId | null>(null);
   if (mobile) {
     return (
       <ul className="flex flex-col">
         {NAV.map((n, i) => {
-          const active = n.match(pathname, type);
+          const active = n.match(pathname, query);
+          const rowCls = "group flex w-full items-center justify-between border-b border-bone/12 py-3.5 font-display text-[1.7rem] font-extrabold uppercase leading-none";
           return (
-            <motion.li
-              key={n.href}
-              initial={{ opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.06 + i * 0.04, type: "spring", stiffness: 420, damping: 36 }}
-            >
-              <Link
-                href={n.href}
-                onClick={onNavigate}
-                aria-current={active ? "page" : undefined}
-                className="group flex items-center justify-between border-b border-bone/12 py-3.5 font-display text-[2.1rem] font-extrabold uppercase leading-none tracking-wide"
-              >
-                <span className={active ? "text-sign-light" : ""}>{n.label}</span>
-                <ArrowIcon size={22} className="text-bone/40 transition-transform group-hover:translate-x-1 group-hover:text-bone" />
-              </Link>
+            <motion.li key={n.href} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.06 + i * 0.04, type: "spring", stiffness: 420, damping: 36 }}>
+              {n.menu ? (
+                <>
+                  <button type="button" onClick={() => setExpanded((x) => (x === n.menu ? null : n.menu!))} aria-expanded={expanded === n.menu} className={rowCls}>
+                    <span className={active ? "text-sign-light" : ""}>{n.label}</span>
+                    <ChevronIcon size={22} className={`text-bone/60 transition-transform ${expanded === n.menu ? "rotate-90" : ""}`} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {expanded === n.menu && (
+                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden border-b border-bone/12">
+                        {n.menu === "shop" ? <MobileShopMenu onNavigate={onNavigate} /> : <MobileTeamsMenu onNavigate={onNavigate} />}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </>
+              ) : (
+                <Link href={n.href} onClick={onNavigate} aria-current={active ? "page" : undefined} className={rowCls}>
+                  <span className={active ? "text-sign-light" : ""}>{n.label}</span>
+                  <ArrowIcon size={22} className="text-bone/40 transition-transform group-hover:translate-x-1 group-hover:text-bone" />
+                </Link>
+              )}
             </motion.li>
           );
         })}
       </ul>
     );
   }
+  const itemCls = "relative inline-flex items-center gap-1 whitespace-nowrap py-2 font-sans text-[0.8rem] font-extrabold uppercase tracking-[0.06em] text-ink/80 transition-colors hover:text-ink";
   return (
     <ul className="flex items-center gap-[clamp(0.9rem,1.5vw,1.75rem)]">
       {NAV.map((n) => {
-        const active = n.match(pathname, type);
+        const active = n.match(pathname, query);
+        const underline = active && (
+          <motion.span layoutId="nav-underline" className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-sign" transition={{ type: "spring", stiffness: 500, damping: 40 }} />
+        );
         return (
-          <li key={n.href} className="relative">
-            <Link
-              href={n.href}
-              aria-current={active ? "page" : undefined}
-              className="relative block whitespace-nowrap py-2 font-sans text-[0.8rem] font-extrabold uppercase tracking-[0.06em] text-ink/80 transition-colors hover:text-ink"
-            >
-              {n.label}
-              {active && (
-                <motion.span
-                  layoutId="nav-underline"
-                  className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-sign"
-                  transition={{ type: "spring", stiffness: 500, damping: 40 }}
-                />
-              )}
-            </Link>
+          <li key={n.href} className="relative" onPointerEnter={(e) => e.pointerType === "mouse" && onMenu?.(n.menu ?? null, "hover")}>
+            {n.menu ? (
+              <button
+                type="button"
+                className={itemCls}
+                aria-expanded={openMenu === n.menu}
+                aria-controls={`menu-${n.menu}`}
+                aria-haspopup="true"
+                onClick={() => onMenu?.(openMenu === n.menu ? null : n.menu!, "click")}
+              >
+                {n.label}
+                <ChevronIcon size={14} className={`transition-transform ${openMenu === n.menu ? "-rotate-90" : "rotate-90"}`} />
+                {underline}
+              </button>
+            ) : (
+              <Link href={n.href} aria-current={active ? "page" : undefined} className={itemCls}>
+                {n.label}
+                {underline}
+              </Link>
+            )}
           </li>
         );
       })}
@@ -231,7 +305,9 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  return (
+  // Rendered into <body>: the header's backdrop blur would otherwise trap this
+  // fixed-position sheet inside the header's own box.
+  return createPortal(
     <motion.div className="fixed inset-0 z-50 xl:hidden" role="dialog" aria-modal="true" aria-label="Menu">
       <motion.div
         className="absolute inset-0 bg-ink/50"
@@ -256,7 +332,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             <CloseIcon size={26} />
           </button>
         </div>
-        <Suspense fallback={<NavList pathname="" type={null} onNavigate={onClose} mobile />}>
+        <Suspense fallback={<NavList pathname="" query={new URLSearchParams()} onNavigate={onClose} mobile />}>
           <NavLinks onNavigate={onClose} mobile />
         </Suspense>
         <div className="mt-auto pt-8">
@@ -280,7 +356,8 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
           </a>
         </div>
       </motion.nav>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }
 
@@ -291,11 +368,40 @@ export function Header() {
   const pathname = usePathname();
   const closeMenu = useCallback(() => setMenuOpen(false), []);
   const closeSearch = useCallback(() => setSearchOpen(false), []);
+  const [openMenu, setOpenMenu] = useState<MenuId | null>(null);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeMenus = useCallback(() => setOpenMenu(null), []);
+
+  // Hover opens after a short pause (no flicker when the pointer passes over); clicks are instant.
+  const onMenu = useCallback((m: MenuId | null, how: "hover" | "click" = "click") => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    if (how === "click") {
+      setOpenMenu(m);
+      if (m) setSearchOpen(false);
+      return;
+    }
+    hoverTimer.current = setTimeout(() => {
+      setOpenMenu((cur) => (m === null && cur === null ? cur : m));
+      if (m) setSearchOpen(false);
+    }, m ? 110 : 160);
+  }, []);
 
   useEffect(() => {
     setSearchOpen(false);
     setMenuOpen(false);
+    setOpenMenu(null);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!openMenu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpenMenu(null);
+      document.querySelector<HTMLElement>(`[aria-controls="menu-${openMenu}"]`)?.focus();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openMenu]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -309,7 +415,10 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-bone/95 backdrop-blur supports-[backdrop-filter]:bg-bone/85">
+    <header
+      className="sticky top-0 z-40 bg-bone/95 backdrop-blur supports-[backdrop-filter]:bg-bone/85"
+      onPointerLeave={(e) => e.pointerType === "mouse" && openMenu && onMenu(null, "hover")}
+    >
       <div className="shell flex h-16 items-center gap-3 xl:h-[4.5rem]">
         <button
           type="button"
@@ -324,14 +433,17 @@ export function Header() {
           <Wordmark />
         </Link>
         <nav aria-label="Main" className="ml-auto hidden xl:block">
-          <Suspense fallback={<NavList pathname="" type={null} />}>
-            <NavLinks />
+          <Suspense fallback={<NavList pathname="" query={new URLSearchParams()} openMenu={openMenu} onMenu={onMenu} />}>
+            <NavLinks openMenu={openMenu} onMenu={onMenu} />
           </Suspense>
         </nav>
         <div className="ml-auto flex items-center xl:ml-4">
           <button
             type="button"
-            onClick={() => setSearchOpen((o) => !o)}
+            onClick={() => {
+              setOpenMenu(null);
+              setSearchOpen((o) => !o);
+            }}
             className="grid size-11 place-items-center rounded-full hover:bg-felt"
             aria-label="Search"
             aria-expanded={searchOpen}
@@ -374,6 +486,10 @@ export function Header() {
       </div>
       <div className="stitch text-ink/60" aria-hidden="true" />
       <AnimatePresence>{searchOpen && <SearchPanel onClose={closeSearch} />}</AnimatePresence>
+      <AnimatePresence>
+        {openMenu === "shop" && <ShopMenu id="menu-shop" key="shop" onNavigate={closeMenus} />}
+        {openMenu === "teams" && <TeamsMenu id="menu-teams" key="teams" onNavigate={closeMenus} />}
+      </AnimatePresence>
       <AnimatePresence>{menuOpen && <MobileMenu onClose={closeMenu} />}</AnimatePresence>
     </header>
   );

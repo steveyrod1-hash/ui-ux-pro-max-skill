@@ -163,6 +163,7 @@ export function ProductDetail({ product }: { product: Product }) {
           <div ref={panelRef} id="buy">
             <PurchasePanel product={product} colorId={colorId} onColorChange={changeColor} />
           </div>
+          {product.type !== "hoodie" && product.type !== "windbreaker" && (
           <p className="mt-6 text-sm text-stone">
             Want it embroidered?{" "}
             <Link href={`/custom?base=${product.type}&color=${colorId}`} className="link font-semibold text-ink">
@@ -170,6 +171,7 @@ export function ProductDetail({ product }: { product: Product }) {
             </Link>{" "}
             and mention this hat.
           </p>
+          )}
           <div className="mt-8 border-t border-ink/15">
             <Disclosure title="Details" open>
               <ul className="list-disc space-y-1 pl-5">

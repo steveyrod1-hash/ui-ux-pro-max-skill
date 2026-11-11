@@ -37,6 +37,8 @@ interface Props {
   className?: string;
   /** Draw the soft floor shadow (off for tight crops). */
   shadow?: boolean;
+  /** Pom on top (pom beanies). */
+  pom?: boolean;
 }
 
 function hash(s: string) {
@@ -68,8 +70,9 @@ function markSize(text: string, base: number) {
   const n = text.length;
   if (n <= 2) return base;
   if (n === 3) return base * 0.8;
-  if (n <= 5) return base * 0.56;
-  if (n <= 8) return base * 0.42;
+  if (n <= 5) return base * 0.5;
+  if (n <= 6) return base * 0.42;
+  if (n <= 8) return base * 0.34;
   return Math.max(base * 0.24, (base * 3.2) / n);
 }
 
@@ -103,6 +106,7 @@ export function ProductArt({
   title,
   className,
   shadow = true,
+  pom = false,
 }: Props) {
   const id = `pa${hash(JSON.stringify([type, colors, mark, view, embroidery?.thread, embroidery?.placement, embroidery?.text]))}`;
   const ref = (n: string) => `url(#${id}-${n})`;
@@ -230,7 +234,7 @@ export function ProductArt({
     );
   };
 
-  const floor = shadow && view !== "detail" && <ellipse cx="200" cy={isApparel ? 352 : type === "beanie" ? 322 : 334} rx={isApparel ? 140 : type === "beanie" ? 110 : 120} ry="12" fill="#000" opacity="0.22" filter={ref("floor")} />;
+  const floor = shadow && view !== "detail" && <ellipse cx="200" cy={isApparel ? 352 : type === "beanie" ? 322 : type === "bucket" ? 314 : 334} rx={isApparel ? 140 : type === "beanie" ? 110 : 120} ry="12" fill="#000" opacity="0.22" filter={ref("floor")} />;
 
   let body: React.ReactNode;
 
@@ -243,6 +247,13 @@ export function ProductArt({
         <path d="M112 300 L112 178 C112 112 152 84 200 84 C248 84 288 112 288 178 L288 300 Z" fill={knit} />
         <path d="M112 300 L112 178 C112 112 152 84 200 84 C248 84 288 112 288 178 L288 300 Z" fill={ref("rib")} />
         <path d="M112 300 L112 178 C112 112 152 84 200 84 C248 84 288 112 288 178 L288 300 Z" fill={ref("light")} />
+        {pom && (
+          <g>
+            <circle cx="200" cy="80" r="30" fill={colors.trim ?? colors.mark} />
+            <circle cx="200" cy="80" r="30" fill={ref("rib")} opacity="0.6" />
+            <circle cx="191" cy="70" r="11" fill="#fff" opacity="0.14" />
+          </g>
+        )}
         <path d="M104 226 L296 226 L298 306 C240 314 160 314 102 306 Z" fill={cuff} />
         <path d="M104 226 L296 226 L298 306 C240 314 160 314 102 306 Z" fill={ref("rib")} />
         <path d="M104 226 L296 226 L298 306 C240 314 160 314 102 306 Z" fill={ref("visor")} />
@@ -261,6 +272,36 @@ export function ProductArt({
           )
         )}
         {overlay && overlayArt(200, 266, 70, overlay)}
+      </g>
+    );
+  } else if (type === "bucket") {
+    const back = view === "back";
+    const crown = "M126 236 C128 172 148 124 200 122 C252 124 272 172 274 236 Z";
+    const brim = "M64 240 C104 222 296 222 336 240 C350 268 310 298 200 300 C90 298 50 268 64 240 Z";
+    body = (
+      <g>
+        <path d={brim} fill={colors.visor} />
+        <path d={brim} fill={ref("visor")} />
+        {[8, 18].map((d, i) =>
+          stitch(
+            `M${72 + d * 0.6} ${250 + d * 0.5} C${112} ${284 + d * 0.2} ${288} ${284 + d * 0.2} ${328 - d * 0.6} ${250 + d * 0.5}`,
+            luminance(colors.visor) > 0.6 ? "rgba(0,0,0,.22)" : "rgba(255,255,255,.2)",
+            `bb${i}`,
+            1.1,
+          ),
+        )}
+        <path d={crown} fill={colors.crown} />
+        <path d={crown} fill={ref("twill")} />
+        <path d={crown} fill={ref("light")} />
+        <path d="M200 122 L200 236" stroke="rgba(0,0,0,.22)" strokeWidth="1.4" />
+        {stitch("M150 150 C140 180 136 210 136 236", lightCrown ? "rgba(0,0,0,.2)" : "rgba(255,255,255,.15)", "bs1", 1)}
+        {stitch("M250 150 C260 180 264 210 264 236", lightCrown ? "rgba(0,0,0,.2)" : "rgba(255,255,255,.15)", "bs2", 1)}
+        <path d="M128 226 C170 236 230 236 272 226" fill="none" stroke="rgba(0,0,0,.28)" strokeWidth="2" />
+        {[[160, 150], [240, 150]].map(([x, y], i) => (
+          <circle key={i} cx={x} cy={y} r="4" fill={shade(colors.crown, lightCrown ? -0.3 : 0.15)} />
+        ))}
+        {!back && showMark && mark && embroideredText(mark, 200, 184, markSize(mark, 64), ref("satin0"))}
+        {overlay && overlayArt(200, back ? 190 : 184, 84, overlay)}
       </g>
     );
   } else if (isApparel) {

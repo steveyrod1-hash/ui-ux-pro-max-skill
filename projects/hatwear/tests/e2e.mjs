@@ -48,8 +48,8 @@ const browser = await chromium.launch();
   await check("home renders hero, wordmark and nav", async () => {
     await page.goto(BASE + "/", { waitUntil: "networkidle" });
     expect((await page.textContent("#hero-title")).toLowerCase().includes("more than"), "hero headline missing");
-    for (const label of ["Shop All", "Fitted Hats", "Snapbacks", "Teams", "Streetwear", "Custom Embroidery", "Our Store"]) {
-      expect(await page.locator(`header nav a:has-text("${label}")`).count(), `nav link ${label} missing`);
+    for (const label of ["Shop", "Fitted Hats", "Snapbacks", "Beanies", "Teams", "Custom Embroidery", "Our Store"]) {
+      expect(await page.locator(`header nav :is(a, button):has-text("${label}")`).count(), `nav item ${label} missing`);
     }
   });
 
@@ -62,6 +62,33 @@ const browser = await chromium.launch();
     expect(await page.locator('a[href="tel:+12096883466"]').count(), "no tap-to-call link");
     expect(await page.locator('a[href*="google.com/maps/dir"]').count(), "no directions link");
     expect(await page.locator('a[href="https://www.instagram.com/hatwear209/"]').count(), "no Instagram link");
+  });
+
+  await check("Shop dropdown lists hat styles and filters the catalog", async () => {
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await page.click('header nav button:has-text("Shop")');
+    const panel = page.locator("#menu-shop");
+    await panel.waitFor();
+    for (const label of ["Caps", "Beanies", "Hats", "Stretch Fit", "Pom Beanie", "Docker", "Bucket", "Fedora"]) {
+      expect(await panel.locator(`text=${label}`).count(), `${label} missing from menu`);
+    }
+    await page.keyboard.press("Escape");
+    await panel.waitFor({ state: "detached" });
+    await page.click('header nav button:has-text("Shop")');
+    await page.locator('#menu-shop a:has-text("Pom Beanie")').click();
+    await page.waitForURL(/style=pom-beanie/);
+    await page.waitForSelector("#results article h3");
+    const names = await page.locator("#results article h3").allTextContents();
+    expect(names.length > 0 && names.every((n) => /pom/i.test(n)), `unexpected: ${names}`);
+    expect((await page.textContent("h1")).toLowerCase().includes("pom beanie"), "title not set from style");
+  });
+
+  await check("Teams dropdown links to a team", async () => {
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await page.hover('header nav button:has-text("Teams")');
+    await page.locator("#menu-teams").waitFor();
+    await page.locator('#menu-teams a:has-text("Sacramento Kings")').click();
+    await page.waitForURL(/team=Sacramento/);
   });
 
   await check("header search shows instant results and opens the shop", async () => {
@@ -120,7 +147,7 @@ const browser = await chromium.launch();
 
   let productUrl;
   await check("product page: gallery, size required, add to bag", async () => {
-    await page.goto(BASE + "/shop?type=fitted&instock=1", { waitUntil: "networkidle" });
+    await page.goto(BASE + "/shop?style=fitted&instock=1", { waitUntil: "networkidle" });
     await page.locator("#results article h3 a").first().click();
     await page.waitForURL(/\/product\//);
     productUrl = page.url();
@@ -272,6 +299,17 @@ const browser = await chromium.launch();
     await menu.locator('a:has-text("Our Store")').click();
     await page.waitForURL(/\/store/);
     await menu.waitFor({ state: "detached" });
+  });
+
+  await check("mobile menu Shop section expands to hat styles", async () => {
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await page.click('button[aria-label="Open menu"]');
+    const menu = page.locator('[role="dialog"][aria-label="Menu"]');
+    await menu.waitFor();
+    await menu.locator('button:has-text("Shop")').click();
+    await menu.locator('a:has-text("Bucket")').click();
+    await page.waitForURL(/style=bucket/);
+    await page.waitForSelector("#results article h3");
   });
 
   await check("mobile filter sheet filters the catalog", async () => {

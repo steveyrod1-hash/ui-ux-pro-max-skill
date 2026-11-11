@@ -26,7 +26,6 @@ const STEPS = ["Product", "Customize", "Preview", "Send"] as const;
 
 const viewFor = (p: Placement): ArtView => (p === "side" ? "side" : p === "back" || p === "full-back" ? "back" : "front");
 
-const GARMENT: Placement[] = ["left-chest", "center-chest", "full-back"];
 
 type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; id: string } | { state: "error"; message: string };
 
@@ -84,14 +83,14 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
   const placements = placementsFor(r.baseType);
 
   // What the preview draws.
-  const previewType: ProductType = r.baseType === "own" ? (GARMENT.includes(r.placement) ? "hoodie" : "fitted") : r.baseType;
+  const previewType: ProductType = r.baseType === "own" ? (r.placement === "cuff" ? "beanie" : "fitted") : r.baseType;
   const previewColors =
     r.baseType === "own"
       ? (BASES.find((b) => b.type === previewType)?.colors[0].art ?? BASES[0].colors[0].art)
       : (base?.colors.find((c) => c.id === r.baseColor)?.art ?? BASES[0].colors[0].art);
   const thread = THREADS.find((t) => t.id === r.thread)!;
   const overlay = { placement: r.placement, text: r.text.trim() || undefined, font: r.font as "block" | "athletic" | "script", thread: thread.hex, image: fileUrl || undefined };
-  const availableViews: ArtView[] = previewType === "beanie" || previewType === "hoodie" || previewType === "windbreaker" ? ["front", "back"] : ["front", "side", "back"];
+  const availableViews: ArtView[] = previewType === "beanie" || previewType === "bucket" ? ["front", "back"] : ["front", "side", "back"];
 
   const onFile = (f: File | null) => {
     setFileError("");
@@ -307,7 +306,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                   <fieldset>
                     <legend className="font-display text-3xl font-black uppercase">What are we stitching?</legend>
                     <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-                      {[...BASES.map((b) => ({ type: b.type as ProductType | "own", label: b.label, note: b.note })), { type: "own" as const, label: "My own item", note: "Bring it to the store" }].map((b) => {
+                      {[...BASES.map((b) => ({ type: b.type as ProductType | "own", label: b.label, note: b.note })), { type: "own" as const, label: "My own hat or beanie", note: "Bring it to the store" }].map((b) => {
                         const on = r.baseType === b.type;
                         const art = b.type === "own" ? null : BASES.find((x) => x.type === b.type)!;
                         return (
@@ -379,7 +378,7 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                         id={`${uid}-own`}
                         value={r.ownItem}
                         onChange={(e) => set("ownItem", e.target.value)}
-                        placeholder="e.g. Black Carhartt beanie, my team's jerseys"
+                        placeholder="e.g. Black Carhartt beanie, a navy New Era fitted"
                         maxLength={120}
                         className="field mt-2"
                         aria-invalid={!!errors.ownItem}
@@ -494,7 +493,8 @@ export function Studio({ initialBase, initialColor }: { initialBase?: string; in
                     <legend className="font-semibold">
                       Thread <span className="font-normal text-stone">· {thread.name}</span>
                     </legend>
-                    <div className="mt-2 grid grid-cols-6 gap-2 sm:grid-cols-12">
+                    <p className="mt-1 text-sm text-stone">The Madeira colours on the shop's thread wall. Need an exact team match? Mention it in the notes.</p>
+                    <div className="mt-2 grid grid-cols-5 gap-2.5 sm:grid-cols-10">
                       {THREADS.map((t) => (
                         <label key={t.id} className="cursor-pointer" title={t.name}>
                           <input type="radio" name={`${uid}-thread`} checked={r.thread === t.id} onChange={() => set("thread", t.id)} className="peer sr-only" />

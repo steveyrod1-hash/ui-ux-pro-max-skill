@@ -14,6 +14,7 @@
  */
 import type { ArtColors, ColorFamily, League, Product, ProductType } from "@/data/types";
 import { CARE, DETAILS, FITTED_SIZES, ONE_SIZE, TEAMS } from "@/data/catalog";
+import { DEFAULT_STYLE, detectStyle } from "@/data/styles";
 
 interface CloverOption {
   id: string;
@@ -155,7 +156,8 @@ export function mapCloverCatalog(raw: CloverRaw): Product[] {
     const cats = (first.categories?.elements ?? []).map((c) => c.name ?? "").join(" ");
     const tags = (first.tags?.elements ?? []).map((t) => t.name ?? "").join(" ");
     const text = `${g.name} ${cats} ${tags}`;
-    let type = TYPE_RULES.find(([re]) => re.test(text))?.[1];
+    const style = detectStyle(text);
+    let type = style?.type ?? TYPE_RULES.find(([re]) => re.test(text))?.[1];
 
     const variants = g.items.map((it) => {
       let size = ONE_SIZE;
@@ -206,6 +208,7 @@ export function mapCloverCatalog(raw: CloverRaw): Product[] {
       slug,
       name: g.name,
       type,
+      style: style?.id ?? DEFAULT_STYLE[type],
       brand: BRANDS.find(([re]) => re.test(text))?.[1] ?? "HatWear",
       league,
       team: team?.name,

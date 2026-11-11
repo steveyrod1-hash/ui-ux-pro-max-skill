@@ -6,6 +6,7 @@
  * no league or club logos are reproduced anywhere in the site.
  */
 import type { ColorFamily, Colorway, League, Product, ProductType } from "./types";
+import { DEFAULT_STYLE } from "./styles";
 
 export const FITTED_SIZES = ["6 7/8", "7", "7 1/8", "7 1/4", "7 3/8", "7 1/2", "7 5/8", "7 3/4", "7 7/8", "8"];
 export const APPAREL_SIZES = ["S", "M", "L", "XL", "2XL"];
@@ -77,6 +78,7 @@ const TYPE_LABEL: Record<ProductType, string> = {
   trucker: "Trucker",
   adjustable: "Adjustable Cap",
   beanie: "Cuffed Beanie",
+  bucket: "Bucket Hat",
   hoodie: "Hoodie",
   windbreaker: "Windbreaker",
 };
@@ -87,6 +89,7 @@ const BASE_PRICE: Record<ProductType, number> = {
   trucker: 32,
   adjustable: 30,
   beanie: 28,
+  bucket: 34,
   hoodie: 68,
   windbreaker: 76,
 };
@@ -97,6 +100,7 @@ export const DETAILS: Record<ProductType, string[]> = {
   trucker: ["Foam-backed front panels", "Breathable mesh back", "Pre-curved visor", "Adjustable snap closure"],
   adjustable: ["Unstructured low crown", "Pre-curved visor", "Adjustable strap with metal buckle", "Washed cotton twill"],
   beanie: ["Rib knit body", "Fold-over cuff", "Embroidered cuff mark"],
+  bucket: ["Cotton twill crown", "Stitched downturned brim", "Breathable eyelets", "Embroidered front mark"],
   hoodie: ["Midweight brushed fleece", "Lined hood with drawcord", "Kangaroo pocket", "Ribbed cuffs and hem"],
   windbreaker: ["Lightweight woven shell", "Full zip with chin guard", "Elastic cuffs", "Packable"],
 };
@@ -107,6 +111,7 @@ export const CARE: Record<ProductType, string[]> = {
   trucker: ["Spot clean the front, rinse mesh gently", "Air dry only"],
   adjustable: ["Hand wash cold", "Reshape and air dry"],
   beanie: ["Hand wash cold", "Lay flat to dry"],
+  bucket: ["Hand wash cold", "Reshape the brim and air dry"],
   hoodie: ["Machine wash cold, inside out", "Tumble dry low", "Do not iron embroidery"],
   windbreaker: ["Machine wash cold, gentle", "Hang to dry"],
 };
@@ -119,6 +124,7 @@ function sizesFor(type: ProductType): string[] {
     return FITTED_SIZES.slice(start, end);
   }
   if (type === "hoodie" || type === "windbreaker") return APPAREL_SIZES.slice(0, 4 + Math.floor(rand() * 2));
+  if (type === "bucket") return ["S/M", "L/XL"];
   return [ONE_SIZE];
 }
 
@@ -139,9 +145,11 @@ let arrival = 0;
 
 function add(p: Omit<Product, "id" | "slug" | "sizes" | "stock" | "details" | "care" | "arrival"> & { sizes?: string[] }) {
   const sizes = p.sizes ?? sizesFor(p.type);
+  const style = p.style ?? DEFAULT_STYLE[p.type];
   const slug = slugify(p.name) + (products.some((x) => x.slug === slugify(p.name)) ? `-${products.length}` : "");
   products.push({
     ...p,
+    style,
     id: `hw-${String(products.length + 1).padStart(3, "0")}`,
     slug,
     sizes,
@@ -381,6 +389,50 @@ const originals: Parameters<typeof add>[0][] = [
     embroideryReady: true,
   },
 ];
+originals.push(
+  {
+    name: "HatWear Navy Bucket Hat",
+    type: "bucket",
+    brand: "HatWear",
+    mark: "HW",
+    price: 34,
+    colorways: [
+      cw("Navy", "Navy", "#1d3557", "#1d3557", "#ffffff", { under: "#1d3557" }),
+      cw("Black", "Black", BLACK, BLACK, "#ffffff", { under: BLACK }),
+      cw("Tan", "Tan", "#c9b48f", "#c9b48f", "#1d3557", { under: "#c9b48f" }),
+    ],
+    description: "A soft cotton bucket hat with a stitched HW front. Concept design for this preview.",
+    isNew: true,
+  },
+  {
+    name: "HatWear Pom Beanie",
+    type: "beanie",
+    style: "pom-beanie",
+    brand: "HatWear",
+    mark: "HATWEAR",
+    price: 28,
+    colorways: [
+      cw("Navy / White", "Navy", "#1d3557", "#1d3557", "#ffffff", { trim: "#ffffff" }),
+      cw("White / Navy", "White", "#eef1f5", "#eef1f5", "#1d3557", { trim: "#1d3557" }),
+    ],
+    description: "A cuffed rib-knit beanie topped with a pom, with a woven HATWEAR label. Concept design for this preview.",
+    isNew: true,
+  },
+  {
+    name: "Golden State Warriors Stretch Fit",
+    type: "fitted",
+    style: "stretch-fit",
+    brand: "New Era",
+    league: "NBA",
+    team: "Golden State Warriors",
+    mark: "GSW",
+    price: 40,
+    sizes: ["S/M", "M/L", "L/XL"],
+    colorways: [cw("Royal / Gold", "Royal", "#24468a", "#24468a", "#f6c445")],
+    description: "A stretch-fit cap in Warriors colours: structured crown and a flexible band that fits without sizing.",
+    isNew: true,
+  },
+);
 originals.forEach(add);
 
 /** Sample products used until a real catalog (Clover) is connected. */

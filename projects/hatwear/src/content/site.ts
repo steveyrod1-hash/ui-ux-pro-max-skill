@@ -49,7 +49,12 @@ export const site = {
   timeZone: "America/Los_Angeles",
 
   /** Store photos live in /public/store/. Empty until the business supplies them. */
-  storePhotos: [] as { src: string; alt: string }[],
+  storePhotos: [
+    { src: "/store/tajima-machine.jpg", alt: "The Tajima embroidery machine in the shop, loaded with Madeira thread, with team caps on the wall behind it" },
+    { src: "/store/thread-wall.jpg", alt: "A shelf of Madeira embroidery thread cones in navy, red, gold, green, pink and more" },
+    { src: "/store/embroidery-station.jpg", alt: "The embroidery station: the Tajima machine with thread cones beside it" },
+    { src: "/store/embroidery-bench.jpg", alt: "The embroidery bench with thread cones, machine oil and stitched backing paper" },
+  ] as { src: string; alt: string }[],
 } as const;
 
 export const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.region} ${site.address.postalCode}`;

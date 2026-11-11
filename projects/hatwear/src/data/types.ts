@@ -4,10 +4,11 @@ export type ProductType =
   | "trucker"
   | "adjustable"
   | "beanie"
+  | "bucket"
   | "hoodie"
   | "windbreaker";
 
-export type HatType = Extract<ProductType, "fitted" | "snapback" | "trucker" | "adjustable" | "beanie">;
+export type HatType = Extract<ProductType, "fitted" | "snapback" | "trucker" | "adjustable" | "beanie" | "bucket">;
 
 export type League = "MLB" | "NFL" | "NBA";
 
@@ -56,6 +57,8 @@ export interface Product {
   slug: string;
   name: string;
   type: ProductType;
+  /** Specific style from src/data/styles.ts, e.g. "pom-beanie" or "stretch-fit". */
+  style?: string;
   brand: string;
   league?: League;
   team?: string;

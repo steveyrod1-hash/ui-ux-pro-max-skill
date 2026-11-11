@@ -188,11 +188,11 @@ export default function Home() {
               Your mark.
             </h2>
             <p className="mt-5 max-w-md text-lg text-bone/80">
-              Names, numbers, a crew logo or your business mark, stitched onto a hat or hoodie. Starting at $7.99. The store reviews every request and confirms the exact price and timing with you before anything is made.
+              Names, numbers, a crew logo or your business mark, stitched onto a hat or beanie in the shop. Starting at $7.99. The store reviews every request and confirms the exact price and timing with you before anything is made.
             </p>
             <ol className="mt-8 space-y-0 border-t border-bone/15">
               {[
-                ["Pick the piece", "Fitted, snapback, trucker, beanie, hoodie or windbreaker, in the colour you want."],
+                ["Pick the hat", "Fitted, snapback, trucker, dad cap, beanie or bucket hat, in the colour you want."],
                 ["Add your mark", "Type your text or upload artwork, choose thread and placement, and see a live preview."],
                 ["Send the request", "HatWear checks the details and contacts you with a quote."],
               ].map(([t, d], i) => (
