@@ -12,7 +12,7 @@ import { sizeRangeLabel } from "@/lib/sizes";
 import { ProductMedia } from "./ProductMedia";
 import { PurchasePanel, WishButton } from "./PurchasePanel";
 import { Modal } from "./Modal";
-import { ArrowIcon } from "./Icons";
+import { ArrowIcon, PlusIcon } from "./Icons";
 
 export function QuickView({ product, open, onClose, initialColor }: { product: Product; open: boolean; onClose: () => void; initialColor: string }) {
   const [colorId, setColorId] = useState(initialColor);
@@ -55,23 +55,27 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   const altView = product.type === "hoodie" || product.type === "windbreaker" || product.type === "beanie" ? "back" : "side";
 
   return (
-    <article className="group relative flex flex-col" onPointerEnter={(e) => e.pointerType === "mouse" && setHover(true)} onPointerLeave={() => setHover(false)}>
-      <div className="relative aspect-[4/5] overflow-hidden bg-felt">
+    <article
+      className="card card-lift group relative flex h-full flex-col overflow-hidden"
+      onPointerEnter={(e) => e.pointerType === "mouse" && setHover(true)}
+      onPointerLeave={() => setHover(false)}
+    >
+      <div className="relative aspect-square overflow-hidden bg-[linear-gradient(180deg,#f3f6fa_0%,#e7ecf3_100%)]">
         <Link href={href} className="absolute inset-0" aria-label={product.name} tabIndex={-1}>
-          <motion.div animate={{ opacity: hover ? 0 : 1, scale: hover ? 1.03 : 1 }} transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }} className="absolute inset-0 p-[6%]">
+          <motion.div animate={{ opacity: hover ? 0 : 1, scale: hover ? 1.04 : 1 }} transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }} className="absolute inset-0 p-[3%]">
             <ProductMedia product={product} colorId={colorId} className="size-full" priority={priority} />
           </motion.div>
           <motion.div
             initial={false}
             animate={{ opacity: hover ? 1 : 0, scale: hover ? 1 : 0.97 }}
-            transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-            className="absolute inset-0 p-[6%]"
+            transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+            className="absolute inset-0 p-[3%]"
             aria-hidden="true"
           >
             <ProductMedia product={product} colorId={colorId} view={altView} className="size-full" />
           </motion.div>
         </Link>
-        <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
+        <div className="pointer-events-none absolute left-2.5 top-2.5 flex flex-col items-start gap-1.5 sm:left-3 sm:top-3">
           {total === 0 ? (
             <span className="label label-bone">Sold out</span>
           ) : deal ? (
@@ -81,31 +85,31 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           ) : null}
           {total > 0 && colorUnits > 0 && colorUnits <= 2 && <span className="label label-bone">Low stock</span>}
         </div>
-        <WishButton id={product.id} name={product.name} className="absolute right-2 top-2 z-10 size-11 bg-bone/0 hover:bg-bone/70" />
+        <WishButton id={product.id} name={product.name} className="absolute right-1 top-1 z-10 size-11 rounded-full transition-colors hover:bg-white/80 sm:right-1.5 sm:top-1.5" />
         <button
           type="button"
           onClick={() => setQuick(true)}
-          className="absolute inset-x-3 bottom-3 hidden h-11 translate-y-2 items-center justify-center rounded-sm bg-ink font-display text-[0.95rem] font-bold uppercase tracking-[0.08em] text-bone opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 focus-visible:translate-y-0 focus-visible:opacity-100 md:flex"
+          className="absolute inset-x-3 bottom-3 hidden h-11 translate-y-2 items-center justify-center rounded-[var(--radius-btn)] bg-ink font-display text-[0.9rem] font-bold uppercase tracking-[0.08em] text-bone opacity-0 shadow-lg transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 focus-visible:translate-y-0 focus-visible:opacity-100 md:flex"
         >
           Quick view
         </button>
-        <span className="pointer-events-none absolute bottom-2 left-3 text-xs font-medium text-graphite md:group-hover:opacity-0">Illustration</span>
+        <span className="pointer-events-none absolute bottom-2 left-3 text-[0.68rem] font-medium text-stone md:group-hover:opacity-0">Illustration</span>
       </div>
 
-      <div className="flex flex-1 flex-col pt-3">
-        <p className="text-[0.8rem] text-stone">
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
+        <p className="truncate text-[0.76rem] text-stone">
           {product.team ?? product.brand} · {TYPE_LABELS[product.type]}
         </p>
-        <h3 className="mt-0.5 font-sans text-[1rem] font-semibold leading-snug tracking-normal">
+        <h3 className="mt-0.5 font-sans text-[0.95rem] font-bold leading-snug tracking-normal sm:text-[1.02rem]">
           <Link href={href} className="after:absolute after:inset-0 after:content-[''] md:after:hidden hover:underline">
             {product.name}
           </Link>
         </h3>
-        <div className="mt-1.5 flex flex-wrap items-baseline justify-between gap-x-2">
+        <div className="mt-auto flex flex-wrap items-baseline justify-between gap-x-2 pt-1.5">
           <PriceTag product={product} showSave={false} />
-          <p className="whitespace-nowrap text-[0.8rem] text-stone">{sizeRangeLabel(product.sizes)}</p>
+          <p className="whitespace-nowrap text-[0.76rem] text-stone">{sizeRangeLabel(product.sizes)}</p>
         </div>
-        <div className="relative z-10 mt-2.5 flex items-center gap-1.5">
+        <div className="relative z-10 -mb-1 -ml-1 mt-1.5 flex items-center gap-0.5">
           {product.colorways.map((c) => (
             <button
               key={c.id}
@@ -114,16 +118,21 @@ export function ProductCard({ product, priority = false }: { product: Product; p
               onPointerEnter={(e) => e.pointerType === "mouse" && setColorId(c.id)}
               aria-label={`Show ${c.name}`}
               aria-pressed={c.id === colorId}
-              className="grid size-7 place-items-center"
+              className="grid size-8 place-items-center"
             >
               <span
-                className={`block size-[1.1rem] rounded-full ring-offset-2 ring-offset-bone transition-shadow ${c.id === colorId ? "ring-2 ring-ink" : "ring-1 ring-ink/25"}`}
+                className={`block size-[1.05rem] rounded-full ring-offset-2 ring-offset-bone transition-shadow ${c.id === colorId ? "ring-2 ring-ink" : "ring-1 ring-ink/25"}`}
                 style={{ background: `linear-gradient(135deg, ${c.art.crown} 0 58%, ${c.art.mark} 58% 100%)` }}
               />
             </button>
           ))}
-          <button type="button" onClick={() => setQuick(true)} className="relative z-10 ml-auto text-[0.8rem] font-semibold underline underline-offset-2 md:hidden">
-            Quick view
+          <button
+            type="button"
+            onClick={() => setQuick(true)}
+            className="relative z-10 ml-auto grid size-8 shrink-0 place-items-center rounded-full border border-ink/20 text-ink transition-colors hover:border-ink md:hidden"
+            aria-label={`Quick view: ${product.name}`}
+          >
+            <PlusIcon size={16} />
           </button>
         </div>
       </div>

@@ -48,7 +48,7 @@ const browser = await chromium.launch();
   await check("home renders hero, wordmark and nav", async () => {
     await page.goto(BASE + "/", { waitUntil: "networkidle" });
     expect((await page.textContent("#hero-title")).toLowerCase().includes("more than"), "hero headline missing");
-    for (const label of ["Shop", "Fitted Hats", "Snapbacks", "Beanies", "Teams", "Custom Embroidery", "Our Store"]) {
+    for (const label of ["Shop", "Deals", "Teams", "Custom Embroidery", "About"]) {
       expect(await page.locator(`header nav :is(a, button):has-text("${label}")`).count(), `nav item ${label} missing`);
     }
   });
@@ -326,7 +326,7 @@ const browser = await chromium.launch();
     await page.click('button[aria-label="Open menu"]');
     const menu = page.locator('[role="dialog"][aria-label="Menu"]');
     await menu.waitFor();
-    await menu.locator('a:has-text("Our Store")').click();
+    await menu.locator('a:has-text("About")').click();
     await page.waitForURL(/\/store/);
     await menu.waitFor({ state: "detached" });
   });

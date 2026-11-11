@@ -13,11 +13,11 @@ export function HeadDiagram() {
       <path d="M52 92 C52 50 78 26 110 26 C142 26 168 50 168 92" fill="#1d3557" />
       <ellipse cx="110" cy="88" rx="66" ry="14" fill="none" stroke="#2557b8" strokeWidth="3" strokeDasharray="7 5" />
       <path d="M176 88 L206 88" stroke="#2557b8" strokeWidth="2" />
-      <text x="206" y="80" textAnchor="end" fontSize="11" fontWeight="700" fill="#13233a" fontFamily="var(--font-sans)">
+      <text x="206" y="80" textAnchor="end" fontSize="11" fontWeight="700" fill="#0b1f3a" fontFamily="var(--font-sans)">
         tape here
       </text>
-      <circle cx="88" cy="104" r="3" fill="#13233a" />
-      <circle cx="132" cy="104" r="3" fill="#13233a" />
+      <circle cx="88" cy="104" r="3" fill="#0b1f3a" />
+      <circle cx="132" cy="104" r="3" fill="#0b1f3a" />
     </svg>
   );
 }

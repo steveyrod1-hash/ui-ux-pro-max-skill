@@ -13,13 +13,16 @@ export default async function CustomPage({ searchParams }: { searchParams: Promi
   const { base, color } = await searchParams;
   return (
     <div className="pb-24">
-      <section className="twill bg-ink text-bone">
+      <section className="navy-stage text-bone">
         <div className="shell grid gap-6 py-12 sm:py-16 lg:grid-cols-[1.4fr_1fr] lg:items-end">
-          <h1 className="text-[clamp(3.4rem,1.6rem+8vw,9rem)] uppercase leading-[0.84]">
-            Your hat.
-            <br />
-            Your mark.
-          </h1>
+          <div>
+            <p className="eyebrow text-steel">Custom embroidery · done in store</p>
+            <h1 className="mt-3 text-[clamp(3rem,1.4rem+7vw,7.5rem)] uppercase leading-[0.86]">
+              Your hat.
+              <br />
+              Your mark.
+            </h1>
+          </div>
           <p className="max-w-md text-lg text-bone/80">
             Embroidery starts at $7.99. Design it here, see an approximate preview, and send it to the store. HatWear replies with an exact quote and timing. Nothing is made or charged until you say yes. Questions? Call{" "}
             <a href={`tel:${site.phone.tel}`} className="link font-semibold text-white">

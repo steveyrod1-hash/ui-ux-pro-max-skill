@@ -51,6 +51,18 @@ export const site = {
   weeklyHours: { 0: ["11:00", "19:00"], 1: ["11:00", "19:00"], 2: ["11:00", "19:00"], 3: ["11:00", "19:00"], 4: ["11:00", "19:00"], 5: ["11:00", "19:00"], 6: ["11:00", "20:00"] } as Record<number, [string, string]>,
   timeZone: "America/Los_Angeles",
 
+  /**
+   * Homepage hero image. Null shows the drawn HW cap. When professional photos
+   * arrive, put one in /public/hero/ (a cut-out PNG or a wide JPG of a real
+   * HatWear cap) and set { src: "/hero/your-photo.jpg", alt: "..." } here.
+   */
+  heroPhoto: {
+    src: "/hero/hw-cap.jpg",
+    alt: "Navy HatWear cap with HW embroidered in raised white thread, on a lit display stand",
+    width: 1448,
+    height: 1086,
+  } as null | { src: string; alt: string; width: number; height: number },
+
   /** Store photos live in /public/store/. Empty until the business supplies them. */
   storePhotos: [
     { src: "/store/tajima-machine.jpg", alt: "The Tajima embroidery machine in the shop, loaded with Madeira thread, with team caps on the wall behind it" },

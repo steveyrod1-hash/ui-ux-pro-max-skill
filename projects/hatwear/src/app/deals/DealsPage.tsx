@@ -12,10 +12,11 @@ export function DealsPage() {
   const deals = activeDeals(now);
   return (
     <div className="pb-24">
-      <section className="twill bg-ink text-bone">
+      <section className="navy-stage text-bone">
         <div className="shell flex flex-wrap items-end justify-between gap-8 py-14 sm:py-20">
           <div>
-            <h1 className="text-[clamp(3.4rem,1.6rem+8vw,9rem)] uppercase leading-[0.84]">Deals</h1>
+            <p className="eyebrow text-steel">Limited time</p>
+            <h1 className="mt-3 text-[clamp(3rem,1.4rem+7vw,7.5rem)] uppercase leading-[0.86]">Deals</h1>
             <p className="mt-5 max-w-lg text-lg text-bone/80">Limited-time prices on hats and hoodies. When the timer hits zero, prices go back to normal.</p>
             {DEMO_CATALOG && deals.length > 0 && <p className="mt-2 text-sm text-bone/60">Sample deals for this preview.</p>}
           </div>
@@ -43,7 +44,7 @@ export function DealsPage() {
             </Link>
           </div>
         ) : (
-          <ul className="grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
             {deals.map((d) => (
               <li key={d.productObj.id}>
                 <ProductCard product={d.productObj} />

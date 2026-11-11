@@ -39,7 +39,7 @@ export function Footer() {
     <footer className="twill mt-auto bg-ink text-bone">
       <div className="shell grid gap-10 py-14 md:grid-cols-[1.4fr_2fr] md:py-20">
         <div>
-          <Link href="/" className="text-4xl" aria-label="HatWear home">
+          <Link href="/" className="text-[1.75rem] min-[400px]:text-4xl" aria-label="HatWear home">
             <Wordmark tone="bone" />
           </Link>
           <p className="mt-4 max-w-sm text-bone/70">{site.tagline}</p>

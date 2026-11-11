@@ -6,7 +6,7 @@
  * tone="bone" → for navy backgrounds (navy cap with a white outline, like the lit sign)
  */
 export function CapMark({ className, tone = "ink" }: { className?: string; tone?: "ink" | "bone" }) {
-  const navy = "#1d3557";
+  const navy = "#0b1f3a";
   const line = tone === "bone" ? "#ffffff" : navy;
   return (
     <svg viewBox="0 0 120 70" className={className} aria-hidden="true">

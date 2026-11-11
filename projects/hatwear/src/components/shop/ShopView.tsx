@@ -245,7 +245,7 @@ export function ShopView() {
         </p>
       )}
 
-      <div className="grid gap-8 lg:grid-cols-[16.5rem_1fr]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[16.5rem_minmax(0,1fr)]">
         <aside className="hidden lg:block" aria-label="Filters">
           <div className="sticky top-24 max-h-[calc(100dvh-7rem)] overflow-y-auto pr-2">
             <FilterPanel f={f} facets={result.facets} onToggle={toggle} onStock={(v) => push({ inStock: v })} />
@@ -257,13 +257,13 @@ export function ShopView() {
           </div>
         </aside>
 
-        <section id="results" aria-label="Products" className="scroll-mt-24">
+        <section id="results" aria-label="Products" className="min-w-0 scroll-mt-24">
           <div className="sticky top-16 z-20 -mx-4 flex items-center justify-between gap-3 bg-bone/95 px-4 py-3 backdrop-blur sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:py-0 sm:pb-4">
-            <p className="text-sm text-graphite" aria-live="polite">
+            <p className="shrink-0 text-sm text-graphite" aria-live="polite">
               {pending ? "Updating…" : plural(result.total, "style")}
             </p>
-            <div className="flex items-center gap-2">
-              <button type="button" onClick={() => setSheet(true)} className="inline-flex h-11 items-center gap-2 rounded-sm border-[1.5px] border-ink/30 px-4 font-semibold lg:hidden" aria-haspopup="dialog">
+            <div className="flex min-w-0 items-center gap-2">
+              <button type="button" onClick={() => setSheet(true)} className="inline-flex h-11 shrink-0 items-center gap-2 rounded-[var(--radius-btn)] border-[1.5px] border-ink/30 px-3 font-semibold sm:px-4 lg:hidden" aria-haspopup="dialog">
                 <FilterIcon size={18} /> Filters {active.length + (f.inStock ? 1 : 0) > 0 && <span className="grid size-5 place-items-center rounded-full bg-sign text-xs text-white">{active.length + (f.inStock ? 1 : 0)}</span>}
               </button>
               <label htmlFor="sort" className="sr-only">
@@ -273,7 +273,7 @@ export function ShopView() {
                 id="sort"
                 value={f.sort}
                 onChange={(e) => push({ sort: e.target.value as SortKey })}
-                className="h-11 rounded-sm border-[1.5px] border-ink/30 bg-transparent px-3 font-semibold"
+                className="h-11 w-[8.5rem] min-w-0 rounded-[var(--radius-btn)] border-[1.5px] border-ink/30 bg-transparent px-2.5 text-[0.92rem] font-semibold min-[400px]:w-auto sm:px-3 sm:text-base"
               >
                 {Object.entries(SORT_LABELS).map(([k, v]) => (
                   <option key={k} value={k}>
@@ -312,7 +312,7 @@ export function ShopView() {
               </button>
             </div>
           ) : (
-            <motion.ul layout className={`grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 xl:grid-cols-3 2xl:grid-cols-4 ${pending ? "opacity-60" : ""} transition-opacity`}>
+            <motion.ul layout className={`grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:gap-5 2xl:grid-cols-4 ${pending ? "opacity-60" : ""} transition-opacity`}>
               {result.items.map((p, i) => (
                 <motion.li key={p.id} layout="position" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: Math.min(i, 8) * 0.03 }}>
                   <ProductCard product={p} priority={i < 4} />

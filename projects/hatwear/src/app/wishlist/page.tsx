@@ -30,7 +30,7 @@ export default function WishlistPage() {
           </Link>
         </div>
       ) : (
-        <ul className="mt-10 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-4">
+        <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
           {items.map((p) => (
             <li key={p.id}>
               <ProductCard product={p} />

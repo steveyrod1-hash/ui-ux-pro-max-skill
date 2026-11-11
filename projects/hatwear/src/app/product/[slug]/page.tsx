@@ -50,7 +50,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <h2 id="related-title" className="text-[clamp(2.2rem,1.6rem+3vw,4rem)] uppercase">
             Goes with it
           </h2>
-          <ul className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-4">
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
             {related.map((p) => (
               <li key={p.id}>
                 <ProductCard product={p} />

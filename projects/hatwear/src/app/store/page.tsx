@@ -33,11 +33,11 @@ export default function StorePage() {
   const photos = site.storePhotos;
   return (
     <div className="pb-24">
-      <section className="twill bg-ink text-bone">
+      <section className="navy-stage text-bone">
         <div className="shell grid items-end gap-10 py-14 sm:py-20 lg:grid-cols-[1.3fr_1fr]">
           <div>
-            <p className="text-bone/70">Our store · Stockton, California</p>
-            <h1 className="mt-3 text-[clamp(3.4rem,1.6rem+8vw,9.5rem)] uppercase leading-[0.84]">
+            <p className="eyebrow text-steel">Our store · Stockton, California</p>
+            <h1 className="mt-3 text-[clamp(3rem,1.4rem+7vw,7.5rem)] uppercase leading-[0.86]">
               Come see
               <br />
               the wall
@@ -56,7 +56,7 @@ export default function StorePage() {
       <section className="shell grid gap-6 py-14 sm:py-20 md:grid-cols-3" aria-label="Why visit">
         {REASONS.map(([t, d]) => (
           <div key={t} className="border-t-2 border-ink pt-5">
-            <h2 className="text-[2.2rem] uppercase">{t}</h2>
+            <h2 className="text-[clamp(1.7rem,1.1rem+1.5vw,2.2rem)] uppercase [overflow-wrap:anywhere]">{t}</h2>
             <p className="mt-2 text-graphite">{d}</p>
           </div>
         ))}
@@ -111,7 +111,7 @@ export default function StorePage() {
         )}
       </section>
 
-      <section className="shell grid gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.3fr]" aria-labelledby="find-title">
+      <section id="hours" className="shell grid scroll-mt-24 gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.3fr]" aria-labelledby="find-title">
         <div>
           <h2 id="find-title" className="text-[clamp(2.2rem,1.6rem+3vw,4rem)] uppercase">
             Hours and directions

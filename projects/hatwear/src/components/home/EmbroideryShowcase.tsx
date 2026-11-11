@@ -26,7 +26,7 @@ export function EmbroideryShowcase() {
 
   const s = SAMPLES[i];
   return (
-    <div ref={ref} className="relative aspect-square overflow-hidden bg-charcoal">
+    <div ref={ref} className="relative aspect-square overflow-hidden rounded-[var(--radius-card)] bg-charcoal">
       <AnimatePresence initial={false}>
         <motion.div
           key={i}
