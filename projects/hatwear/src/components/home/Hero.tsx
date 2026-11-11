@@ -69,7 +69,7 @@ export function Hero() {
         >
           <motion.div initial={{ opacity: 0, y: 36, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 1.1, ease, delay: 0.25 }}>
             {photo ? (
-              <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} priority sizes="(min-width: 768px) 55vw, 100vw" className="h-auto w-full" />
+              <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} priority sizes="(min-width: 768px) 55vw, 100vw" className="h-auto w-full [mask-image:radial-gradient(ellipse_50%_50%_at_50%_52%,#000_62%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_50%_50%_at_50%_52%,#000_62%,transparent_100%)]" />
             ) : (
               <HeroCap className="h-auto w-full" />
             )}

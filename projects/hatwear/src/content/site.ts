@@ -56,7 +56,12 @@ export const site = {
    * arrive, put one in /public/hero/ (a cut-out PNG or a wide JPG of a real
    * HatWear cap) and set { src: "/hero/your-photo.jpg", alt: "..." } here.
    */
-  heroPhoto: null as null | { src: string; alt: string; width: number; height: number },
+  heroPhoto: {
+    src: "/hero/hw-cap.jpg",
+    alt: "Navy HatWear cap with HW embroidered in raised white thread, on a lit display stand",
+    width: 1448,
+    height: 1086,
+  } as null | { src: string; alt: string; width: number; height: number },
 
   /** Store photos live in /public/store/. Empty until the business supplies them. */
   storePhotos: [
