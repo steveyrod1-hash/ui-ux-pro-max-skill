@@ -11,6 +11,7 @@ import { money } from "@/lib/format";
 import { QtyStepper } from "./CartDrawer";
 import { CheckIcon, HeartIcon, RulerIcon } from "./Icons";
 import { SizeGuideDialog } from "./SizeGuide";
+import { useUnitPrice } from "./PriceTag";
 
 export function ColorSwatches({
   product,
@@ -185,6 +186,7 @@ export function PurchasePanel({
 }) {
   const uid = useId();
   const { add } = useStore();
+  const unitPrice = useUnitPrice(product);
   const single = product.sizes.length === 1 ? product.sizes[0] : "";
   const [size, setSize] = useState(single);
   const [qty, setQty] = useState(1);
@@ -246,7 +248,7 @@ export function PurchasePanel({
                   <CheckIcon size={20} /> Added
                 </>
               ) : (
-                `Add to bag · ${money(product.price * qty)}`
+                `Add to bag · ${money(unitPrice * qty)}`
               )}
             </motion.span>
           </AnimatePresence>

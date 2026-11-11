@@ -113,7 +113,10 @@ export function startMock(port) {
         return it ? send(res, 200, it) : send(res, 404, { message: "Not found" });
       }
       const totals = (cart) => {
-        const subtotal = cart.lineItems.reduce((n, li) => n + (ITEMS.find((i) => i.id === li.item.id)?.price ?? 0), 0);
+        const subtotal = cart.lineItems.reduce(
+          (n, li) => n + (ITEMS.find((i) => i.id === li.item.id)?.price ?? 0) + (li.discounts ?? []).reduce((d, x) => d + x.amount, 0),
+          0,
+        );
         const tax = Math.round(subtotal * TAX_RATE);
         return { subtotal, tax, total: subtotal + tax };
       };

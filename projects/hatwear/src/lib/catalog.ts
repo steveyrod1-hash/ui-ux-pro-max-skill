@@ -24,6 +24,15 @@ export const HAT_TYPES: ProductType[] = ["fitted", "snapback", "trucker", "adjus
 export const APPAREL_TYPES: ProductType[] = ["hoodie", "windbreaker"];
 export const isHat = (t: ProductType) => HAT_TYPES.includes(t);
 
+/**
+ * Price used for sorting and price filters. Deals register a resolver here
+ * (src/lib/deals.ts) so a $50 hat on deal for $35 sorts and filters as $35.
+ */
+let priceOf = (p: Product) => p.price;
+export function registerPriceResolver(fn: (p: Product) => number) {
+  priceOf = fn;
+}
+
 export function getAllProducts(): Product[] {
   return catalog;
 }
@@ -175,7 +184,7 @@ function passes(p: Product, f: Filters, skip?: FacetKey): boolean {
   if (skip !== "size" && f.size.length && !f.size.some((s) => p.sizes.includes(s) && unitsFor(p, undefined, s) > 0))
     return false;
   if (skip !== "price" && f.price.length) {
-    const ok = PRICE_BUCKETS.filter((b) => f.price.includes(b.id)).some((b) => p.price >= b.min && p.price < b.max);
+    const ok = PRICE_BUCKETS.filter((b) => f.price.includes(b.id)).some((b) => priceOf(p) >= b.min && priceOf(p) < b.max);
     if (!ok) return false;
   }
   if (f.inStock && unitsFor(p) <= 0) return false;
@@ -188,9 +197,9 @@ function sortProducts(items: Product[], sort: SortKey) {
     case "newest":
       return out.sort((a, b) => b.arrival - a.arrival);
     case "price-asc":
-      return out.sort((a, b) => a.price - b.price || a.name.localeCompare(b.name));
+      return out.sort((a, b) => priceOf(a) - priceOf(b) || a.name.localeCompare(b.name));
     case "price-desc":
-      return out.sort((a, b) => b.price - a.price || a.name.localeCompare(b.name));
+      return out.sort((a, b) => priceOf(b) - priceOf(a) || a.name.localeCompare(b.name));
     case "name":
       return out.sort((a, b) => a.name.localeCompare(b.name));
     default:
@@ -245,7 +254,7 @@ export function queryProducts(f: Filters): QueryResult {
   const sizeCounts = count(facetBase("size"), (p) => p.sizes.filter((s) => unitsFor(p, undefined, s) > 0));
   const colorCounts = count(facetBase("color"), (p) => p.colorways.map((c) => c.family));
   const priceCounts = count(facetBase("price"), (p) =>
-    PRICE_BUCKETS.filter((b) => p.price >= b.min && p.price < b.max).map((b) => b.id),
+    PRICE_BUCKETS.filter((b) => priceOf(p) >= b.min && priceOf(p) < b.max).map((b) => b.id),
   );
 
   const withSelected = (opts: FacetOption[], selected: string[], label: (v: string) => string = (v) => v) => {

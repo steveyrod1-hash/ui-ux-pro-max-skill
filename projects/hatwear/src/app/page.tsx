@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HeroWall } from "@/components/home/HeroWall";
+import { DealsSection } from "@/components/deals/DealsSection";
 import { TeamBrowser } from "@/components/home/TeamBrowser";
 import { EmbroideryShowcase } from "@/components/home/EmbroideryShowcase";
 import { ProductCard } from "@/components/ProductCard";
@@ -96,6 +97,8 @@ export default function Home() {
   return (
     <>
       <HeroWall wall={wall} />
+
+      <DealsSection />
 
       {/* Shop by style */}
       <section className="shell py-16 sm:py-24" aria-labelledby="styles-title">

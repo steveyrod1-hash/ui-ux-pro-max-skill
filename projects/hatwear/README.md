@@ -141,6 +141,29 @@ It's on the dashboard's account or merchant settings page, and in the dashboard 
 
 It doesn't replace one real sandbox order with HatWear's own Clover account (step 6).
 
+## Limited-time deals
+
+Deals are set in **`src/content/deals.ts`** (or, without touching code, as JSON in Vercel's `NEXT_PUBLIC_DEALS` environment variable, followed by a redeploy). Each deal is one line:
+
+```ts
+{ product: "san-francisco-giants-59fifty-fitted", salePrice: 35, endsAt: "2026-11-30T23:59:00-08:00" }
+```
+
+- **`product`:** the product's web address (the part after `/product/` in its URL).
+- **`salePrice`:** what customers pay. It must be lower than the regular price.
+- **`endsAt`:** when the deal ends. The deal switches itself off at that moment. `startsAt` and a `label` such as "Black Friday" are optional.
+
+While a deal runs, the site shows:
+- the homepage "Limited-time deals" section, with a countdown
+- the `/deals` page
+- a **Deals** link in the menu
+- an announcement-bar message
+- sale prices and badges on product cards and pages, in the bag and at checkout
+
+**At checkout,** Clover is charged the sale price as a "Limited-time deal" discount on the order, so Clover reports show it.
+
+**Sample deals:** the ones in `sampleDeals` only appear in preview mode (sample catalog). With the real Clover catalog, only `liveDeals` and `NEXT_PUBLIC_DEALS` count, so list only deals the store is actually running.
+
 ## Before accepting real customer orders
 
 1. **Connect Clover**, following the steps above. Until then the site shows sample products and checkout stays in preview mode.

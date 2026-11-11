@@ -13,10 +13,12 @@ import { ProductArt } from "./ProductArt";
 import { useStore } from "@/lib/store";
 import { LEAGUES, searchProducts, styleCounts, TEAMS_BY_LEAGUE, TYPE_LABELS } from "@/lib/catalog";
 import { money } from "@/lib/format";
+import { activeDeals, priceFor } from "@/lib/deals";
+import { useNow } from "@/lib/use-now";
 import { mapLinks, site } from "@/content/site";
 
 type MenuId = "shop" | "teams";
-type NavItem = { label: string; href: string; menu?: MenuId; match: (p: string, q: URLSearchParams) => boolean };
+type NavItem = { label: string; href: string; menu?: MenuId; deals?: boolean; wideOnly?: boolean; match: (p: string, q: URLSearchParams) => boolean };
 
 const onShop = (p: string, q: URLSearchParams, type: string) => p === "/shop" && q.get("type") === type;
 
@@ -27,9 +29,11 @@ export const NAV: NavItem[] = [
     menu: "shop",
     match: (p, q) => p === "/shop" && !["fitted", "snapback", "beanie"].includes(q.get("type") ?? "") && !q.get("team") && !q.get("league"),
   },
+  { label: "Deals", href: "/deals", deals: true, match: (p) => p.startsWith("/deals") },
   { label: "Fitted Hats", href: "/shop?type=fitted", match: (p, q) => onShop(p, q, "fitted") },
-  { label: "Snapbacks", href: "/shop?type=snapback", match: (p, q) => onShop(p, q, "snapback") },
-  { label: "Beanies", href: "/shop?type=beanie", match: (p, q) => onShop(p, q, "beanie") },
+  // Also in the Shop menu, so these only show in the top bar on wide screens.
+  { label: "Snapbacks", href: "/shop?type=snapback", wideOnly: true, match: (p, q) => onShop(p, q, "snapback") },
+  { label: "Beanies", href: "/shop?type=beanie", wideOnly: true, match: (p, q) => onShop(p, q, "beanie") },
   { label: "Teams", href: "/teams", menu: "teams", match: (p, q) => p.startsWith("/teams") || (p === "/shop" && !!(q.get("team") || q.get("league"))) },
   { label: "Custom Embroidery", href: "/custom", match: (p) => p.startsWith("/custom") },
   { label: "Our Store", href: "/store", match: (p) => p.startsWith("/store") },
@@ -101,10 +105,12 @@ function MobileTeamsMenu({ onNavigate }: { onNavigate?: () => void }) {
 
 function NavList({ pathname, query, onNavigate, mobile, openMenu, onMenu }: NavProps & { pathname: string; query: URLSearchParams }) {
   const [expanded, setExpanded] = useState<MenuId | null>(null);
+  const hasDeals = activeDeals(useNow()).length > 0;
+  const items = NAV.filter((n) => !n.deals || hasDeals);
   if (mobile) {
     return (
       <ul className="flex flex-col">
-        {NAV.map((n, i) => {
+        {items.map((n, i) => {
           const active = n.match(pathname, query);
           const rowCls = "group flex w-full items-center justify-between border-b border-bone/12 py-3.5 font-display text-[1.7rem] font-extrabold uppercase leading-none";
           return (
@@ -138,13 +144,13 @@ function NavList({ pathname, query, onNavigate, mobile, openMenu, onMenu }: NavP
   const itemCls = "relative inline-flex items-center gap-1 whitespace-nowrap py-2 font-sans text-[0.8rem] font-extrabold uppercase tracking-[0.06em] text-ink/80 transition-colors hover:text-ink";
   return (
     <ul className="flex items-center gap-[clamp(0.9rem,1.5vw,1.75rem)]">
-      {NAV.map((n) => {
+      {items.map((n) => {
         const active = n.match(pathname, query);
         const underline = active && (
           <motion.span layoutId="nav-underline" className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-sign" transition={{ type: "spring", stiffness: 500, damping: 40 }} />
         );
         return (
-          <li key={n.href} className="relative" onPointerEnter={(e) => e.pointerType === "mouse" && onMenu?.(n.menu ?? null, "hover")}>
+          <li key={n.href} className={`relative ${n.wideOnly ? "hidden 2xl:block" : ""}`} onPointerEnter={(e) => e.pointerType === "mouse" && onMenu?.(n.menu ?? null, "hover")}>
             {n.menu ? (
               <button
                 type="button"
@@ -159,7 +165,7 @@ function NavList({ pathname, query, onNavigate, mobile, openMenu, onMenu }: NavP
                 {underline}
               </button>
             ) : (
-              <Link href={n.href} aria-current={active ? "page" : undefined} className={itemCls}>
+              <Link href={n.href} aria-current={active ? "page" : undefined} className={`${itemCls} ${n.deals ? "!text-sign-deep" : ""}`}>
                 {n.label}
                 {underline}
               </Link>
@@ -254,7 +260,7 @@ function SearchPanel({ onClose }: { onClose: () => void }) {
                         <span className="min-w-0">
                           <span className="block truncate font-semibold">{p.name}</span>
                           <span className="text-sm text-stone">
-                            {TYPE_LABELS[p.type]} · {money(p.price)}
+                            {TYPE_LABELS[p.type]} · {money(priceFor(p).price)}
                           </span>
                         </span>
                       </Link>

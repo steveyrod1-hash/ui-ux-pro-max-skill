@@ -91,6 +91,35 @@ const browser = await chromium.launch();
     await page.waitForURL(/team=Sacramento/);
   });
 
+  await check("deals: homepage section, countdown, sale prices and Deals link", async () => {
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    const section = page.locator('section[aria-labelledby="deals-title"]');
+    await section.waitFor();
+    expect(await section.locator('[role="timer"]').count() === 1, "no countdown");
+    const cards = await section.locator("article").count();
+    expect(cards === 4, `expected 4 deal cards, got ${cards}`);
+    const card = await section.locator("article", { hasText: "Crown Mark Fitted" }).textContent();
+    expect(card.includes("$35.00") && card.includes("$44.00") && /\d+% off/.test(card), card);
+    expect(await page.locator('header nav a:has-text("Deals")').count() === 1, "Deals nav link missing");
+  });
+
+  await check("deals: sale price flows to product page, bag and checkout", async () => {
+    await page.goto(BASE + "/product/crown-mark-fitted", { waitUntil: "networkidle" });
+    const price = await page.locator("main").textContent();
+    expect(price.includes("$35.00") && price.includes("$44.00") && /ends in/i.test(price), "product page missing deal");
+    await page.locator('#buy label:not(.cursor-not-allowed) input[type="radio"][value^="7"]').first().check({ force: true });
+    const btn = await page.locator('#buy button:has-text("Add to bag")').textContent();
+    expect(btn.includes("$35.00"), btn);
+    await page.locator('#buy button:has-text("Add to bag")').click();
+    await page.waitForSelector('[role="dialog"][aria-labelledby="cart-title"]');
+    const sub = await page.locator("aside .font-display.tabular-nums").textContent();
+    expect(sub.includes("$35.00"), `subtotal ${sub}`);
+    await page.click('aside button:has-text("Remove")');
+    await page.keyboard.press("Escape");
+    await page.goto(BASE + "/deals", { waitUntil: "networkidle" });
+    expect((await page.locator("main article").count()) === 4, "deals page should list 4 deals");
+  });
+
   await check("header search shows instant results and opens the shop", async () => {
     await page.click('button[aria-label="Search"]');
     await page.fill("#site-search", "warriors");
@@ -132,7 +161,8 @@ const browser = await chromium.launch();
 
   await check("sorting by price low to high", async () => {
     await page.goto(BASE + "/shop?sort=price-asc", { waitUntil: "networkidle" });
-    const prices = (await page.locator("#results article p.tabular-nums").allTextContents()).map((p) => parseFloat(p.replace(/[^0-9.]/g, "")));
+    // First dollar amount on each card is the price paid (the sale price when on deal).
+    const prices = (await page.locator("#results article p.tabular-nums").allTextContents()).map((p) => parseFloat((p.match(/\$([0-9.]+)/) ?? [])[1]));
     expect(prices.every((p, i) => i === 0 || p >= prices[i - 1]), "prices not ascending");
   });
 

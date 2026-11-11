@@ -37,6 +37,8 @@ const ENV = {
   NEXT_PUBLIC_CLOVER_ENV: "sandbox",
   NEXT_PUBLIC_CLOVER_SDK_URL: `${MOCK}/sdk.js`,
   NEXT_DIST_DIR: ".next-clover",
+  // A running deal on the beanie: $24.99 → $19.99.
+  NEXT_PUBLIC_DEALS: JSON.stringify([{ product: "hatwear-navy-cuffed-beanie", salePrice: 19.99, endsAt: "2099-01-01T00:00:00Z" }]),
   NO_PROXY: "127.0.0.1,localhost",
   no_proxy: "127.0.0.1,localhost",
 };
@@ -165,6 +167,21 @@ try {
     const lastPay = state.pays.at(-1);
     expect(state.deleted.includes(lastPay.orderId), "declined order was not deleted");
   });
+  await check("a deal is charged as a Clover line discount", async () => {
+    const q = await (await post("/api/checkout/quote", { lines: [{ productId: "cl-item-IT_BEANIE", colorId: "one-colour", size: "One size", qty: 1 }] })).json();
+    expect(q.subtotal === 1999 && q.tax === 180 && q.total === 2179, JSON.stringify(q));
+    const r = await post("/api/checkout/pay", {
+      lines: [{ productId: "cl-item-IT_BEANIE", colorId: "one-colour", size: "One size", qty: 1 }],
+      customer: CUSTOMER,
+      token: "clv_test_ok_1111",
+      idempotencyKey: uuid(),
+    });
+    const d = await r.json();
+    expect(r.ok && d.amountPaid === 2179, JSON.stringify(d));
+    const li = state.orders.get(d.orderId).cart.lineItems[0];
+    expect(li.discounts?.[0]?.amount === -500, JSON.stringify(li));
+  });
+
   await check("bad customer details are rejected before anything is charged", async () => {
     const before = state.pays.length;
     const r = await post("/api/checkout/pay", { lines: [LINE], customer: { name: "", email: "nope", phone: "12" }, token: "clv_test_ok_1111", idempotencyKey: uuid() });
@@ -205,12 +222,12 @@ try {
     await p.locator('#buy button:has-text("Add to bag")').click();
     await p.goto(`${APP}/checkout`, { waitUntil: "networkidle" });
     await p.waitForSelector('[data-clover-field="CARD_NUMBER"]');
-    await p.waitForSelector('button:has-text("Pay $27.24")');
+    await p.waitForSelector('button:has-text("Pay $21.79")');
     await p.fill("#co-name", CUSTOMER.name);
     await p.fill("#co-phone", CUSTOMER.phone);
     await p.fill("#co-email", CUSTOMER.email);
     await p.fill('[data-clover-field="CARD_NUMBER"]', "4000 0000 0000 0002");
-    await p.click('button:has-text("Pay $27.24")');
+    await p.click('button:has-text("Pay $21.79")');
     await p.waitForSelector('[role="alert"]:has-text("declined")');
     await p.screenshot({ path: path.join(ROOT, "tests/screens/clover-checkout.png"), fullPage: true }).catch(() => {});
     await b.close();

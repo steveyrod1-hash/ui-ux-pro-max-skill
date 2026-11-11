@@ -5,7 +5,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import type { Product } from "@/data/types";
 import { TYPE_LABELS, unitsFor } from "@/lib/catalog";
-import { money } from "@/lib/format";
+import { PriceTag } from "./PriceTag";
+import { dealFor } from "@/lib/deals";
+import { useNow } from "@/lib/use-now";
 import { sizeRangeLabel } from "@/lib/sizes";
 import { ProductMedia } from "./ProductMedia";
 import { PurchasePanel, WishButton } from "./PurchasePanel";
@@ -30,7 +32,7 @@ export function QuickView({ product, open, onClose, initialColor }: { product: P
             {product.brand} · {TYPE_LABELS[product.type]}
           </p>
           <h2 className="mt-1 pr-10 text-4xl uppercase">{product.name}</h2>
-          <p className="mt-2 font-display text-3xl font-extrabold">{money(product.price)}</p>
+          <PriceTag product={product} size="md" className="mt-2" />
           <div className="stitch my-5 text-ink/40" aria-hidden="true" />
           <PurchasePanel product={product} colorId={colorId} onColorChange={setColorId} compact />
           <Link href={`/product/${product.slug}?color=${colorId}`} onClick={onClose} className="link mt-6 inline-flex items-center gap-2 font-semibold">
@@ -47,6 +49,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   const [hover, setHover] = useState(false);
   const [quick, setQuick] = useState(false);
   const total = unitsFor(product);
+  const deal = dealFor(product.id, useNow());
   const colorUnits = unitsFor(product, colorId);
   const href = `/product/${product.slug}${colorId !== product.colorways[0].id ? `?color=${colorId}` : ""}`;
   const altView = product.type === "hoodie" || product.type === "windbreaker" || product.type === "beanie" ? "back" : "side";
@@ -71,6 +74,8 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
           {total === 0 ? (
             <span className="label label-bone">Sold out</span>
+          ) : deal ? (
+            <span className="label label-accent">Deal · {deal.percentOff}% off</span>
           ) : product.isNew ? (
             <span className="label">New</span>
           ) : null}
@@ -96,9 +101,9 @@ export function ProductCard({ product, priority = false }: { product: Product; p
             {product.name}
           </Link>
         </h3>
-        <div className="mt-1.5 flex items-center justify-between gap-2">
-          <p className="font-semibold tabular-nums">{money(product.price)}</p>
-          <p className="text-[0.8rem] text-stone">{sizeRangeLabel(product.sizes)}</p>
+        <div className="mt-1.5 flex flex-wrap items-baseline justify-between gap-x-2">
+          <PriceTag product={product} showSave={false} />
+          <p className="whitespace-nowrap text-[0.8rem] text-stone">{sizeRangeLabel(product.sizes)}</p>
         </div>
         <div className="relative z-10 mt-2.5 flex items-center gap-1.5">
           {product.colorways.map((c) => (

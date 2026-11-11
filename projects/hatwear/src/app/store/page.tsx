@@ -74,7 +74,11 @@ export default function StorePage() {
         {photos.length > 0 ? (
           <div className="mt-6 grid auto-rows-[14rem] grid-cols-2 gap-3 md:grid-cols-4">
             {photos.map((p, i) => (
-              <RevealImage key={p.src} delay={i * 0.05} className={`relative overflow-hidden ${i === 0 ? "col-span-2 row-span-2" : ""}`}>
+              <RevealImage
+                key={p.src}
+                delay={i * 0.05}
+                className={`relative overflow-hidden ${i === 0 ? "col-span-2 row-span-2" : ""} ${i > 0 && i === photos.length - 1 && (photos.length - 1) % 2 === 1 ? "col-span-2" : ""}`}
+              >
                 <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
               </RevealImage>
             ))}

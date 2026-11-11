@@ -370,7 +370,7 @@ export function CloverCheckout() {
           <ul className="mt-4 divide-y divide-ink/10">
             {lines.map((l) => {
               const live = quote?.lines.find((x) => x.key === l.key);
-              const unit = live ? live.unitPrice / 100 : l.product.price;
+              const unit = live ? live.unitPrice / 100 : l.lineTotal / l.qty;
               return (
                 <li key={l.key} className={`flex gap-3 py-3 ${errorLine === l.key ? "bg-sign/10" : ""}`}>
                   <span className="size-16 shrink-0 bg-felt">

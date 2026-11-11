@@ -1,6 +1,7 @@
 import { fullAddress, site } from "@/content/site";
 import type { Product } from "@/data/types";
 import { unitsFor } from "./catalog";
+import { priceFor } from "./deals";
 
 /** schema.org Store markup. Hours are only included once verified in site.ts. */
 export function localBusinessJsonLd() {
@@ -46,7 +47,7 @@ export function productJsonLd(p: Product) {
     offers: {
       "@type": "Offer",
       priceCurrency: "USD",
-      price: p.price.toFixed(2),
+      price: priceFor(p).price.toFixed(2),
       availability: unitsFor(p) > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       url: `${site.url}/product/${p.slug}`,
       seller: { "@id": `${site.url}/#store` },

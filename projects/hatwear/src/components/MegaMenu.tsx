@@ -71,9 +71,14 @@ export function ShopMenu({ onNavigate, id }: { onNavigate: () => void; id: strin
         <Link href="/shop" onClick={onNavigate} className="link inline-flex items-center gap-2 font-semibold">
           Shop everything <ArrowIcon size={16} />
         </Link>
-        <Link href="/size-guide" onClick={onNavigate} className="link font-semibold">
-          Fitted size guide
-        </Link>
+        <span className="flex items-center gap-6">
+          <Link href="/deals" onClick={onNavigate} className="link font-semibold text-sign-deep">
+            Limited-time deals
+          </Link>
+          <Link href="/size-guide" onClick={onNavigate} className="link font-semibold">
+            Fitted size guide
+          </Link>
+        </span>
       </div>
     </motion.div>
   );

@@ -1,5 +1,6 @@
 import "server-only";
 import { getProductById } from "@/lib/catalog";
+import { discountCents } from "@/lib/deals";
 import { cloverServerConfig } from "./config";
 import { CloverError, ecomm, rest } from "./api";
 
@@ -41,6 +42,7 @@ export interface ResolvedLine extends CartLineInput {
   itemId: string;
   name: string;
   unitPrice: number; // cents, from Clover right now
+  discount: number; // cents off per unit from a running deal (0 when none)
   stock: number | null; // null when Clover doesn't track stock for the item
 }
 
@@ -76,7 +78,7 @@ export async function resolveLines(lines: CartLineInput[]): Promise<ResolvedLine
           409,
           key,
         );
-      return { ...l, qty, itemId, name: product.name, unitPrice: item.price, stock };
+      return { ...l, qty, itemId, name: product.name, unitPrice: item.price, discount: discountCents(product.id, item.price), stock };
     }),
   );
 }
@@ -85,7 +87,13 @@ function orderCart(lines: ResolvedLine[], note?: string) {
   const c = cloverServerConfig();
   return {
     // Clover line items are one per unit for fixed-price inventory items.
-    lineItems: lines.flatMap((l) => Array.from({ length: l.qty }, () => ({ item: { id: l.itemId } }))),
+    lineItems: lines.flatMap((l) =>
+      Array.from({ length: l.qty }, () => ({
+        item: { id: l.itemId },
+        // A running deal is applied as a line discount, so Clover charges the sale price and reports the deal.
+        ...(l.discount > 0 ? { discounts: [{ name: "Limited-time deal", amount: -l.discount }] } : {}),
+      })),
+    ),
     ...(c.orderTypeId ? { orderType: { id: c.orderTypeId } } : {}),
     ...(note ? { note } : {}),
   };
@@ -105,7 +113,7 @@ function totalsFrom(res: Record<string, unknown>, subtotal: number): Totals {
 /** Price check before paying: Clover computes tax from the store's own tax settings. */
 export async function quote(lines: CartLineInput[]) {
   const resolved = await resolveLines(lines);
-  const subtotal = resolved.reduce((n, l) => n + l.unitPrice * l.qty, 0);
+  const subtotal = resolved.reduce((n, l) => n + (l.unitPrice - l.discount) * l.qty, 0);
   let totals: Totals = { subtotal, tax: null, total: null };
   try {
     const res = await rest<Record<string, unknown>>("/atomic_order/checkouts", { method: "POST", body: { orderCart: orderCart(resolved) } });
@@ -116,7 +124,7 @@ export async function quote(lines: CartLineInput[]) {
   }
   return {
     ...totals,
-    lines: resolved.map((l) => ({ key: `${l.productId}|${l.colorId}|${l.size}`, unitPrice: l.unitPrice, qty: l.qty, stock: l.stock })),
+    lines: resolved.map((l) => ({ key: `${l.productId}|${l.colorId}|${l.size}`, unitPrice: l.unitPrice - l.discount, regularPrice: l.unitPrice, qty: l.qty, stock: l.stock })),
   };
 }
 
