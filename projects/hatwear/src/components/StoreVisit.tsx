@@ -51,7 +51,7 @@ export function StoreActions({ dark = false }: { dark?: boolean }) {
 
 export function MapFrame({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative overflow-hidden bg-felt ${className}`}>
+    <div className={`relative overflow-hidden rounded-[var(--radius-card)] bg-felt ${className}`}>
       {/* Fallback underneath the map, visible if the embed is blocked. */}
       <div className="absolute inset-0 grid place-items-center p-6 text-center">
         <a href={mapLinks.google} target="_blank" rel="noopener noreferrer" className="link font-semibold">

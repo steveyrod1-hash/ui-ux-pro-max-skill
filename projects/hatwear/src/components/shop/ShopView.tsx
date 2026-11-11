@@ -312,7 +312,7 @@ export function ShopView() {
               </button>
             </div>
           ) : (
-            <motion.ul layout className={`grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 xl:grid-cols-3 2xl:grid-cols-4 ${pending ? "opacity-60" : ""} transition-opacity`}>
+            <motion.ul layout className={`grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:gap-5 2xl:grid-cols-4 ${pending ? "opacity-60" : ""} transition-opacity`}>
               {result.items.map((p, i) => (
                 <motion.li key={p.id} layout="position" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: Math.min(i, 8) * 0.03 }}>
                   <ProductCard product={p} priority={i < 4} />

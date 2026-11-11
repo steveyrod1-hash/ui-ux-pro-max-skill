@@ -18,7 +18,7 @@ import { useNow } from "@/lib/use-now";
 import { mapLinks, site } from "@/content/site";
 
 type MenuId = "shop" | "teams";
-type NavItem = { label: string; href: string; menu?: MenuId; deals?: boolean; wideOnly?: boolean; match: (p: string, q: URLSearchParams) => boolean };
+type NavItem = { label: string; href: string; menu?: MenuId; deals?: boolean; match: (p: string, q: URLSearchParams) => boolean };
 
 const onShop = (p: string, q: URLSearchParams, type: string) => p === "/shop" && q.get("type") === type;
 
@@ -27,16 +27,12 @@ export const NAV: NavItem[] = [
     label: "Shop",
     href: "/shop",
     menu: "shop",
-    match: (p, q) => p === "/shop" && !["fitted", "snapback", "beanie"].includes(q.get("type") ?? "") && !q.get("team") && !q.get("league"),
+    match: (p, q) => p === "/shop" && !q.get("team") && !q.get("league"),
   },
   { label: "Deals", href: "/deals", deals: true, match: (p) => p.startsWith("/deals") },
-  { label: "Fitted Hats", href: "/shop?type=fitted", match: (p, q) => onShop(p, q, "fitted") },
-  // Also in the Shop menu, so these only show in the top bar on wide screens.
-  { label: "Snapbacks", href: "/shop?type=snapback", wideOnly: true, match: (p, q) => onShop(p, q, "snapback") },
-  { label: "Beanies", href: "/shop?type=beanie", wideOnly: true, match: (p, q) => onShop(p, q, "beanie") },
-  { label: "Teams", href: "/teams", menu: "teams", match: (p, q) => p.startsWith("/teams") || (p === "/shop" && !!(q.get("team") || q.get("league"))) },
   { label: "Custom Embroidery", href: "/custom", match: (p) => p.startsWith("/custom") },
-  { label: "Our Store", href: "/store", match: (p) => p.startsWith("/store") },
+  { label: "Teams", href: "/teams", menu: "teams", match: (p, q) => p.startsWith("/teams") || (p === "/shop" && !!(q.get("team") || q.get("league"))) },
+  { label: "About", href: "/store", match: (p) => p.startsWith("/store") },
 ];
 
 type NavProps = {
@@ -141,16 +137,16 @@ function NavList({ pathname, query, onNavigate, mobile, openMenu, onMenu }: NavP
       </ul>
     );
   }
-  const itemCls = "relative inline-flex items-center gap-1 whitespace-nowrap py-2 font-sans text-[0.8rem] font-extrabold uppercase tracking-[0.06em] text-ink/80 transition-colors hover:text-ink";
+  const itemCls = "relative inline-flex min-h-11 items-center gap-1 whitespace-nowrap px-1 font-sans text-[0.95rem] font-semibold text-ink/80 transition-colors hover:text-ink";
   return (
-    <ul className="flex items-center gap-[clamp(0.9rem,1.5vw,1.75rem)]">
+    <ul className="flex items-center justify-center gap-[clamp(1.25rem,2.6vw,2.75rem)]">
       {items.map((n) => {
         const active = n.match(pathname, query);
         const underline = active && (
-          <motion.span layoutId="nav-underline" className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-sign" transition={{ type: "spring", stiffness: 500, damping: 40 }} />
+          <motion.span layoutId="nav-underline" className="absolute inset-x-1 bottom-1 h-[2.5px] rounded-full bg-sign" transition={{ type: "spring", stiffness: 500, damping: 40 }} />
         );
         return (
-          <li key={n.href} className={`relative ${n.wideOnly ? "hidden 2xl:block" : ""}`} onPointerEnter={(e) => e.pointerType === "mouse" && onMenu?.(n.menu ?? null, "hover")}>
+          <li key={n.href} className="relative" onPointerEnter={(e) => e.pointerType === "mouse" && onMenu?.(n.menu ?? null, "hover")}>
             {n.menu ? (
               <button
                 type="button"
@@ -165,7 +161,7 @@ function NavList({ pathname, query, onNavigate, mobile, openMenu, onMenu }: NavP
                 {underline}
               </button>
             ) : (
-              <Link href={n.href} aria-current={active ? "page" : undefined} className={`${itemCls} ${n.deals ? "!text-sign-deep" : ""}`}>
+              <Link href={n.href} aria-current={active ? "page" : undefined} className={`${itemCls} ${n.deals ? "!text-sign" : ""}`}>
                 {n.label}
                 {underline}
               </Link>
@@ -314,7 +310,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
   // Rendered into <body>: the header's backdrop blur would otherwise trap this
   // fixed-position sheet inside the header's own box.
   return createPortal(
-    <motion.div className="fixed inset-0 z-50 xl:hidden" role="dialog" aria-modal="true" aria-label="Menu">
+    <motion.div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label="Menu">
       <motion.div
         className="absolute inset-0 bg-ink/50"
         initial={{ opacity: 0 }}
@@ -328,7 +324,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
         transition={{ type: "spring", stiffness: 380, damping: 40 }}
-        className="twill absolute inset-y-0 right-0 flex w-[min(26rem,100%)] flex-col overflow-y-auto bg-ink px-6 pb-8 text-bone"
+        className="navy-stage absolute inset-y-0 right-0 flex w-[min(26rem,100%)] flex-col overflow-y-auto px-6 pb-[max(2rem,env(safe-area-inset-bottom))] text-bone"
       >
         <div className="flex h-16 items-center justify-between">
           <Link href="/" onClick={onClose} className="text-2xl" aria-label="HatWear home">
@@ -377,6 +373,13 @@ export function Header() {
   const [openMenu, setOpenMenu] = useState<MenuId | null>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeMenus = useCallback(() => setOpenMenu(null), []);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Hover opens after a short pause (no flicker when the pointer passes over); clicks are instant.
   const onMenu = useCallback((m: MenuId | null, how: "hover" | "click" = "click") => {
@@ -422,44 +425,37 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-40 bg-bone/95 backdrop-blur supports-[backdrop-filter]:bg-bone/85"
+      className={`sticky top-0 z-40 border-b bg-bone/95 backdrop-blur transition-shadow duration-300 supports-[backdrop-filter]:bg-bone/88 ${
+        scrolled ? "border-ink/10 shadow-[0_8px_24px_-16px_rgba(11,31,58,.35)]" : "border-ink/8"
+      }`}
       onPointerLeave={(e) => e.pointerType === "mouse" && openMenu && onMenu(null, "hover")}
     >
-      <div className="shell flex h-16 items-center gap-3 xl:h-[4.5rem]">
-        <button
-          type="button"
-          className="-ml-2 grid size-11 place-items-center xl:hidden"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-        >
-          <MenuIcon size={26} />
-        </button>
-        <Link href="/" className="text-[1.65rem] xl:text-[1.85rem]" aria-label="HatWear home">
+      <div className="shell flex h-16 items-center gap-3 lg:grid lg:h-[4.75rem] lg:grid-cols-[1fr_auto_1fr]">
+        <Link href="/" className="justify-self-start text-[1.45rem] min-[400px]:text-[1.6rem] lg:text-[1.9rem]" aria-label="HatWear home">
           <Wordmark />
         </Link>
-        <nav aria-label="Main" className="ml-auto hidden xl:block">
+        <nav aria-label="Main" className="hidden lg:block">
           <Suspense fallback={<NavList pathname="" query={new URLSearchParams()} openMenu={openMenu} onMenu={onMenu} />}>
             <NavLinks openMenu={openMenu} onMenu={onMenu} />
           </Suspense>
         </nav>
-        <div className="ml-auto flex items-center xl:ml-4">
+        <div className="-mr-2 ml-auto flex items-center justify-self-end lg:ml-0">
           <button
             type="button"
             onClick={() => {
               setOpenMenu(null);
               setSearchOpen((o) => !o);
             }}
-            className="grid size-11 place-items-center rounded-full hover:bg-felt"
+            className="grid size-11 place-items-center rounded-full transition-colors hover:bg-felt"
             aria-label="Search"
             aria-expanded={searchOpen}
           >
             <motion.span animate={{ rotate: searchOpen ? 90 : 0 }} className="grid place-items-center">
-              {searchOpen ? <CloseIcon /> : <SearchIcon />}
+              {searchOpen ? <CloseIcon size={24} /> : <SearchIcon size={24} />}
             </motion.span>
           </button>
-          <Link href="/wishlist" className="relative hidden size-11 place-items-center rounded-full hover:bg-felt sm:grid" aria-label={`Wishlist, ${wishlist.length} saved`}>
-            <HeartIcon />
+          <Link href="/wishlist" className="relative hidden size-11 place-items-center rounded-full transition-colors hover:bg-felt sm:grid" aria-label={`Wishlist, ${wishlist.length} saved`}>
+            <HeartIcon size={24} />
             {hydrated && wishlist.length > 0 && (
               <span className="absolute right-1 top-1 grid min-w-4 place-items-center rounded-full bg-ink px-1 text-[0.72rem] font-bold leading-4 text-bone">
                 {wishlist.length}
@@ -469,10 +465,10 @@ export function Header() {
           <button
             type="button"
             onClick={openCart}
-            className="relative -mr-2 grid size-11 place-items-center rounded-full hover:bg-felt"
+            className="relative grid size-11 place-items-center rounded-full transition-colors hover:bg-felt"
             aria-label={`Cart, ${count} ${count === 1 ? "item" : "items"}`}
           >
-            <BagIcon />
+            <BagIcon size={24} />
             <AnimatePresence>
               {hydrated && count > 0 && (
                 <motion.span
@@ -488,9 +484,17 @@ export function Header() {
               )}
             </AnimatePresence>
           </button>
+          <button
+            type="button"
+            className="grid size-11 place-items-center rounded-full transition-colors hover:bg-felt"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+          >
+            <MenuIcon size={26} />
+          </button>
         </div>
       </div>
-      <div className="stitch text-ink/60" aria-hidden="true" />
       <AnimatePresence>{searchOpen && <SearchPanel onClose={closeSearch} />}</AnimatePresence>
       <AnimatePresence>
         {openMenu === "shop" && <ShopMenu id="menu-shop" key="shop" onNavigate={closeMenus} />}

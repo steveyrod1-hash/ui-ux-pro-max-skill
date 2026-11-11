@@ -113,3 +113,25 @@ export const RulerIcon = (p: P) => (
     <path d="m7 12 2 2M10 9l2 2M13 6l2 2" />
   </svg>
 );
+export const StoreIcon = (p: P) => (
+  <svg {...base(p)}>
+    <path d="M4 9.5 5.5 4h13L20 9.5" />
+    <path d="M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0" />
+    <path d="M5.5 12.5V20h13v-7.5" />
+    <path d="M10 20v-4.5h4V20" />
+  </svg>
+);
+export const NeedleIcon = (p: P) => (
+  <svg {...base(p)}>
+    <rect x="5" y="3" width="11" height="3" rx="1" />
+    <rect x="5" y="18" width="11" height="3" rx="1" />
+    <path d="M7 6v12M14 6v12M7 9h7M7 12h7M7 15h7" />
+    <path d="M16 9c3 0 3.5 3 3.5 5.5V21" />
+  </svg>
+);
+export const ClockIcon = (p: P) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M12 7.5V12l3 2" />
+  </svg>
+);

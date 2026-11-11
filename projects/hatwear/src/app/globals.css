@@ -6,16 +6,20 @@
    paper; Sign Blue is the action colour (buttons, links, focus, highlights).
 ---------------------------------------------------------------------------- */
 @theme {
-  --color-ink: #13233a;
-  --color-charcoal: #1d3557;
-  --color-graphite: #3b4f6b;
-  --color-stone: #586a82;
+  /* Brand palette (2026 redesign). Ink = Primary Navy, Charcoal = Secondary
+     Navy, Sign = Royal Blue for actions, Chalk = Soft White, Steel = muted
+     text on navy. */
+  --color-ink: #0b1f3a;
+  --color-charcoal: #142b4d;
+  --color-graphite: #33465f;
+  --color-stone: #56677e;
+  --color-steel: #aab7ca;
   --color-bone: #ffffff;
-  --color-felt: #e9eff6;
-  --color-chalk: #f4f7fb;
-  --color-sign: #2557b8;
-  --color-sign-deep: #1b438f;
-  /* Sign Blue tint for text and icons on navy surfaces. */
+  --color-felt: #edf1f7;
+  --color-chalk: #f7f9fc;
+  --color-sign: #2456c4;
+  --color-sign-deep: #1a4299;
+  /* Royal Blue tint for text and icons on navy surfaces. */
   --color-sign-light: #9cc0ff;
   --color-ok: #2f6b3a;
   --color-warn: #8a5a00;
@@ -28,7 +32,11 @@
   --text-mega: clamp(2.6rem, 1.4rem + 5vw, 6rem);
 
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --radius-label: 3px;
+  --radius-label: 4px;
+  --radius-btn: 6px;
+  --radius-card: 12px;
+  --shadow-card: 0 1px 2px rgba(11, 31, 58, 0.06), 0 4px 14px -6px rgba(11, 31, 58, 0.12);
+  --shadow-card-hover: 0 2px 4px rgba(11, 31, 58, 0.06), 0 18px 36px -14px rgba(11, 31, 58, 0.28);
 }
 
 @layer base {
@@ -58,6 +66,13 @@
     line-height: 0.95;
     letter-spacing: -0.02em;
     text-wrap: balance;
+  }
+  /* Campaign headings: heavy, wide and italic, as on the hero. */
+  h1,
+  h2,
+  .display-italic {
+    font-style: italic;
+    letter-spacing: -0.025em;
   }
   p {
     text-wrap: pretty;
@@ -132,7 +147,7 @@
     font-size: 0.95rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    border-radius: 2px;
+    border-radius: var(--radius-btn);
     transition:
       background-color 160ms var(--ease-out-quart),
       color 160ms var(--ease-out-quart),
@@ -141,19 +156,26 @@
     cursor: pointer;
     user-select: none;
   }
-  .btn:active {
+  .btn:active:not(:disabled) {
     transform: translateY(1px);
   }
   .btn:disabled {
     opacity: 0.45;
     cursor: not-allowed;
   }
+  .btn-lg {
+    min-height: 3.5rem;
+    padding: 0 1.75rem;
+    font-size: 1.02rem;
+  }
   .btn-primary {
     background: var(--color-sign);
     color: #fff;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset, 0 10px 24px -12px rgba(36, 86, 196, 0.8);
   }
   .btn-primary:hover:not(:disabled) {
-    background: var(--color-sign-deep);
+    background: #2b62d9;
+    transform: translateY(-1px);
   }
   .btn-dark {
     background: var(--color-ink);
@@ -213,6 +235,49 @@
     max-width: 92rem;
     margin-inline: auto;
     padding-inline: clamp(1rem, 4vw, 3rem);
+  }
+
+  /* Small spaced caps above section titles. */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* White product/content card. */
+  .card {
+    background: var(--color-bone);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition:
+      box-shadow 260ms var(--ease-out-quart),
+      transform 260ms var(--ease-out-quart);
+  }
+  @media (hover: hover) {
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+  }
+
+  /* Deep navy campaign surface with a soft royal light from the top right. */
+  .navy-stage {
+    background-color: var(--color-ink);
+    background-image:
+      radial-gradient(ellipse 60% 70% at 78% 18%, rgba(36, 86, 196, 0.42), transparent 70%),
+      radial-gradient(ellipse 50% 60% at 10% 100%, rgba(20, 43, 77, 0.9), transparent 70%),
+      linear-gradient(180deg, #0d2344 0%, #0b1f3a 55%, #08182e 100%);
+  }
+
+  /* Giant outlined brand letters behind the hero art. */
+  .hw-backdrop {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(170, 183, 202, 0.14);
+    background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.015) 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
   /* Twill texture for dark surfaces. */

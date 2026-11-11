@@ -21,9 +21,10 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
 
   return (
     <div className="pb-24">
-      <section className="twill bg-ink text-bone">
+      <section className="navy-stage text-bone">
         <div className="shell py-14 sm:py-20">
-          <h1 className="text-[clamp(3.4rem,1.6rem+8vw,9rem)] uppercase leading-[0.84]">
+          <p className="eyebrow text-steel">MLB · NFL · NBA</p>
+          <h1 className="mt-3 text-[clamp(3rem,1.4rem+7vw,7.5rem)] uppercase leading-[0.86]">
             Rep your
             <br />
             team
@@ -49,7 +50,7 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
                 All {l} <ArrowIcon size={18} />
               </Link>
             </div>
-            <ul className="mt-6 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-4">
+            <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
               {items.map((p) => (
                 <li key={p.id}>
                   <ProductCard product={p} />

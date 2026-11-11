@@ -4,6 +4,7 @@ import { Archivo, Yellowtail } from "next/font/google";
 export const sans = Archivo({
   subsets: ["latin"],
   axes: ["wdth"],
+  style: ["normal", "italic"],
   variable: "--font-hw-sans",
   display: "swap",
 });

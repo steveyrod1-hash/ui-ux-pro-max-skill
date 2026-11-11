@@ -33,7 +33,7 @@ type Status =
 
 const FIELD_STYLES = {
   body: { fontFamily: "system-ui, -apple-system, 'Segoe UI', sans-serif", fontSize: "16px" },
-  input: { fontSize: "16px", color: "#13233a" },
+  input: { fontSize: "16px", color: "#0b1f3a" },
   "input::placeholder": { color: "#586a82" },
 };
 
