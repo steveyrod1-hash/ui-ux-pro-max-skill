@@ -45,11 +45,11 @@ export function AnnouncementBar() {
     setPaused(true); // manual navigation stops the rotation
     setI((n) => (n + d + announcements.length) % announcements.length);
   };
-  const iconBtn = "grid size-9 shrink-0 place-items-center rounded-full text-steel transition-colors hover:bg-white/10 hover:text-white";
+  const iconBtn = "grid size-8 shrink-0 min-[400px]:size-9 place-items-center rounded-full text-steel transition-colors hover:bg-white/10 hover:text-white";
 
   return (
     <div className="bg-ink text-bone" role="region" aria-label="Store announcements" aria-roledescription="carousel">
-      <div className="shell flex min-h-10 items-center gap-1 text-[0.84rem] sm:gap-2">
+      <div className="shell flex min-h-10 items-center gap-0.5 text-[0.84rem] sm:gap-2">
         {announcements.length > 1 && (
           <button type="button" onClick={() => step(-1)} className={`-ml-2 ${iconBtn}`} aria-label="Previous announcement">
             <ChevronIcon size={16} className="rotate-180" />
@@ -64,7 +64,7 @@ export function AnnouncementBar() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: dir > 0 ? "-100%" : "100%", opacity: 0 }}
               transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-              className="line-clamp-2 py-2 leading-snug sm:truncate"
+              className="line-clamp-3 py-2 text-[0.8rem] leading-snug min-[400px]:line-clamp-2 min-[400px]:text-[0.84rem] sm:truncate"
             >
               <span>{a.text}</span>
               {a.href && a.cta && (

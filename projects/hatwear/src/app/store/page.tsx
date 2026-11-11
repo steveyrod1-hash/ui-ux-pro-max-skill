@@ -56,7 +56,7 @@ export default function StorePage() {
       <section className="shell grid gap-6 py-14 sm:py-20 md:grid-cols-3" aria-label="Why visit">
         {REASONS.map(([t, d]) => (
           <div key={t} className="border-t-2 border-ink pt-5">
-            <h2 className="text-[2.2rem] uppercase">{t}</h2>
+            <h2 className="text-[clamp(1.7rem,1.1rem+1.5vw,2.2rem)] uppercase [overflow-wrap:anywhere]">{t}</h2>
             <p className="mt-2 text-graphite">{d}</p>
           </div>
         ))}

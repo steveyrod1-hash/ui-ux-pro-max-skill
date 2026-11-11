@@ -29,8 +29,7 @@ export function Hero() {
 
   return (
     <section ref={ref} className="navy-stage relative isolate overflow-hidden text-bone" aria-labelledby="hero-title">
-      {/* Oversized brand letters behind the drawn cap (the photo brings its own backdrop) */}
-      {!photo && (
+      {/* Oversized brand letters behind the cap */}
       <motion.div
         aria-hidden="true"
         initial={{ opacity: 0, x: 40 }}
@@ -40,7 +39,6 @@ export function Hero() {
       >
         HW
       </motion.div>
-      )}
 
       <div className="shell grid gap-x-6 pb-10 pt-8 [grid-template-areas:'copy'_'art'_'actions'] sm:pt-12 md:min-h-[38rem] md:grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)] md:grid-rows-[1fr_1fr] md:py-14 md:[grid-template-areas:'copy_art'_'actions_art'] lg:min-h-[min(48rem,calc(100svh-7.5rem))] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:py-16 2xl:min-h-[50rem]">
         <div className="relative z-10 [grid-area:copy] md:self-end">
@@ -51,8 +49,8 @@ export function Hero() {
             id="hero-title"
             className="mt-4 font-display text-[clamp(3rem,17vw,5.2rem)] font-black uppercase leading-[0.84] tracking-[-0.035em] text-white md:text-[clamp(4.1rem,8.4vw,7.4rem)] lg:mt-5 lg:text-[clamp(5.6rem,7.6vw,8.6rem)]"
           >
-            <Line delay={0.15}>More</Line>
-            <Line delay={0.25}>than</Line>
+            <Line delay={0.15}>More</Line>{" "}
+            <Line delay={0.25}>than</Line>{" "}
             <Line delay={0.35}>a hat.</Line>
           </h1>
           <motion.p
@@ -71,7 +69,7 @@ export function Hero() {
         >
           <motion.div initial={{ opacity: 0, y: 36, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 1.1, ease, delay: 0.25 }}>
             {photo ? (
-              <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} priority sizes="(min-width: 768px) 55vw, 100vw" className="h-auto w-full [mask-image:radial-gradient(ellipse_52%_56%_at_52%_60%,#000_46%,rgba(0,0,0,.55)_68%,transparent_92%)] [-webkit-mask-image:radial-gradient(ellipse_52%_56%_at_52%_60%,#000_46%,rgba(0,0,0,.55)_68%,transparent_92%)]" />
+              <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} priority sizes="(min-width: 768px) 55vw, 100vw" className="h-auto w-full [mask-image:radial-gradient(ellipse_54%_56%_at_52%_54%,#000_45%,rgba(0,0,0,.6)_70%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_54%_56%_at_52%_54%,#000_45%,rgba(0,0,0,.6)_70%,transparent_100%)]" />
             ) : (
               <HeroCap className="h-auto w-full" />
             )}

@@ -431,7 +431,7 @@ export function Header() {
       onPointerLeave={(e) => e.pointerType === "mouse" && openMenu && onMenu(null, "hover")}
     >
       <div className="shell flex h-16 items-center gap-3 lg:grid lg:h-[4.75rem] lg:grid-cols-[1fr_auto_1fr]">
-        <Link href="/" className="justify-self-start text-[1.45rem] min-[400px]:text-[1.6rem] lg:text-[1.9rem]" aria-label="HatWear home">
+        <Link href="/" className="min-w-0 justify-self-start text-[1.15rem] min-[360px]:text-[1.4rem] min-[400px]:text-[1.6rem] lg:text-[1.9rem]" aria-label="HatWear home">
           <Wordmark />
         </Link>
         <nav aria-label="Main" className="hidden lg:block">
@@ -439,7 +439,7 @@ export function Header() {
             <NavLinks openMenu={openMenu} onMenu={onMenu} />
           </Suspense>
         </nav>
-        <div className="-mr-2 ml-auto flex items-center justify-self-end lg:ml-0">
+        <div className="-mr-2 ml-auto flex shrink-0 items-center justify-self-end lg:ml-0 max-[359px]:[&>*]:size-10">
           <button
             type="button"
             onClick={() => {
