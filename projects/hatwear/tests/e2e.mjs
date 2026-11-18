@@ -314,6 +314,17 @@ const browser = await chromium.launch();
     }
   });
 
+  await check("shop Snapback filter shows the real team snapbacks", async () => {
+    await page.goto(BASE + "/shop?type=snapback", { waitUntil: "networkidle" });
+    const strip = page.locator('[data-testid="shop-snapbacks"]');
+    await strip.waitFor();
+    expect((await strip.locator('a[href^="/snapbacks/"]').count()) === 10, "expected first 10 team snapbacks");
+    await strip.locator('button:has-text("Show all")').click();
+    expect((await strip.locator('a[href^="/snapbacks/"]').count()) === 59, "expected all 59 after Show all");
+    await page.goto(BASE + "/shop?type=fitted", { waitUntil: "networkidle" });
+    expect((await page.locator('[data-testid="shop-snapbacks"]').count()) === 0, "strip should not show on fitted");
+  });
+
   await check("snapback gallery: four views, thumbnails and arrows change the main image", async () => {
     await page.goto(BASE + "/snapbacks/kansas-city-royals", { waitUntil: "networkidle" });
     const tabs = page.locator('[role="tablist"][aria-label="Choose a view"] [role="tab"]');

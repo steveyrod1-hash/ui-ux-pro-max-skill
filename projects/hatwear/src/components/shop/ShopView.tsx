@@ -20,6 +20,8 @@ import { ProductCard } from "../ProductCard";
 import { CloseIcon, FilterIcon, ChevronIcon, SearchIcon } from "../Icons";
 import { plural } from "@/lib/format";
 import { DEMO_CATALOG } from "@/content/site";
+import { ClassicSnapbackStrip } from "../snapbacks/ClassicSnapbackStrip";
+import type { SnapCard } from "../snapbacks/SnapbackGrid";
 
 type ListKey = "type" | "style" | "league" | "team" | "brand" | "size" | "color" | "price";
 
@@ -152,7 +154,7 @@ function FilterPanel({
   );
 }
 
-export function ShopView() {
+export function ShopView({ snapbacks = [], snapbackPrice = 0 }: { snapbacks?: SnapCard[]; snapbackPrice?: number }) {
   const sp = useSearchParams();
   const pathname = usePathname();
   const [pending, startTransition] = useTransition();
@@ -239,6 +241,9 @@ export function ShopView() {
           )}
         </form>
       </div>
+      {(f.type.includes("snapback") || f.style.includes("snapback")) && snapbacks.length > 0 && (
+        <ClassicSnapbackStrip hats={snapbacks} price={snapbackPrice} league={f.league} q={f.q} />
+      )}
       {DEMO_CATALOG && (
         <p className="mb-6 rounded-sm bg-felt px-4 py-3 text-sm text-graphite">
           Preview catalog: these are sample products, prices and stock levels with illustrated images, so you can try filtering, sizing and the bag. The real catalog plugs in here.
