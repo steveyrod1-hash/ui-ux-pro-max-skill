@@ -47,10 +47,10 @@ MLB,Houston Astros,front,/assets/hats/mlb/houston-astros/front.webp,NO
 MLB,Houston Astros,back,/assets/hats/mlb/houston-astros/back.webp,NO
 MLB,Houston Astros,inside,/assets/hats/mlb/houston-astros/inside.webp,NO
 MLB,Houston Astros,side,/assets/hats/mlb/houston-astros/side.webp,NO
-MLB,Kansas City Royals,front,/assets/hats/mlb/kansas-city-royals/front.webp,NO
-MLB,Kansas City Royals,back,/assets/hats/mlb/kansas-city-royals/back.webp,NO
-MLB,Kansas City Royals,inside,/assets/hats/mlb/kansas-city-royals/inside.webp,NO
-MLB,Kansas City Royals,side,/assets/hats/mlb/kansas-city-royals/side.webp,NO
+MLB,Kansas City Royals,front,/assets/hats/mlb/kansas-city-royals/front.webp,YES
+MLB,Kansas City Royals,back,/assets/hats/mlb/kansas-city-royals/back.webp,YES
+MLB,Kansas City Royals,inside,/assets/hats/mlb/kansas-city-royals/inside.webp,YES
+MLB,Kansas City Royals,side,/assets/hats/mlb/kansas-city-royals/side.webp,YES
 MLB,Los Angeles Angels,front,/assets/hats/mlb/los-angeles-angels/front.webp,NO
 MLB,Los Angeles Angels,back,/assets/hats/mlb/los-angeles-angels/back.webp,NO
 MLB,Los Angeles Angels,inside,/assets/hats/mlb/los-angeles-angels/inside.webp,NO
