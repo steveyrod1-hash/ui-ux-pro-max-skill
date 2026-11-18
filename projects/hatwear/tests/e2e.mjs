@@ -295,6 +295,46 @@ const browser = await chromium.launch();
     expect(res.status() === 404, `status ${res.status()}`);
   });
 
+  await check("classic snapbacks: all 59 teams, 29 MLB + 30 NFL, search works", async () => {
+    await page.goto(BASE + "/snapbacks", { waitUntil: "networkidle" });
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 59, "expected 59 snapback cards");
+    await page.click('[role="tab"]:has-text("MLB")');
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 29, "expected 29 MLB");
+    await page.click('[role="tab"]:has-text("NFL")');
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 30, "expected 30 NFL");
+    await page.click('[role="tab"]:has-text("All")');
+    await page.fill('input[placeholder="Search a team"]', "royals");
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 1, "search should find one team");
+    // Every team page exists and has exactly four labelled view boxes.
+    const slugs = await page.evaluate(async () => [...(await (await fetch("/sitemap.xml")).text()).matchAll(/\/snapbacks\/([a-z0-9-]+)/g)].map((m) => m[1]));
+    expect(new Set(slugs).size === 59, `sitemap lists ${new Set(slugs).size} snapback pages`);
+    for (const slug of new Set(slugs)) {
+      const html = await (await fetch(`${BASE}/snapbacks/${slug}`)).text();
+      for (const v of ["front", "back", "inside", "side"]) expect(html.includes(`data-view="${v}"`), `${slug} missing ${v} box`);
+    }
+  });
+
+  await check("snapback gallery: four views, thumbnails and arrows change the main image", async () => {
+    await page.goto(BASE + "/snapbacks/kansas-city-royals", { waitUntil: "networkidle" });
+    const tabs = page.locator('[role="tablist"][aria-label="Choose a view"] [role="tab"]');
+    expect((await tabs.count()) === 4, "expected 4 thumbnails");
+    const labels = await tabs.allInnerTexts();
+    expect(JSON.stringify(labels.map((t) => t.trim())) === JSON.stringify(["Front", "Back", "Inside / Underside", "Side"]), `thumb labels ${labels}`);
+    const label = page.locator('[data-testid="view-label"]');
+    expect((await label.innerText()).includes("Front"), "starts on Front");
+    await tabs.nth(2).click();
+    await page.waitForFunction(() => document.querySelector('[data-testid="view-label"]').textContent.includes("Inside"));
+    expect((await tabs.nth(2).getAttribute("aria-selected")) === "true", "thumb not selected");
+    await page.click('button[aria-label="Next view"]');
+    await page.waitForFunction(() => document.querySelector('[data-testid="view-label"]').textContent.includes("Side"));
+    await page.click('button[aria-label="Next view"]');
+    await page.waitForFunction(() => document.querySelector('[data-testid="view-label"]').textContent.includes("Front"));
+    await page.click('button[aria-label="Previous view"]');
+    await page.waitForFunction(() => document.querySelector('[data-testid="view-label"]').textContent.includes("Side"));
+    expect((await page.locator('[data-testid="snap-price"]').textContent()).trim() === "$39.99", "snapback price should be $39.99");
+    expect((await page.locator('[data-testid="price-panel"]').textContent()).includes("Check stock"), "stock panel missing");
+  });
+
   await check("unknown pages return the branded 404", async () => {
     const res = await page.goto(BASE + "/product/does-not-exist", { waitUntil: "networkidle" });
     expect(res.status() === 404 && (await page.textContent("h1")).toLowerCase().includes("not on the wall"), "404 page wrong");

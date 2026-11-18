@@ -30,6 +30,9 @@ export default async function TeamsPage({ searchParams }: { searchParams: Promis
             team
           </h1>
           <p className="mt-6 max-w-lg text-lg text-bone/80">Pick a league, then a team, and we'll show every style on the site for it.</p>
+          <Link href="/snapbacks" className="link mt-4 inline-flex min-h-11 items-center font-semibold text-white">
+            Classic snapbacks: 29 MLB and 30 NFL teams
+          </Link>
         </div>
       </section>
       <section className="shell py-14">
