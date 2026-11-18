@@ -147,6 +147,9 @@ export default function Home() {
             Baseball, football and basketball. Pick a league, then a team.
           </p>
           <p className="mt-4 max-w-sm text-sm text-stone">Team merchandise shown here is sample data. Official logos appear only on genuine licensed products and their photos.</p>
+          <Link href="/snapbacks" className="group mt-6 inline-flex min-h-11 items-center gap-2 font-semibold">
+            Classic snapbacks for 59 MLB and NFL teams <ArrowIcon size={18} className="transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
         <TeamBrowser leagues={LEAGUES} teams={TEAMS_BY_LEAGUE} counts={teamCounts()} codes={TEAM_CODES} />
       </section>

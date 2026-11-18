@@ -1,0 +1,237 @@
+league,team,view,expected_path,present
+MLB,Arizona Diamondbacks,front,/assets/hats/mlb/arizona-diamondbacks/front.webp,NO
+MLB,Arizona Diamondbacks,back,/assets/hats/mlb/arizona-diamondbacks/back.webp,NO
+MLB,Arizona Diamondbacks,inside,/assets/hats/mlb/arizona-diamondbacks/inside.webp,NO
+MLB,Arizona Diamondbacks,side,/assets/hats/mlb/arizona-diamondbacks/side.webp,NO
+MLB,Athletics (Oakland A’s),front,/assets/hats/mlb/oakland-athletics/front.webp,NO
+MLB,Athletics (Oakland A’s),back,/assets/hats/mlb/oakland-athletics/back.webp,NO
+MLB,Athletics (Oakland A’s),inside,/assets/hats/mlb/oakland-athletics/inside.webp,NO
+MLB,Athletics (Oakland A’s),side,/assets/hats/mlb/oakland-athletics/side.webp,NO
+MLB,Atlanta Braves,front,/assets/hats/mlb/atlanta-braves/front.webp,NO
+MLB,Atlanta Braves,back,/assets/hats/mlb/atlanta-braves/back.webp,NO
+MLB,Atlanta Braves,inside,/assets/hats/mlb/atlanta-braves/inside.webp,NO
+MLB,Atlanta Braves,side,/assets/hats/mlb/atlanta-braves/side.webp,NO
+MLB,Baltimore Orioles,front,/assets/hats/mlb/baltimore-orioles/front.webp,NO
+MLB,Baltimore Orioles,back,/assets/hats/mlb/baltimore-orioles/back.webp,NO
+MLB,Baltimore Orioles,inside,/assets/hats/mlb/baltimore-orioles/inside.webp,NO
+MLB,Baltimore Orioles,side,/assets/hats/mlb/baltimore-orioles/side.webp,NO
+MLB,Boston Red Sox,front,/assets/hats/mlb/boston-red-sox/front.webp,NO
+MLB,Boston Red Sox,back,/assets/hats/mlb/boston-red-sox/back.webp,NO
+MLB,Boston Red Sox,inside,/assets/hats/mlb/boston-red-sox/inside.webp,NO
+MLB,Boston Red Sox,side,/assets/hats/mlb/boston-red-sox/side.webp,NO
+MLB,Chicago Cubs,front,/assets/hats/mlb/chicago-cubs/front.webp,NO
+MLB,Chicago Cubs,back,/assets/hats/mlb/chicago-cubs/back.webp,NO
+MLB,Chicago Cubs,inside,/assets/hats/mlb/chicago-cubs/inside.webp,NO
+MLB,Chicago Cubs,side,/assets/hats/mlb/chicago-cubs/side.webp,NO
+MLB,Chicago White Sox,front,/assets/hats/mlb/chicago-white-sox/front.webp,NO
+MLB,Chicago White Sox,back,/assets/hats/mlb/chicago-white-sox/back.webp,NO
+MLB,Chicago White Sox,inside,/assets/hats/mlb/chicago-white-sox/inside.webp,NO
+MLB,Chicago White Sox,side,/assets/hats/mlb/chicago-white-sox/side.webp,NO
+MLB,Cincinnati Reds,front,/assets/hats/mlb/cincinnati-reds/front.webp,NO
+MLB,Cincinnati Reds,back,/assets/hats/mlb/cincinnati-reds/back.webp,NO
+MLB,Cincinnati Reds,inside,/assets/hats/mlb/cincinnati-reds/inside.webp,NO
+MLB,Cincinnati Reds,side,/assets/hats/mlb/cincinnati-reds/side.webp,NO
+MLB,Cleveland Guardians,front,/assets/hats/mlb/cleveland-guardians/front.webp,NO
+MLB,Cleveland Guardians,back,/assets/hats/mlb/cleveland-guardians/back.webp,NO
+MLB,Cleveland Guardians,inside,/assets/hats/mlb/cleveland-guardians/inside.webp,NO
+MLB,Cleveland Guardians,side,/assets/hats/mlb/cleveland-guardians/side.webp,NO
+MLB,Colorado Rockies,front,/assets/hats/mlb/colorado-rockies/front.webp,NO
+MLB,Colorado Rockies,back,/assets/hats/mlb/colorado-rockies/back.webp,NO
+MLB,Colorado Rockies,inside,/assets/hats/mlb/colorado-rockies/inside.webp,NO
+MLB,Colorado Rockies,side,/assets/hats/mlb/colorado-rockies/side.webp,NO
+MLB,Detroit Tigers,front,/assets/hats/mlb/detroit-tigers/front.webp,NO
+MLB,Detroit Tigers,back,/assets/hats/mlb/detroit-tigers/back.webp,NO
+MLB,Detroit Tigers,inside,/assets/hats/mlb/detroit-tigers/inside.webp,NO
+MLB,Detroit Tigers,side,/assets/hats/mlb/detroit-tigers/side.webp,NO
+MLB,Houston Astros,front,/assets/hats/mlb/houston-astros/front.webp,NO
+MLB,Houston Astros,back,/assets/hats/mlb/houston-astros/back.webp,NO
+MLB,Houston Astros,inside,/assets/hats/mlb/houston-astros/inside.webp,NO
+MLB,Houston Astros,side,/assets/hats/mlb/houston-astros/side.webp,NO
+MLB,Kansas City Royals,front,/assets/hats/mlb/kansas-city-royals/front.webp,NO
+MLB,Kansas City Royals,back,/assets/hats/mlb/kansas-city-royals/back.webp,NO
+MLB,Kansas City Royals,inside,/assets/hats/mlb/kansas-city-royals/inside.webp,NO
+MLB,Kansas City Royals,side,/assets/hats/mlb/kansas-city-royals/side.webp,NO
+MLB,Los Angeles Angels,front,/assets/hats/mlb/los-angeles-angels/front.webp,NO
+MLB,Los Angeles Angels,back,/assets/hats/mlb/los-angeles-angels/back.webp,NO
+MLB,Los Angeles Angels,inside,/assets/hats/mlb/los-angeles-angels/inside.webp,NO
+MLB,Los Angeles Angels,side,/assets/hats/mlb/los-angeles-angels/side.webp,NO
+MLB,Los Angeles Dodgers,front,/assets/hats/mlb/los-angeles-dodgers/front.webp,NO
+MLB,Los Angeles Dodgers,back,/assets/hats/mlb/los-angeles-dodgers/back.webp,NO
+MLB,Los Angeles Dodgers,inside,/assets/hats/mlb/los-angeles-dodgers/inside.webp,NO
+MLB,Los Angeles Dodgers,side,/assets/hats/mlb/los-angeles-dodgers/side.webp,NO
+MLB,Miami Marlins,front,/assets/hats/mlb/miami-marlins/front.webp,NO
+MLB,Miami Marlins,back,/assets/hats/mlb/miami-marlins/back.webp,NO
+MLB,Miami Marlins,inside,/assets/hats/mlb/miami-marlins/inside.webp,NO
+MLB,Miami Marlins,side,/assets/hats/mlb/miami-marlins/side.webp,NO
+MLB,Milwaukee Brewers,front,/assets/hats/mlb/milwaukee-brewers/front.webp,NO
+MLB,Milwaukee Brewers,back,/assets/hats/mlb/milwaukee-brewers/back.webp,NO
+MLB,Milwaukee Brewers,inside,/assets/hats/mlb/milwaukee-brewers/inside.webp,NO
+MLB,Milwaukee Brewers,side,/assets/hats/mlb/milwaukee-brewers/side.webp,NO
+MLB,Minnesota Twins,front,/assets/hats/mlb/minnesota-twins/front.webp,NO
+MLB,Minnesota Twins,back,/assets/hats/mlb/minnesota-twins/back.webp,NO
+MLB,Minnesota Twins,inside,/assets/hats/mlb/minnesota-twins/inside.webp,NO
+MLB,Minnesota Twins,side,/assets/hats/mlb/minnesota-twins/side.webp,NO
+MLB,New York Mets,front,/assets/hats/mlb/new-york-mets/front.webp,NO
+MLB,New York Mets,back,/assets/hats/mlb/new-york-mets/back.webp,NO
+MLB,New York Mets,inside,/assets/hats/mlb/new-york-mets/inside.webp,NO
+MLB,New York Mets,side,/assets/hats/mlb/new-york-mets/side.webp,NO
+MLB,New York Yankees,front,/assets/hats/mlb/new-york-yankees/front.webp,NO
+MLB,New York Yankees,back,/assets/hats/mlb/new-york-yankees/back.webp,NO
+MLB,New York Yankees,inside,/assets/hats/mlb/new-york-yankees/inside.webp,NO
+MLB,New York Yankees,side,/assets/hats/mlb/new-york-yankees/side.webp,NO
+MLB,Philadelphia Phillies,front,/assets/hats/mlb/philadelphia-phillies/front.webp,NO
+MLB,Philadelphia Phillies,back,/assets/hats/mlb/philadelphia-phillies/back.webp,NO
+MLB,Philadelphia Phillies,inside,/assets/hats/mlb/philadelphia-phillies/inside.webp,NO
+MLB,Philadelphia Phillies,side,/assets/hats/mlb/philadelphia-phillies/side.webp,NO
+MLB,Pittsburgh Pirates,front,/assets/hats/mlb/pittsburgh-pirates/front.webp,NO
+MLB,Pittsburgh Pirates,back,/assets/hats/mlb/pittsburgh-pirates/back.webp,NO
+MLB,Pittsburgh Pirates,inside,/assets/hats/mlb/pittsburgh-pirates/inside.webp,NO
+MLB,Pittsburgh Pirates,side,/assets/hats/mlb/pittsburgh-pirates/side.webp,NO
+MLB,San Diego Padres,front,/assets/hats/mlb/san-diego-padres/front.webp,NO
+MLB,San Diego Padres,back,/assets/hats/mlb/san-diego-padres/back.webp,NO
+MLB,San Diego Padres,inside,/assets/hats/mlb/san-diego-padres/inside.webp,NO
+MLB,San Diego Padres,side,/assets/hats/mlb/san-diego-padres/side.webp,NO
+MLB,San Francisco Giants,front,/assets/hats/mlb/san-francisco-giants/front.webp,NO
+MLB,San Francisco Giants,back,/assets/hats/mlb/san-francisco-giants/back.webp,NO
+MLB,San Francisco Giants,inside,/assets/hats/mlb/san-francisco-giants/inside.webp,NO
+MLB,San Francisco Giants,side,/assets/hats/mlb/san-francisco-giants/side.webp,NO
+MLB,Seattle Mariners,front,/assets/hats/mlb/seattle-mariners/front.webp,NO
+MLB,Seattle Mariners,back,/assets/hats/mlb/seattle-mariners/back.webp,NO
+MLB,Seattle Mariners,inside,/assets/hats/mlb/seattle-mariners/inside.webp,NO
+MLB,Seattle Mariners,side,/assets/hats/mlb/seattle-mariners/side.webp,NO
+MLB,St. Louis Cardinals,front,/assets/hats/mlb/st-louis-cardinals/front.webp,NO
+MLB,St. Louis Cardinals,back,/assets/hats/mlb/st-louis-cardinals/back.webp,NO
+MLB,St. Louis Cardinals,inside,/assets/hats/mlb/st-louis-cardinals/inside.webp,NO
+MLB,St. Louis Cardinals,side,/assets/hats/mlb/st-louis-cardinals/side.webp,NO
+MLB,Texas Rangers,front,/assets/hats/mlb/texas-rangers/front.webp,NO
+MLB,Texas Rangers,back,/assets/hats/mlb/texas-rangers/back.webp,NO
+MLB,Texas Rangers,inside,/assets/hats/mlb/texas-rangers/inside.webp,NO
+MLB,Texas Rangers,side,/assets/hats/mlb/texas-rangers/side.webp,NO
+MLB,Toronto Blue Jays,front,/assets/hats/mlb/toronto-blue-jays/front.webp,NO
+MLB,Toronto Blue Jays,back,/assets/hats/mlb/toronto-blue-jays/back.webp,NO
+MLB,Toronto Blue Jays,inside,/assets/hats/mlb/toronto-blue-jays/inside.webp,NO
+MLB,Toronto Blue Jays,side,/assets/hats/mlb/toronto-blue-jays/side.webp,NO
+MLB,Washington Nationals,front,/assets/hats/mlb/washington-nationals/front.webp,NO
+MLB,Washington Nationals,back,/assets/hats/mlb/washington-nationals/back.webp,NO
+MLB,Washington Nationals,inside,/assets/hats/mlb/washington-nationals/inside.webp,NO
+MLB,Washington Nationals,side,/assets/hats/mlb/washington-nationals/side.webp,NO
+NFL,Arizona Cardinals,front,/assets/hats/nfl/arizona-cardinals/front.webp,NO
+NFL,Arizona Cardinals,back,/assets/hats/nfl/arizona-cardinals/back.webp,NO
+NFL,Arizona Cardinals,inside,/assets/hats/nfl/arizona-cardinals/inside.webp,NO
+NFL,Arizona Cardinals,side,/assets/hats/nfl/arizona-cardinals/side.webp,NO
+NFL,Atlanta Falcons,front,/assets/hats/nfl/atlanta-falcons/front.webp,NO
+NFL,Atlanta Falcons,back,/assets/hats/nfl/atlanta-falcons/back.webp,NO
+NFL,Atlanta Falcons,inside,/assets/hats/nfl/atlanta-falcons/inside.webp,NO
+NFL,Atlanta Falcons,side,/assets/hats/nfl/atlanta-falcons/side.webp,NO
+NFL,Baltimore Ravens,front,/assets/hats/nfl/baltimore-ravens/front.webp,NO
+NFL,Baltimore Ravens,back,/assets/hats/nfl/baltimore-ravens/back.webp,NO
+NFL,Baltimore Ravens,inside,/assets/hats/nfl/baltimore-ravens/inside.webp,NO
+NFL,Baltimore Ravens,side,/assets/hats/nfl/baltimore-ravens/side.webp,NO
+NFL,Buffalo Bills,front,/assets/hats/nfl/buffalo-bills/front.webp,NO
+NFL,Buffalo Bills,back,/assets/hats/nfl/buffalo-bills/back.webp,NO
+NFL,Buffalo Bills,inside,/assets/hats/nfl/buffalo-bills/inside.webp,NO
+NFL,Buffalo Bills,side,/assets/hats/nfl/buffalo-bills/side.webp,NO
+NFL,Carolina Panthers,front,/assets/hats/nfl/carolina-panthers/front.webp,NO
+NFL,Carolina Panthers,back,/assets/hats/nfl/carolina-panthers/back.webp,NO
+NFL,Carolina Panthers,inside,/assets/hats/nfl/carolina-panthers/inside.webp,NO
+NFL,Carolina Panthers,side,/assets/hats/nfl/carolina-panthers/side.webp,NO
+NFL,Chicago Bears,front,/assets/hats/nfl/chicago-bears/front.webp,NO
+NFL,Chicago Bears,back,/assets/hats/nfl/chicago-bears/back.webp,NO
+NFL,Chicago Bears,inside,/assets/hats/nfl/chicago-bears/inside.webp,NO
+NFL,Chicago Bears,side,/assets/hats/nfl/chicago-bears/side.webp,NO
+NFL,Cincinnati Bengals,front,/assets/hats/nfl/cincinnati-bengals/front.webp,NO
+NFL,Cincinnati Bengals,back,/assets/hats/nfl/cincinnati-bengals/back.webp,NO
+NFL,Cincinnati Bengals,inside,/assets/hats/nfl/cincinnati-bengals/inside.webp,NO
+NFL,Cincinnati Bengals,side,/assets/hats/nfl/cincinnati-bengals/side.webp,NO
+NFL,Cleveland Browns,front,/assets/hats/nfl/cleveland-browns/front.webp,NO
+NFL,Cleveland Browns,back,/assets/hats/nfl/cleveland-browns/back.webp,NO
+NFL,Cleveland Browns,inside,/assets/hats/nfl/cleveland-browns/inside.webp,NO
+NFL,Cleveland Browns,side,/assets/hats/nfl/cleveland-browns/side.webp,NO
+NFL,Dallas Cowboys,front,/assets/hats/nfl/dallas-cowboys/front.webp,NO
+NFL,Dallas Cowboys,back,/assets/hats/nfl/dallas-cowboys/back.webp,NO
+NFL,Dallas Cowboys,inside,/assets/hats/nfl/dallas-cowboys/inside.webp,NO
+NFL,Dallas Cowboys,side,/assets/hats/nfl/dallas-cowboys/side.webp,NO
+NFL,Detroit Lions,front,/assets/hats/nfl/detroit-lions/front.webp,NO
+NFL,Detroit Lions,back,/assets/hats/nfl/detroit-lions/back.webp,NO
+NFL,Detroit Lions,inside,/assets/hats/nfl/detroit-lions/inside.webp,NO
+NFL,Detroit Lions,side,/assets/hats/nfl/detroit-lions/side.webp,NO
+NFL,Green Bay Packers,front,/assets/hats/nfl/green-bay-packers/front.webp,NO
+NFL,Green Bay Packers,back,/assets/hats/nfl/green-bay-packers/back.webp,NO
+NFL,Green Bay Packers,inside,/assets/hats/nfl/green-bay-packers/inside.webp,NO
+NFL,Green Bay Packers,side,/assets/hats/nfl/green-bay-packers/side.webp,NO
+NFL,Houston Texans,front,/assets/hats/nfl/houston-texans/front.webp,NO
+NFL,Houston Texans,back,/assets/hats/nfl/houston-texans/back.webp,NO
+NFL,Houston Texans,inside,/assets/hats/nfl/houston-texans/inside.webp,NO
+NFL,Houston Texans,side,/assets/hats/nfl/houston-texans/side.webp,NO
+NFL,Indianapolis Colts,front,/assets/hats/nfl/indianapolis-colts/front.webp,NO
+NFL,Indianapolis Colts,back,/assets/hats/nfl/indianapolis-colts/back.webp,NO
+NFL,Indianapolis Colts,inside,/assets/hats/nfl/indianapolis-colts/inside.webp,NO
+NFL,Indianapolis Colts,side,/assets/hats/nfl/indianapolis-colts/side.webp,NO
+NFL,Kansas City Chiefs,front,/assets/hats/nfl/kansas-city-chiefs/front.webp,NO
+NFL,Kansas City Chiefs,back,/assets/hats/nfl/kansas-city-chiefs/back.webp,NO
+NFL,Kansas City Chiefs,inside,/assets/hats/nfl/kansas-city-chiefs/inside.webp,NO
+NFL,Kansas City Chiefs,side,/assets/hats/nfl/kansas-city-chiefs/side.webp,NO
+NFL,Las Vegas Raiders,front,/assets/hats/nfl/las-vegas-raiders/front.webp,NO
+NFL,Las Vegas Raiders,back,/assets/hats/nfl/las-vegas-raiders/back.webp,NO
+NFL,Las Vegas Raiders,inside,/assets/hats/nfl/las-vegas-raiders/inside.webp,NO
+NFL,Las Vegas Raiders,side,/assets/hats/nfl/las-vegas-raiders/side.webp,NO
+NFL,Los Angeles Chargers,front,/assets/hats/nfl/los-angeles-chargers/front.webp,NO
+NFL,Los Angeles Chargers,back,/assets/hats/nfl/los-angeles-chargers/back.webp,NO
+NFL,Los Angeles Chargers,inside,/assets/hats/nfl/los-angeles-chargers/inside.webp,NO
+NFL,Los Angeles Chargers,side,/assets/hats/nfl/los-angeles-chargers/side.webp,NO
+NFL,Los Angeles Rams,front,/assets/hats/nfl/los-angeles-rams/front.webp,NO
+NFL,Los Angeles Rams,back,/assets/hats/nfl/los-angeles-rams/back.webp,NO
+NFL,Los Angeles Rams,inside,/assets/hats/nfl/los-angeles-rams/inside.webp,NO
+NFL,Los Angeles Rams,side,/assets/hats/nfl/los-angeles-rams/side.webp,NO
+NFL,Miami Dolphins,front,/assets/hats/nfl/miami-dolphins/front.webp,NO
+NFL,Miami Dolphins,back,/assets/hats/nfl/miami-dolphins/back.webp,NO
+NFL,Miami Dolphins,inside,/assets/hats/nfl/miami-dolphins/inside.webp,NO
+NFL,Miami Dolphins,side,/assets/hats/nfl/miami-dolphins/side.webp,NO
+NFL,Minnesota Vikings,front,/assets/hats/nfl/minnesota-vikings/front.webp,NO
+NFL,Minnesota Vikings,back,/assets/hats/nfl/minnesota-vikings/back.webp,NO
+NFL,Minnesota Vikings,inside,/assets/hats/nfl/minnesota-vikings/inside.webp,NO
+NFL,Minnesota Vikings,side,/assets/hats/nfl/minnesota-vikings/side.webp,NO
+NFL,New England Patriots,front,/assets/hats/nfl/new-england-patriots/front.webp,NO
+NFL,New England Patriots,back,/assets/hats/nfl/new-england-patriots/back.webp,NO
+NFL,New England Patriots,inside,/assets/hats/nfl/new-england-patriots/inside.webp,NO
+NFL,New England Patriots,side,/assets/hats/nfl/new-england-patriots/side.webp,NO
+NFL,New Orleans Saints,front,/assets/hats/nfl/new-orleans-saints/front.webp,NO
+NFL,New Orleans Saints,back,/assets/hats/nfl/new-orleans-saints/back.webp,NO
+NFL,New Orleans Saints,inside,/assets/hats/nfl/new-orleans-saints/inside.webp,NO
+NFL,New Orleans Saints,side,/assets/hats/nfl/new-orleans-saints/side.webp,NO
+NFL,New York Giants,front,/assets/hats/nfl/new-york-giants/front.webp,NO
+NFL,New York Giants,back,/assets/hats/nfl/new-york-giants/back.webp,NO
+NFL,New York Giants,inside,/assets/hats/nfl/new-york-giants/inside.webp,NO
+NFL,New York Giants,side,/assets/hats/nfl/new-york-giants/side.webp,NO
+NFL,New York Jets,front,/assets/hats/nfl/new-york-jets/front.webp,NO
+NFL,New York Jets,back,/assets/hats/nfl/new-york-jets/back.webp,NO
+NFL,New York Jets,inside,/assets/hats/nfl/new-york-jets/inside.webp,NO
+NFL,New York Jets,side,/assets/hats/nfl/new-york-jets/side.webp,NO
+NFL,Philadelphia Eagles,front,/assets/hats/nfl/philadelphia-eagles/front.webp,NO
+NFL,Philadelphia Eagles,back,/assets/hats/nfl/philadelphia-eagles/back.webp,NO
+NFL,Philadelphia Eagles,inside,/assets/hats/nfl/philadelphia-eagles/inside.webp,NO
+NFL,Philadelphia Eagles,side,/assets/hats/nfl/philadelphia-eagles/side.webp,NO
+NFL,Pittsburgh Steelers,front,/assets/hats/nfl/pittsburgh-steelers/front.webp,NO
+NFL,Pittsburgh Steelers,back,/assets/hats/nfl/pittsburgh-steelers/back.webp,NO
+NFL,Pittsburgh Steelers,inside,/assets/hats/nfl/pittsburgh-steelers/inside.webp,NO
+NFL,Pittsburgh Steelers,side,/assets/hats/nfl/pittsburgh-steelers/side.webp,NO
+NFL,San Francisco 49ers,front,/assets/hats/nfl/san-francisco-49ers/front.webp,NO
+NFL,San Francisco 49ers,back,/assets/hats/nfl/san-francisco-49ers/back.webp,NO
+NFL,San Francisco 49ers,inside,/assets/hats/nfl/san-francisco-49ers/inside.webp,NO
+NFL,San Francisco 49ers,side,/assets/hats/nfl/san-francisco-49ers/side.webp,NO
+NFL,Seattle Seahawks,front,/assets/hats/nfl/seattle-seahawks/front.webp,NO
+NFL,Seattle Seahawks,back,/assets/hats/nfl/seattle-seahawks/back.webp,NO
+NFL,Seattle Seahawks,inside,/assets/hats/nfl/seattle-seahawks/inside.webp,NO
+NFL,Seattle Seahawks,side,/assets/hats/nfl/seattle-seahawks/side.webp,NO
+NFL,Tampa Bay Buccaneers,front,/assets/hats/nfl/tampa-bay-buccaneers/front.webp,NO
+NFL,Tampa Bay Buccaneers,back,/assets/hats/nfl/tampa-bay-buccaneers/back.webp,NO
+NFL,Tampa Bay Buccaneers,inside,/assets/hats/nfl/tampa-bay-buccaneers/inside.webp,NO
+NFL,Tampa Bay Buccaneers,side,/assets/hats/nfl/tampa-bay-buccaneers/side.webp,NO
+NFL,Tennessee Titans,front,/assets/hats/nfl/tennessee-titans/front.webp,NO
+NFL,Tennessee Titans,back,/assets/hats/nfl/tennessee-titans/back.webp,NO
+NFL,Tennessee Titans,inside,/assets/hats/nfl/tennessee-titans/inside.webp,NO
+NFL,Tennessee Titans,side,/assets/hats/nfl/tennessee-titans/side.webp,NO
+NFL,Washington Commanders,front,/assets/hats/nfl/washington-commanders/front.webp,NO
+NFL,Washington Commanders,back,/assets/hats/nfl/washington-commanders/back.webp,NO
+NFL,Washington Commanders,inside,/assets/hats/nfl/washington-commanders/inside.webp,NO
+NFL,Washington Commanders,side,/assets/hats/nfl/washington-commanders/side.webp,NO

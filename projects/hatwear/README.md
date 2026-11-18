@@ -141,6 +141,15 @@ It's on the dashboard's account or merchant settings page, and in the dashboard 
 
 It doesn't replace one real sandbox order with HatWear's own Clover account (step 6).
 
+## Classic Snapbacks (59 teams)
+
+`/snapbacks` lists 29 MLB and 30 NFL classic snapbacks from the owner's handoff package (`docs/classic-snapbacks/`). Each team page at `/snapbacks/<slug>` shows four separate photos: Front, Back, Inside / Underside and Side.
+
+- **Price:** $39.99, set by the owner, in `src/data/classic-snapbacks.json`.
+- **Stock:** checked in store until these items come from Clover.
+- **Adding photos:** put each one at `public/assets/hats/<mlb|nfl>/<slug>/<front|back|inside|side>.webp` (or `.jpg`/`.png`) and redeploy. A missing view shows a "photo coming soon" box. Only use photos the store took or has permission to publish.
+- **Progress:** `npm run photos:status` lists the missing photos and writes `docs/classic-snapbacks/photo-status.csv`.
+
 ## Limited-time deals
 
 Deals are set in **`src/content/deals.ts`** (or, without touching code, as JSON in Vercel's `NEXT_PUBLIC_DEALS` environment variable, followed by a redeploy). Each deal is one line:

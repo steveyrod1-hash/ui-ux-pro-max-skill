@@ -1,0 +1,361 @@
+{
+ "collection": "Classic Snapback Hats — 59 Teams",
+ "price": 39.99,
+ "priceSource": "Set by the store owner, November 2026",
+ "hats": [
+  {
+   "id": "mlb-arizona-diamondbacks",
+   "league": "MLB",
+   "team": "Arizona Diamondbacks",
+   "slug": "arizona-diamondbacks"
+  },
+  {
+   "id": "mlb-oakland-athletics",
+   "league": "MLB",
+   "team": "Athletics (Oakland A’s)",
+   "slug": "oakland-athletics"
+  },
+  {
+   "id": "mlb-atlanta-braves",
+   "league": "MLB",
+   "team": "Atlanta Braves",
+   "slug": "atlanta-braves"
+  },
+  {
+   "id": "mlb-baltimore-orioles",
+   "league": "MLB",
+   "team": "Baltimore Orioles",
+   "slug": "baltimore-orioles"
+  },
+  {
+   "id": "mlb-boston-red-sox",
+   "league": "MLB",
+   "team": "Boston Red Sox",
+   "slug": "boston-red-sox"
+  },
+  {
+   "id": "mlb-chicago-cubs",
+   "league": "MLB",
+   "team": "Chicago Cubs",
+   "slug": "chicago-cubs"
+  },
+  {
+   "id": "mlb-chicago-white-sox",
+   "league": "MLB",
+   "team": "Chicago White Sox",
+   "slug": "chicago-white-sox"
+  },
+  {
+   "id": "mlb-cincinnati-reds",
+   "league": "MLB",
+   "team": "Cincinnati Reds",
+   "slug": "cincinnati-reds"
+  },
+  {
+   "id": "mlb-cleveland-guardians",
+   "league": "MLB",
+   "team": "Cleveland Guardians",
+   "slug": "cleveland-guardians"
+  },
+  {
+   "id": "mlb-colorado-rockies",
+   "league": "MLB",
+   "team": "Colorado Rockies",
+   "slug": "colorado-rockies"
+  },
+  {
+   "id": "mlb-detroit-tigers",
+   "league": "MLB",
+   "team": "Detroit Tigers",
+   "slug": "detroit-tigers"
+  },
+  {
+   "id": "mlb-houston-astros",
+   "league": "MLB",
+   "team": "Houston Astros",
+   "slug": "houston-astros"
+  },
+  {
+   "id": "mlb-kansas-city-royals",
+   "league": "MLB",
+   "team": "Kansas City Royals",
+   "slug": "kansas-city-royals"
+  },
+  {
+   "id": "mlb-los-angeles-angels",
+   "league": "MLB",
+   "team": "Los Angeles Angels",
+   "slug": "los-angeles-angels"
+  },
+  {
+   "id": "mlb-los-angeles-dodgers",
+   "league": "MLB",
+   "team": "Los Angeles Dodgers",
+   "slug": "los-angeles-dodgers"
+  },
+  {
+   "id": "mlb-miami-marlins",
+   "league": "MLB",
+   "team": "Miami Marlins",
+   "slug": "miami-marlins"
+  },
+  {
+   "id": "mlb-milwaukee-brewers",
+   "league": "MLB",
+   "team": "Milwaukee Brewers",
+   "slug": "milwaukee-brewers"
+  },
+  {
+   "id": "mlb-minnesota-twins",
+   "league": "MLB",
+   "team": "Minnesota Twins",
+   "slug": "minnesota-twins"
+  },
+  {
+   "id": "mlb-new-york-mets",
+   "league": "MLB",
+   "team": "New York Mets",
+   "slug": "new-york-mets"
+  },
+  {
+   "id": "mlb-new-york-yankees",
+   "league": "MLB",
+   "team": "New York Yankees",
+   "slug": "new-york-yankees"
+  },
+  {
+   "id": "mlb-philadelphia-phillies",
+   "league": "MLB",
+   "team": "Philadelphia Phillies",
+   "slug": "philadelphia-phillies"
+  },
+  {
+   "id": "mlb-pittsburgh-pirates",
+   "league": "MLB",
+   "team": "Pittsburgh Pirates",
+   "slug": "pittsburgh-pirates"
+  },
+  {
+   "id": "mlb-san-diego-padres",
+   "league": "MLB",
+   "team": "San Diego Padres",
+   "slug": "san-diego-padres"
+  },
+  {
+   "id": "mlb-san-francisco-giants",
+   "league": "MLB",
+   "team": "San Francisco Giants",
+   "slug": "san-francisco-giants"
+  },
+  {
+   "id": "mlb-seattle-mariners",
+   "league": "MLB",
+   "team": "Seattle Mariners",
+   "slug": "seattle-mariners"
+  },
+  {
+   "id": "mlb-st-louis-cardinals",
+   "league": "MLB",
+   "team": "St. Louis Cardinals",
+   "slug": "st-louis-cardinals"
+  },
+  {
+   "id": "mlb-texas-rangers",
+   "league": "MLB",
+   "team": "Texas Rangers",
+   "slug": "texas-rangers"
+  },
+  {
+   "id": "mlb-toronto-blue-jays",
+   "league": "MLB",
+   "team": "Toronto Blue Jays",
+   "slug": "toronto-blue-jays"
+  },
+  {
+   "id": "mlb-washington-nationals",
+   "league": "MLB",
+   "team": "Washington Nationals",
+   "slug": "washington-nationals"
+  },
+  {
+   "id": "nfl-arizona-cardinals",
+   "league": "NFL",
+   "team": "Arizona Cardinals",
+   "slug": "arizona-cardinals"
+  },
+  {
+   "id": "nfl-atlanta-falcons",
+   "league": "NFL",
+   "team": "Atlanta Falcons",
+   "slug": "atlanta-falcons"
+  },
+  {
+   "id": "nfl-baltimore-ravens",
+   "league": "NFL",
+   "team": "Baltimore Ravens",
+   "slug": "baltimore-ravens"
+  },
+  {
+   "id": "nfl-buffalo-bills",
+   "league": "NFL",
+   "team": "Buffalo Bills",
+   "slug": "buffalo-bills"
+  },
+  {
+   "id": "nfl-carolina-panthers",
+   "league": "NFL",
+   "team": "Carolina Panthers",
+   "slug": "carolina-panthers"
+  },
+  {
+   "id": "nfl-chicago-bears",
+   "league": "NFL",
+   "team": "Chicago Bears",
+   "slug": "chicago-bears"
+  },
+  {
+   "id": "nfl-cincinnati-bengals",
+   "league": "NFL",
+   "team": "Cincinnati Bengals",
+   "slug": "cincinnati-bengals"
+  },
+  {
+   "id": "nfl-cleveland-browns",
+   "league": "NFL",
+   "team": "Cleveland Browns",
+   "slug": "cleveland-browns"
+  },
+  {
+   "id": "nfl-dallas-cowboys",
+   "league": "NFL",
+   "team": "Dallas Cowboys",
+   "slug": "dallas-cowboys"
+  },
+  {
+   "id": "nfl-detroit-lions",
+   "league": "NFL",
+   "team": "Detroit Lions",
+   "slug": "detroit-lions"
+  },
+  {
+   "id": "nfl-green-bay-packers",
+   "league": "NFL",
+   "team": "Green Bay Packers",
+   "slug": "green-bay-packers"
+  },
+  {
+   "id": "nfl-houston-texans",
+   "league": "NFL",
+   "team": "Houston Texans",
+   "slug": "houston-texans"
+  },
+  {
+   "id": "nfl-indianapolis-colts",
+   "league": "NFL",
+   "team": "Indianapolis Colts",
+   "slug": "indianapolis-colts"
+  },
+  {
+   "id": "nfl-kansas-city-chiefs",
+   "league": "NFL",
+   "team": "Kansas City Chiefs",
+   "slug": "kansas-city-chiefs"
+  },
+  {
+   "id": "nfl-las-vegas-raiders",
+   "league": "NFL",
+   "team": "Las Vegas Raiders",
+   "slug": "las-vegas-raiders"
+  },
+  {
+   "id": "nfl-los-angeles-chargers",
+   "league": "NFL",
+   "team": "Los Angeles Chargers",
+   "slug": "los-angeles-chargers"
+  },
+  {
+   "id": "nfl-los-angeles-rams",
+   "league": "NFL",
+   "team": "Los Angeles Rams",
+   "slug": "los-angeles-rams"
+  },
+  {
+   "id": "nfl-miami-dolphins",
+   "league": "NFL",
+   "team": "Miami Dolphins",
+   "slug": "miami-dolphins"
+  },
+  {
+   "id": "nfl-minnesota-vikings",
+   "league": "NFL",
+   "team": "Minnesota Vikings",
+   "slug": "minnesota-vikings"
+  },
+  {
+   "id": "nfl-new-england-patriots",
+   "league": "NFL",
+   "team": "New England Patriots",
+   "slug": "new-england-patriots"
+  },
+  {
+   "id": "nfl-new-orleans-saints",
+   "league": "NFL",
+   "team": "New Orleans Saints",
+   "slug": "new-orleans-saints"
+  },
+  {
+   "id": "nfl-new-york-giants",
+   "league": "NFL",
+   "team": "New York Giants",
+   "slug": "new-york-giants"
+  },
+  {
+   "id": "nfl-new-york-jets",
+   "league": "NFL",
+   "team": "New York Jets",
+   "slug": "new-york-jets"
+  },
+  {
+   "id": "nfl-philadelphia-eagles",
+   "league": "NFL",
+   "team": "Philadelphia Eagles",
+   "slug": "philadelphia-eagles"
+  },
+  {
+   "id": "nfl-pittsburgh-steelers",
+   "league": "NFL",
+   "team": "Pittsburgh Steelers",
+   "slug": "pittsburgh-steelers"
+  },
+  {
+   "id": "nfl-san-francisco-49ers",
+   "league": "NFL",
+   "team": "San Francisco 49ers",
+   "slug": "san-francisco-49ers"
+  },
+  {
+   "id": "nfl-seattle-seahawks",
+   "league": "NFL",
+   "team": "Seattle Seahawks",
+   "slug": "seattle-seahawks"
+  },
+  {
+   "id": "nfl-tampa-bay-buccaneers",
+   "league": "NFL",
+   "team": "Tampa Bay Buccaneers",
+   "slug": "tampa-bay-buccaneers"
+  },
+  {
+   "id": "nfl-tennessee-titans",
+   "league": "NFL",
+   "team": "Tennessee Titans",
+   "slug": "tennessee-titans"
+  },
+  {
+   "id": "nfl-washington-commanders",
+   "league": "NFL",
+   "team": "Washington Commanders",
+   "slug": "washington-commanders"
+  }
+ ]
+}

@@ -72,6 +72,9 @@ export function ShopMenu({ onNavigate, id }: { onNavigate: () => void; id: strin
           Shop everything <ArrowIcon size={16} />
         </Link>
         <span className="flex items-center gap-6">
+          <Link href="/snapbacks" onClick={onNavigate} className="link font-semibold">
+            Classic snapbacks · 59 teams
+          </Link>
           <Link href="/deals" onClick={onNavigate} className="link font-semibold text-sign-deep">
             Limited-time deals
           </Link>
@@ -108,9 +111,12 @@ export function TeamsMenu({ onNavigate, id }: { onNavigate: () => void; id: stri
           </div>
         ))}
       </div>
-      <div className="shell border-t border-ink/10 py-3 text-sm">
+      <div className="shell flex items-center justify-between border-t border-ink/10 py-3 text-sm">
         <Link href="/teams" onClick={onNavigate} className="link inline-flex items-center gap-2 font-semibold">
           Browse all teams <ArrowIcon size={16} />
+        </Link>
+        <Link href="/snapbacks" onClick={onNavigate} className="link font-semibold">
+          Classic snapbacks for 29 MLB and 30 NFL teams
         </Link>
       </div>
     </motion.div>
