@@ -139,10 +139,10 @@ NFL,Chicago Bears,front,/assets/hats/nfl/chicago-bears/front.webp,NO
 NFL,Chicago Bears,back,/assets/hats/nfl/chicago-bears/back.webp,NO
 NFL,Chicago Bears,inside,/assets/hats/nfl/chicago-bears/inside.webp,NO
 NFL,Chicago Bears,side,/assets/hats/nfl/chicago-bears/side.webp,NO
-NFL,Cincinnati Bengals,front,/assets/hats/nfl/cincinnati-bengals/front.webp,NO
-NFL,Cincinnati Bengals,back,/assets/hats/nfl/cincinnati-bengals/back.webp,NO
-NFL,Cincinnati Bengals,inside,/assets/hats/nfl/cincinnati-bengals/inside.webp,NO
-NFL,Cincinnati Bengals,side,/assets/hats/nfl/cincinnati-bengals/side.webp,NO
+NFL,Cincinnati Bengals,front,/assets/hats/nfl/cincinnati-bengals/front.webp,YES
+NFL,Cincinnati Bengals,back,/assets/hats/nfl/cincinnati-bengals/back.webp,YES
+NFL,Cincinnati Bengals,inside,/assets/hats/nfl/cincinnati-bengals/inside.webp,YES
+NFL,Cincinnati Bengals,side,/assets/hats/nfl/cincinnati-bengals/side.webp,YES
 NFL,Cleveland Browns,front,/assets/hats/nfl/cleveland-browns/front.webp,NO
 NFL,Cleveland Browns,back,/assets/hats/nfl/cleveland-browns/back.webp,NO
 NFL,Cleveland Browns,inside,/assets/hats/nfl/cleveland-browns/inside.webp,NO
@@ -167,10 +167,10 @@ NFL,Indianapolis Colts,front,/assets/hats/nfl/indianapolis-colts/front.webp,NO
 NFL,Indianapolis Colts,back,/assets/hats/nfl/indianapolis-colts/back.webp,NO
 NFL,Indianapolis Colts,inside,/assets/hats/nfl/indianapolis-colts/inside.webp,NO
 NFL,Indianapolis Colts,side,/assets/hats/nfl/indianapolis-colts/side.webp,NO
-NFL,Kansas City Chiefs,front,/assets/hats/nfl/kansas-city-chiefs/front.webp,NO
-NFL,Kansas City Chiefs,back,/assets/hats/nfl/kansas-city-chiefs/back.webp,NO
-NFL,Kansas City Chiefs,inside,/assets/hats/nfl/kansas-city-chiefs/inside.webp,NO
-NFL,Kansas City Chiefs,side,/assets/hats/nfl/kansas-city-chiefs/side.webp,NO
+NFL,Kansas City Chiefs,front,/assets/hats/nfl/kansas-city-chiefs/front.webp,YES
+NFL,Kansas City Chiefs,back,/assets/hats/nfl/kansas-city-chiefs/back.webp,YES
+NFL,Kansas City Chiefs,inside,/assets/hats/nfl/kansas-city-chiefs/inside.webp,YES
+NFL,Kansas City Chiefs,side,/assets/hats/nfl/kansas-city-chiefs/side.webp,YES
 NFL,Las Vegas Raiders,front,/assets/hats/nfl/las-vegas-raiders/front.webp,NO
 NFL,Las Vegas Raiders,back,/assets/hats/nfl/las-vegas-raiders/back.webp,NO
 NFL,Las Vegas Raiders,inside,/assets/hats/nfl/las-vegas-raiders/inside.webp,NO
@@ -187,10 +187,10 @@ NFL,Miami Dolphins,front,/assets/hats/nfl/miami-dolphins/front.webp,NO
 NFL,Miami Dolphins,back,/assets/hats/nfl/miami-dolphins/back.webp,NO
 NFL,Miami Dolphins,inside,/assets/hats/nfl/miami-dolphins/inside.webp,NO
 NFL,Miami Dolphins,side,/assets/hats/nfl/miami-dolphins/side.webp,NO
-NFL,Minnesota Vikings,front,/assets/hats/nfl/minnesota-vikings/front.webp,NO
-NFL,Minnesota Vikings,back,/assets/hats/nfl/minnesota-vikings/back.webp,NO
-NFL,Minnesota Vikings,inside,/assets/hats/nfl/minnesota-vikings/inside.webp,NO
-NFL,Minnesota Vikings,side,/assets/hats/nfl/minnesota-vikings/side.webp,NO
+NFL,Minnesota Vikings,front,/assets/hats/nfl/minnesota-vikings/front.webp,YES
+NFL,Minnesota Vikings,back,/assets/hats/nfl/minnesota-vikings/back.webp,YES
+NFL,Minnesota Vikings,inside,/assets/hats/nfl/minnesota-vikings/inside.webp,YES
+NFL,Minnesota Vikings,side,/assets/hats/nfl/minnesota-vikings/side.webp,YES
 NFL,New England Patriots,front,/assets/hats/nfl/new-england-patriots/front.webp,NO
 NFL,New England Patriots,back,/assets/hats/nfl/new-england-patriots/back.webp,NO
 NFL,New England Patriots,inside,/assets/hats/nfl/new-england-patriots/inside.webp,NO
@@ -203,10 +203,10 @@ NFL,New York Giants,front,/assets/hats/nfl/new-york-giants/front.webp,NO
 NFL,New York Giants,back,/assets/hats/nfl/new-york-giants/back.webp,NO
 NFL,New York Giants,inside,/assets/hats/nfl/new-york-giants/inside.webp,NO
 NFL,New York Giants,side,/assets/hats/nfl/new-york-giants/side.webp,NO
-NFL,New York Jets,front,/assets/hats/nfl/new-york-jets/front.webp,NO
-NFL,New York Jets,back,/assets/hats/nfl/new-york-jets/back.webp,NO
-NFL,New York Jets,inside,/assets/hats/nfl/new-york-jets/inside.webp,NO
-NFL,New York Jets,side,/assets/hats/nfl/new-york-jets/side.webp,NO
+NFL,New York Jets,front,/assets/hats/nfl/new-york-jets/front.webp,YES
+NFL,New York Jets,back,/assets/hats/nfl/new-york-jets/back.webp,YES
+NFL,New York Jets,inside,/assets/hats/nfl/new-york-jets/inside.webp,YES
+NFL,New York Jets,side,/assets/hats/nfl/new-york-jets/side.webp,YES
 NFL,Philadelphia Eagles,front,/assets/hats/nfl/philadelphia-eagles/front.webp,NO
 NFL,Philadelphia Eagles,back,/assets/hats/nfl/philadelphia-eagles/back.webp,NO
 NFL,Philadelphia Eagles,inside,/assets/hats/nfl/philadelphia-eagles/inside.webp,NO
@@ -223,15 +223,15 @@ NFL,Seattle Seahawks,front,/assets/hats/nfl/seattle-seahawks/front.webp,NO
 NFL,Seattle Seahawks,back,/assets/hats/nfl/seattle-seahawks/back.webp,NO
 NFL,Seattle Seahawks,inside,/assets/hats/nfl/seattle-seahawks/inside.webp,NO
 NFL,Seattle Seahawks,side,/assets/hats/nfl/seattle-seahawks/side.webp,NO
-NFL,Tampa Bay Buccaneers,front,/assets/hats/nfl/tampa-bay-buccaneers/front.webp,NO
-NFL,Tampa Bay Buccaneers,back,/assets/hats/nfl/tampa-bay-buccaneers/back.webp,NO
-NFL,Tampa Bay Buccaneers,inside,/assets/hats/nfl/tampa-bay-buccaneers/inside.webp,NO
-NFL,Tampa Bay Buccaneers,side,/assets/hats/nfl/tampa-bay-buccaneers/side.webp,NO
+NFL,Tampa Bay Buccaneers,front,/assets/hats/nfl/tampa-bay-buccaneers/front.webp,YES
+NFL,Tampa Bay Buccaneers,back,/assets/hats/nfl/tampa-bay-buccaneers/back.webp,YES
+NFL,Tampa Bay Buccaneers,inside,/assets/hats/nfl/tampa-bay-buccaneers/inside.webp,YES
+NFL,Tampa Bay Buccaneers,side,/assets/hats/nfl/tampa-bay-buccaneers/side.webp,YES
 NFL,Tennessee Titans,front,/assets/hats/nfl/tennessee-titans/front.webp,NO
 NFL,Tennessee Titans,back,/assets/hats/nfl/tennessee-titans/back.webp,NO
 NFL,Tennessee Titans,inside,/assets/hats/nfl/tennessee-titans/inside.webp,NO
 NFL,Tennessee Titans,side,/assets/hats/nfl/tennessee-titans/side.webp,NO
-NFL,Washington Commanders,front,/assets/hats/nfl/washington-commanders/front.webp,NO
-NFL,Washington Commanders,back,/assets/hats/nfl/washington-commanders/back.webp,NO
-NFL,Washington Commanders,inside,/assets/hats/nfl/washington-commanders/inside.webp,NO
-NFL,Washington Commanders,side,/assets/hats/nfl/washington-commanders/side.webp,NO
+NFL,Washington Commanders,front,/assets/hats/nfl/washington-commanders/front.webp,YES
+NFL,Washington Commanders,back,/assets/hats/nfl/washington-commanders/back.webp,YES
+NFL,Washington Commanders,inside,/assets/hats/nfl/washington-commanders/inside.webp,YES
+NFL,Washington Commanders,side,/assets/hats/nfl/washington-commanders/side.webp,YES
