@@ -1,60 +1,60 @@
 league,team,view,expected_path,present
-MLB,Arizona Diamondbacks,front,/assets/hats/mlb/arizona-diamondbacks/front.webp,NO
-MLB,Arizona Diamondbacks,back,/assets/hats/mlb/arizona-diamondbacks/back.webp,NO
-MLB,Arizona Diamondbacks,inside,/assets/hats/mlb/arizona-diamondbacks/inside.webp,NO
-MLB,Arizona Diamondbacks,side,/assets/hats/mlb/arizona-diamondbacks/side.webp,NO
-MLB,Athletics (Oakland A’s),front,/assets/hats/mlb/oakland-athletics/front.webp,NO
-MLB,Athletics (Oakland A’s),back,/assets/hats/mlb/oakland-athletics/back.webp,NO
-MLB,Athletics (Oakland A’s),inside,/assets/hats/mlb/oakland-athletics/inside.webp,NO
-MLB,Athletics (Oakland A’s),side,/assets/hats/mlb/oakland-athletics/side.webp,NO
-MLB,Atlanta Braves,front,/assets/hats/mlb/atlanta-braves/front.webp,NO
-MLB,Atlanta Braves,back,/assets/hats/mlb/atlanta-braves/back.webp,NO
-MLB,Atlanta Braves,inside,/assets/hats/mlb/atlanta-braves/inside.webp,NO
-MLB,Atlanta Braves,side,/assets/hats/mlb/atlanta-braves/side.webp,NO
-MLB,Baltimore Orioles,front,/assets/hats/mlb/baltimore-orioles/front.webp,NO
-MLB,Baltimore Orioles,back,/assets/hats/mlb/baltimore-orioles/back.webp,NO
-MLB,Baltimore Orioles,inside,/assets/hats/mlb/baltimore-orioles/inside.webp,NO
-MLB,Baltimore Orioles,side,/assets/hats/mlb/baltimore-orioles/side.webp,NO
-MLB,Boston Red Sox,front,/assets/hats/mlb/boston-red-sox/front.webp,NO
-MLB,Boston Red Sox,back,/assets/hats/mlb/boston-red-sox/back.webp,NO
-MLB,Boston Red Sox,inside,/assets/hats/mlb/boston-red-sox/inside.webp,NO
-MLB,Boston Red Sox,side,/assets/hats/mlb/boston-red-sox/side.webp,NO
-MLB,Chicago Cubs,front,/assets/hats/mlb/chicago-cubs/front.webp,NO
-MLB,Chicago Cubs,back,/assets/hats/mlb/chicago-cubs/back.webp,NO
-MLB,Chicago Cubs,inside,/assets/hats/mlb/chicago-cubs/inside.webp,NO
-MLB,Chicago Cubs,side,/assets/hats/mlb/chicago-cubs/side.webp,NO
-MLB,Chicago White Sox,front,/assets/hats/mlb/chicago-white-sox/front.webp,NO
-MLB,Chicago White Sox,back,/assets/hats/mlb/chicago-white-sox/back.webp,NO
-MLB,Chicago White Sox,inside,/assets/hats/mlb/chicago-white-sox/inside.webp,NO
-MLB,Chicago White Sox,side,/assets/hats/mlb/chicago-white-sox/side.webp,NO
-MLB,Cincinnati Reds,front,/assets/hats/mlb/cincinnati-reds/front.webp,NO
-MLB,Cincinnati Reds,back,/assets/hats/mlb/cincinnati-reds/back.webp,NO
-MLB,Cincinnati Reds,inside,/assets/hats/mlb/cincinnati-reds/inside.webp,NO
-MLB,Cincinnati Reds,side,/assets/hats/mlb/cincinnati-reds/side.webp,NO
-MLB,Cleveland Guardians,front,/assets/hats/mlb/cleveland-guardians/front.webp,NO
-MLB,Cleveland Guardians,back,/assets/hats/mlb/cleveland-guardians/back.webp,NO
-MLB,Cleveland Guardians,inside,/assets/hats/mlb/cleveland-guardians/inside.webp,NO
-MLB,Cleveland Guardians,side,/assets/hats/mlb/cleveland-guardians/side.webp,NO
-MLB,Colorado Rockies,front,/assets/hats/mlb/colorado-rockies/front.webp,NO
-MLB,Colorado Rockies,back,/assets/hats/mlb/colorado-rockies/back.webp,NO
-MLB,Colorado Rockies,inside,/assets/hats/mlb/colorado-rockies/inside.webp,NO
-MLB,Colorado Rockies,side,/assets/hats/mlb/colorado-rockies/side.webp,NO
-MLB,Detroit Tigers,front,/assets/hats/mlb/detroit-tigers/front.webp,NO
-MLB,Detroit Tigers,back,/assets/hats/mlb/detroit-tigers/back.webp,NO
-MLB,Detroit Tigers,inside,/assets/hats/mlb/detroit-tigers/inside.webp,NO
-MLB,Detroit Tigers,side,/assets/hats/mlb/detroit-tigers/side.webp,NO
-MLB,Houston Astros,front,/assets/hats/mlb/houston-astros/front.webp,NO
-MLB,Houston Astros,back,/assets/hats/mlb/houston-astros/back.webp,NO
-MLB,Houston Astros,inside,/assets/hats/mlb/houston-astros/inside.webp,NO
-MLB,Houston Astros,side,/assets/hats/mlb/houston-astros/side.webp,NO
+MLB,Arizona Diamondbacks,front,/assets/hats/mlb/arizona-diamondbacks/front.webp,YES
+MLB,Arizona Diamondbacks,back,/assets/hats/mlb/arizona-diamondbacks/back.webp,YES
+MLB,Arizona Diamondbacks,inside,/assets/hats/mlb/arizona-diamondbacks/inside.webp,YES
+MLB,Arizona Diamondbacks,side,/assets/hats/mlb/arizona-diamondbacks/side.webp,YES
+MLB,Athletics (Oakland A’s),front,/assets/hats/mlb/oakland-athletics/front.webp,YES
+MLB,Athletics (Oakland A’s),back,/assets/hats/mlb/oakland-athletics/back.webp,YES
+MLB,Athletics (Oakland A’s),inside,/assets/hats/mlb/oakland-athletics/inside.webp,YES
+MLB,Athletics (Oakland A’s),side,/assets/hats/mlb/oakland-athletics/side.webp,YES
+MLB,Atlanta Braves,front,/assets/hats/mlb/atlanta-braves/front.webp,YES
+MLB,Atlanta Braves,back,/assets/hats/mlb/atlanta-braves/back.webp,YES
+MLB,Atlanta Braves,inside,/assets/hats/mlb/atlanta-braves/inside.webp,YES
+MLB,Atlanta Braves,side,/assets/hats/mlb/atlanta-braves/side.webp,YES
+MLB,Baltimore Orioles,front,/assets/hats/mlb/baltimore-orioles/front.webp,YES
+MLB,Baltimore Orioles,back,/assets/hats/mlb/baltimore-orioles/back.webp,YES
+MLB,Baltimore Orioles,inside,/assets/hats/mlb/baltimore-orioles/inside.webp,YES
+MLB,Baltimore Orioles,side,/assets/hats/mlb/baltimore-orioles/side.webp,YES
+MLB,Boston Red Sox,front,/assets/hats/mlb/boston-red-sox/front.webp,YES
+MLB,Boston Red Sox,back,/assets/hats/mlb/boston-red-sox/back.webp,YES
+MLB,Boston Red Sox,inside,/assets/hats/mlb/boston-red-sox/inside.webp,YES
+MLB,Boston Red Sox,side,/assets/hats/mlb/boston-red-sox/side.webp,YES
+MLB,Chicago Cubs,front,/assets/hats/mlb/chicago-cubs/front.webp,YES
+MLB,Chicago Cubs,back,/assets/hats/mlb/chicago-cubs/back.webp,YES
+MLB,Chicago Cubs,inside,/assets/hats/mlb/chicago-cubs/inside.webp,YES
+MLB,Chicago Cubs,side,/assets/hats/mlb/chicago-cubs/side.webp,YES
+MLB,Chicago White Sox,front,/assets/hats/mlb/chicago-white-sox/front.webp,YES
+MLB,Chicago White Sox,back,/assets/hats/mlb/chicago-white-sox/back.webp,YES
+MLB,Chicago White Sox,inside,/assets/hats/mlb/chicago-white-sox/inside.webp,YES
+MLB,Chicago White Sox,side,/assets/hats/mlb/chicago-white-sox/side.webp,YES
+MLB,Cincinnati Reds,front,/assets/hats/mlb/cincinnati-reds/front.webp,YES
+MLB,Cincinnati Reds,back,/assets/hats/mlb/cincinnati-reds/back.webp,YES
+MLB,Cincinnati Reds,inside,/assets/hats/mlb/cincinnati-reds/inside.webp,YES
+MLB,Cincinnati Reds,side,/assets/hats/mlb/cincinnati-reds/side.webp,YES
+MLB,Cleveland Guardians,front,/assets/hats/mlb/cleveland-guardians/front.webp,YES
+MLB,Cleveland Guardians,back,/assets/hats/mlb/cleveland-guardians/back.webp,YES
+MLB,Cleveland Guardians,inside,/assets/hats/mlb/cleveland-guardians/inside.webp,YES
+MLB,Cleveland Guardians,side,/assets/hats/mlb/cleveland-guardians/side.webp,YES
+MLB,Colorado Rockies,front,/assets/hats/mlb/colorado-rockies/front.webp,YES
+MLB,Colorado Rockies,back,/assets/hats/mlb/colorado-rockies/back.webp,YES
+MLB,Colorado Rockies,inside,/assets/hats/mlb/colorado-rockies/inside.webp,YES
+MLB,Colorado Rockies,side,/assets/hats/mlb/colorado-rockies/side.webp,YES
+MLB,Detroit Tigers,front,/assets/hats/mlb/detroit-tigers/front.webp,YES
+MLB,Detroit Tigers,back,/assets/hats/mlb/detroit-tigers/back.webp,YES
+MLB,Detroit Tigers,inside,/assets/hats/mlb/detroit-tigers/inside.webp,YES
+MLB,Detroit Tigers,side,/assets/hats/mlb/detroit-tigers/side.webp,YES
+MLB,Houston Astros,front,/assets/hats/mlb/houston-astros/front.webp,YES
+MLB,Houston Astros,back,/assets/hats/mlb/houston-astros/back.webp,YES
+MLB,Houston Astros,inside,/assets/hats/mlb/houston-astros/inside.webp,YES
+MLB,Houston Astros,side,/assets/hats/mlb/houston-astros/side.webp,YES
 MLB,Kansas City Royals,front,/assets/hats/mlb/kansas-city-royals/front.webp,YES
 MLB,Kansas City Royals,back,/assets/hats/mlb/kansas-city-royals/back.webp,YES
 MLB,Kansas City Royals,inside,/assets/hats/mlb/kansas-city-royals/inside.webp,YES
 MLB,Kansas City Royals,side,/assets/hats/mlb/kansas-city-royals/side.webp,YES
-MLB,Los Angeles Angels,front,/assets/hats/mlb/los-angeles-angels/front.webp,NO
-MLB,Los Angeles Angels,back,/assets/hats/mlb/los-angeles-angels/back.webp,NO
-MLB,Los Angeles Angels,inside,/assets/hats/mlb/los-angeles-angels/inside.webp,NO
-MLB,Los Angeles Angels,side,/assets/hats/mlb/los-angeles-angels/side.webp,NO
+MLB,Los Angeles Angels,front,/assets/hats/mlb/los-angeles-angels/front.webp,YES
+MLB,Los Angeles Angels,back,/assets/hats/mlb/los-angeles-angels/back.webp,YES
+MLB,Los Angeles Angels,inside,/assets/hats/mlb/los-angeles-angels/inside.webp,YES
+MLB,Los Angeles Angels,side,/assets/hats/mlb/los-angeles-angels/side.webp,YES
 MLB,Los Angeles Dodgers,front,/assets/hats/mlb/los-angeles-dodgers/front.webp,NO
 MLB,Los Angeles Dodgers,back,/assets/hats/mlb/los-angeles-dodgers/back.webp,NO
 MLB,Los Angeles Dodgers,inside,/assets/hats/mlb/los-angeles-dodgers/inside.webp,NO
