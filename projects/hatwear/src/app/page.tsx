@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Hero } from "@/components/home/Hero";
 import { FeatureStrip } from "@/components/home/FeatureStrip";
@@ -19,7 +20,7 @@ const NAVY = "#0b1f3a";
 const ROYAL = "#2456c4";
 const WHITE = "#ffffff";
 
-const STYLES: { label: string; href: string; types: ProductType[]; art: { type: ProductType; colors: ArtColors; mark: string }; tone: "dark" | "felt" | "royal" | "chalk"; blurb: string }[] = [
+const STYLES: { label: string; href: string; types: ProductType[]; art: { type: ProductType; colors: ArtColors; mark: string }; photo?: { src: string; alt: string }; countLabel?: string; tone: "dark" | "felt" | "royal" | "chalk"; blurb: string }[] = [
   {
     label: "Fitted Hats",
     href: "/shop?type=fitted",
@@ -30,10 +31,12 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
   },
   {
     label: "Snapbacks",
-    href: "/shop?type=snapback",
+    href: "/snapbacks",
     types: ["snapback"],
     art: { type: "snapback", mark: "209", colors: { crown: WHITE, visor: NAVY, under: "#24406b", button: NAVY, mark: NAVY } },
-    tone: "felt",
+    photo: { src: "/assets/hats/nfl/san-francisco-49ers/front.webp", alt: "San Francisco 49ers classic snapback" },
+    countLabel: "59 teams",
+    tone: "chalk",
     blurb: "Flat brim, one size, snap closure.",
   },
   {
@@ -41,7 +44,7 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
     href: "/shop?type=trucker",
     types: ["trucker"],
     art: { type: "trucker", mark: "HW", colors: { crown: NAVY, visor: NAVY, under: "#24406b", button: NAVY, mark: WHITE, trim: WHITE } },
-    tone: "chalk",
+    tone: "felt",
     blurb: "Foam front, mesh back.",
   },
   {
@@ -120,6 +123,11 @@ export default function Home() {
                   <h3 className={`uppercase italic ${i === 0 ? "text-[clamp(2.2rem,1.6rem+2.6vw,4rem)]" : "text-[1.08rem] max-sm:[font-variation-settings:'wdth'_100] min-[400px]:text-[1.2rem] sm:text-[clamp(1.35rem,1rem+1.1vw,1.95rem)]"}`}>{s.label}</h3>
                   <p className={`mt-2 max-w-[13rem] text-sm ${s.tone === "dark" ? "text-steel" : s.tone === "royal" ? "text-white/85" : "text-graphite"}`}>{s.blurb}</p>
                 </div>
+                {s.photo ? (
+                  <div className="pointer-events-none absolute bottom-[18%] -right-[3%] w-[64%] transition-transform lg:bottom-[14%] duration-500 ease-[cubic-bezier(.25,1,.5,1)] group-hover:-translate-y-2 group-hover:scale-[1.03]">
+                    <Image src={s.photo.src} alt={s.photo.alt} width={760} height={760} sizes="(min-width: 1024px) 18vw, 36vw" className="h-auto w-full mix-blend-multiply" />
+                  </div>
+                ) : (
                 <div
                   className={`pointer-events-none absolute transition-transform duration-500 ease-[cubic-bezier(.25,1,.5,1)] group-hover:-translate-y-2 group-hover:scale-[1.03] ${
                     i === 0 ? "-bottom-[12%] -right-[6%] w-[66%] sm:w-[58%] lg:-bottom-[6%] lg:-right-[8%] lg:w-[86%]" : "-bottom-[10%] -right-[12%] w-[78%]"
@@ -127,8 +135,9 @@ export default function Home() {
                 >
                   <ProductArt {...s.art} className="w-full" />
                 </div>
+                )}
                 <span className="relative z-10 inline-flex items-center gap-2 text-sm font-semibold">
-                  {countFor(s.types)} styles <ArrowIcon size={16} className="transition-transform group-hover:translate-x-1" />
+                  {s.countLabel ?? `${countFor(s.types)} styles`} <ArrowIcon size={16} className="transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
             </RevealImage>

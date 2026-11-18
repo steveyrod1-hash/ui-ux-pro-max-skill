@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ShopView } from "@/components/shop/ShopView";
+import { getClassicSnapbacks, SNAPBACK_PRICE } from "@/lib/classic-snapbacks";
 
 export const metadata: Metadata = {
   title: "Shop hats, team gear and streetwear",
@@ -25,9 +26,10 @@ function ShopSkeleton() {
 }
 
 export default function ShopPage() {
+  const snapbacks = getClassicSnapbacks().map((h) => ({ slug: h.slug, team: h.team, league: h.league, front: h.photos.front, photoCount: 4 - h.missing.length }));
   return (
     <Suspense fallback={<ShopSkeleton />}>
-      <ShopView />
+      <ShopView snapbacks={snapbacks} snapbackPrice={SNAPBACK_PRICE} />
     </Suspense>
   );
 }
