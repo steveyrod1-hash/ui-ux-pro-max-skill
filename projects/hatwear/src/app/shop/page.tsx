@@ -28,7 +28,7 @@ function ShopSkeleton() {
 
 export default function ShopPage() {
   const snapbacks = getClassicSnapbacks().map((h) => ({ slug: h.slug, team: h.team, league: h.league, front: h.photos.front, photoCount: 4 - h.missing.length }));
-  const beanies = getTeamBeanies().map((b) => ({ slug: b.slug, team: b.team, name: b.name, league: b.league, front: b.photos.front, photoCount: 4 }));
+  const beanies = getTeamBeanies().map((b) => ({ slug: b.slug, team: b.team, name: b.name, league: b.league, front: b.photos.front, photoCount: Object.values(b.photos).filter(Boolean).length }));
   return (
     <Suspense fallback={<ShopSkeleton />}>
       <ShopView snapbacks={snapbacks} snapbackPrice={SNAPBACK_PRICE} beanies={beanies} beaniePrice={BEANIE_PRICE} />

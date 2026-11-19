@@ -23,9 +23,9 @@ export const BEANIE_PRICE: number | null = data.price;
 export interface TeamBeanie {
   slug: string;
   team: string;
-  league: "NFL" | "MLB";
+  league: "NFL" | "NBA" | "MLB";
   name: string;
-  pom: boolean;
+  pom?: boolean;
   description: string;
   photos: Record<BeanieView, { src: string; alt: string } | null>;
 }
@@ -43,7 +43,7 @@ export function getTeamBeanies(): TeamBeanie[] {
       }),
     ) as TeamBeanie["photos"];
     return { ...b, photos };
-  });
+  }).sort((a, b) => Number(!a.photos.front) - Number(!b.photos.front)); // photographed styles first
   return cache;
 }
 

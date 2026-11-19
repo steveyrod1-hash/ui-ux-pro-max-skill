@@ -22,7 +22,7 @@ export default async function BeaniePage({ params }: { params: Promise<{ slug: s
   const { slug } = await params;
   const b = getTeamBeanie(slug);
   if (!b) notFound();
-  const others = getTeamBeanies().filter((x) => x.slug !== b.slug);
+  const others = getTeamBeanies().filter((x) => x.slug !== b.slug && x.league === b.league);
   const views = BEANIE_VIEWS.map((v) => ({ id: v.id, label: v.label, photo: b.photos[v.id] }));
 
   return (
@@ -34,10 +34,10 @@ export default async function BeaniePage({ params }: { params: Promise<{ slug: s
         <SnapbackGallery name={b.name} views={views} />
         <div>
           <p className="text-sm text-stone">
-            {b.league} · {b.team} · {b.pom ? "Pom knit" : "Cuffed knit"}
+            {b.league} · {b.team} · {b.pom === undefined ? "Knit beanie" : b.pom ? "Pom knit" : "Cuffed knit"}
           </p>
           <h1 className="mt-2 text-[clamp(2.2rem,1.5rem+2.4vw,3.6rem)] uppercase">{b.name}</h1>
-          <p className="mt-3 font-display text-3xl font-black tabular-nums" data-testid="beanie-price">
+          <p className={`mt-3 font-display font-black tabular-nums ${BEANIE_PRICE != null ? "text-4xl" : "text-xl uppercase"}`} data-testid="beanie-price">
             {BEANIE_PRICE != null ? money(BEANIE_PRICE) : "Ask in store for price"}
           </p>
           <div className="mt-5 rounded-[var(--radius-card)] bg-felt p-5">
@@ -60,7 +60,7 @@ export default async function BeaniePage({ params }: { params: Promise<{ slug: s
       </div>
       {others.length > 0 && (
         <section className="mt-20" aria-labelledby="more-title">
-          <h2 id="more-title" className="text-[clamp(2rem,1.5rem+2.4vw,3.4rem)] uppercase">More team beanies</h2>
+          <h2 id="more-title" className="text-[clamp(2rem,1.5rem+2.4vw,3.4rem)] uppercase">More {b.league} beanies</h2>
           <ul className="mt-6 flex flex-wrap gap-2">
             {others.map((x) => (
               <li key={x.slug}>

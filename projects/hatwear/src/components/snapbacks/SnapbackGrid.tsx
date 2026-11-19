@@ -7,29 +7,29 @@ import { SearchIcon } from "../Icons";
 import { money } from "@/lib/format";
 import { PhotoPlaceholder } from "./SnapbackGallery";
 
-export type SnapCard = { slug: string; team: string; league: "MLB" | "NFL"; front: { src: string; alt: string } | null; photoCount: number; name?: string };
+export type SnapCard = { slug: string; team: string; league: "MLB" | "NFL" | "NBA"; front: { src: string; alt: string } | null; photoCount: number; name?: string };
 
-const TABS = ["All", "MLB", "NFL"] as const;
 
 export function SnapbackGrid({ hats, price, basePath = "/snapbacks", kind = "Classic snapback", tabs = true }: { hats: SnapCard[]; price: number | null; basePath?: string; kind?: string; tabs?: boolean }) {
-  const [tab, setTab] = useState<(typeof TABS)[number]>("All");
+  const TABS = ["All", ...(["MLB", "NFL", "NBA"] as const).filter((l) => hats.some((h) => h.league === l))];
+  const [tab, setTab] = useState<string>("All");
   const [q, setQ] = useState("");
   // Deep link: /snapbacks?league=NFL
   useEffect(() => {
     const l = new URLSearchParams(window.location.search).get("league")?.toUpperCase();
-    if (l === "MLB" || l === "NFL") setTab(l);
+    if (l === "MLB" || l === "NFL" || l === "NBA") setTab(l);
   }, []);
   const shown = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return hats.filter((h) => (tab === "All" || h.league === tab) && (!needle || `${h.team} ${h.name ?? ""}`.toLowerCase().includes(needle)));
   }, [hats, tab, q]);
-  const count = (t: (typeof TABS)[number]) => (t === "All" ? hats.length : hats.filter((h) => h.league === t).length);
+  const count = (t: string) => (t === "All" ? hats.length : hats.filter((h) => h.league === t).length);
 
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         {tabs && (
-        <div className="grid w-full grid-cols-3 rounded-[var(--radius-btn)] bg-felt p-1 sm:inline-flex sm:w-auto" role="tablist" aria-label="League">
+        <div className="grid w-full auto-cols-fr grid-flow-col rounded-[var(--radius-btn)] bg-felt p-1 sm:inline-flex sm:w-auto" role="tablist" aria-label="League">
           {TABS.map((t) => (
             <button
               key={t}
@@ -72,8 +72,8 @@ export function SnapbackGrid({ hats, price, basePath = "/snapbacks", kind = "Cla
                   <span className="text-[0.76rem] text-stone">{kind}</span>
                   <span className="mt-0.5 font-bold leading-snug group-hover:underline">{h.name ?? h.team}</span>
                   <span className="mt-auto flex items-baseline justify-between gap-2 pt-1.5">
-                    <span className="font-semibold tabular-nums">{price != null ? money(price) : "Ask in store"}</span>
-                    <span className="text-[0.76rem] text-stone">{h.photoCount === 4 ? "4 photos" : `${h.photoCount}/4 photos`}</span>
+                    <span className="whitespace-nowrap font-semibold tabular-nums">{price != null ? money(price) : "Ask in store"}</span>
+                    {h.photoCount > 0 && <span className="whitespace-nowrap text-[0.76rem] text-stone">{h.photoCount === 4 ? "4 photos" : `${h.photoCount}/4 photos`}</span>}
                   </span>
                 </span>
               </Link>
