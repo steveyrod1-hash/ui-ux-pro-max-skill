@@ -154,7 +154,7 @@ function FilterPanel({
   );
 }
 
-export function ShopView({ snapbacks = [], snapbackPrice = 0 }: { snapbacks?: SnapCard[]; snapbackPrice?: number }) {
+export function ShopView({ snapbacks = [], snapbackPrice = 0, beanies = [], beaniePrice = null }: { snapbacks?: SnapCard[]; snapbackPrice?: number; beanies?: SnapCard[]; beaniePrice?: number | null }) {
   const sp = useSearchParams();
   const pathname = usePathname();
   const [pending, startTransition] = useTransition();
@@ -243,6 +243,9 @@ export function ShopView({ snapbacks = [], snapbackPrice = 0 }: { snapbacks?: Sn
       </div>
       {(f.type.includes("snapback") || f.style.includes("snapback")) && snapbacks.length > 0 && (
         <ClassicSnapbackStrip hats={snapbacks} price={snapbackPrice} league={f.league} q={f.q} />
+      )}
+      {(f.type.includes("beanie") || f.style.some((s) => STYLE_BY_ID[s]?.type === "beanie")) && beanies.length > 0 && (
+        <ClassicSnapbackStrip hats={beanies} price={beaniePrice} league={f.league} q={f.q} basePath="/beanies" title="Team beanies" kind="Beanie" allLabel={`All ${beanies.length} beanies`} />
       )}
       {DEMO_CATALOG && (
         <p className="mb-6 rounded-sm bg-felt px-4 py-3 text-sm text-graphite">

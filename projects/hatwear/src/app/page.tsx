@@ -52,7 +52,8 @@ const STYLES: { label: string; href: string; types: ProductType[]; art: { type: 
     href: "/shop?type=beanie",
     types: ["beanie"],
     art: { type: "beanie", mark: "HATWEAR", colors: { crown: WHITE, visor: WHITE, under: WHITE, button: WHITE, mark: NAVY, trim: "#e3e9f2" } },
-    tone: "royal",
+    photo: { src: "/assets/beanies/49ers-striped-pom-knit/front.webp", alt: "San Francisco 49ers striped pom knit beanie" },
+    tone: "chalk",
     blurb: "Cuffed rib knits.",
   },
   {

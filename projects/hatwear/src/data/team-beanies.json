@@ -1,0 +1,12 @@
+{
+ "collection": "Team Beanies",
+ "price": null,
+ "beanies": [
+  { "slug": "49ers-sport-pom-knit-gold-cuff", "team": "San Francisco 49ers", "league": "NFL", "name": "49ers Sport Pom Knit, Gold Cuff", "pom": true, "description": "Red crown, heather grey band with 49ERS knit in, gold cuff with an embroidered SF patch and a red pom." },
+  { "slug": "49ers-sport-pom-knit-black-cuff", "team": "San Francisco 49ers", "league": "NFL", "name": "49ers Sport Pom Knit, Black Cuff", "pom": true, "description": "Red crown, heather grey band with 49ERS knit in, black cuff with an embroidered SF patch and a red pom." },
+  { "slug": "49ers-striped-pom-knit", "team": "San Francisco 49ers", "league": "NFL", "name": "49ers Striped Pom Knit", "pom": true, "description": "Red knit with a black 49ERS band between cream stripes, an embroidered SF patch on the cuff and a removable red pom." },
+  { "slug": "49ers-san-francisco-cuff-knit", "team": "San Francisco 49ers", "league": "NFL", "name": "49ers San Francisco Cuff Knit", "pom": false, "description": "Red cuffed knit with SAN FRANCISCO knit in gold, gold and white stripes, and an embroidered SF patch." },
+  { "slug": "49ers-ribbed-patch-cuff-knit", "team": "San Francisco 49ers", "league": "NFL", "name": "49ers Ribbed Patch Cuff Knit", "pom": false, "description": "Chunky red rib knit with a round San Francisco 49ers patch on the cuff." },
+  { "slug": "49ers-waffle-cuff-knit", "team": "San Francisco 49ers", "league": "NFL", "name": "49ers Waffle Cuff Knit", "pom": false, "description": "Red waffle-knit crown with a black cuff and an embroidered SF patch." }
+ ]
+}
