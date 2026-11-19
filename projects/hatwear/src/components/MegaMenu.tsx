@@ -75,6 +75,9 @@ export function ShopMenu({ onNavigate, id }: { onNavigate: () => void; id: strin
           <Link href="/snapbacks" onClick={onNavigate} className="link font-semibold">
             Classic snapbacks · 59 teams
           </Link>
+          <Link href="/beanies" onClick={onNavigate} className="link font-semibold">
+            Team beanies
+          </Link>
           <Link href="/deals" onClick={onNavigate} className="link font-semibold text-sign-deep">
             Limited-time deals
           </Link>

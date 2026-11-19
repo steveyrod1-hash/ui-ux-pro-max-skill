@@ -72,6 +72,9 @@ function MobileShopMenu({ onNavigate }: { onNavigate?: () => void }) {
       <Link href="/snapbacks" onClick={onNavigate} className="flex min-h-11 items-center justify-between rounded-[var(--radius-btn)] border border-bone/25 px-4 font-semibold hover:border-bone">
         Classic snapbacks · 59 teams <ArrowIcon size={16} />
       </Link>
+      <Link href="/beanies" onClick={onNavigate} className="flex min-h-11 items-center justify-between rounded-[var(--radius-btn)] border border-bone/25 px-4 font-semibold hover:border-bone">
+        Team beanies <ArrowIcon size={16} />
+      </Link>
       <Link href="/shop" onClick={onNavigate} className="link inline-flex items-center gap-2 font-semibold">
         Shop everything <ArrowIcon size={16} />
       </Link>

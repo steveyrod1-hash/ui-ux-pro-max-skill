@@ -325,6 +325,19 @@ const browser = await chromium.launch();
     expect((await page.locator('[data-testid="shop-snapbacks"]').count()) === 0, "strip should not show on fitted");
   });
 
+  await check("team beanies: six 49ers beanies with four-view galleries, shown in the shop", async () => {
+    await page.goto(BASE + "/beanies", { waitUntil: "networkidle" });
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 6, "expected 6 beanies");
+    await page.goto(BASE + "/beanies/49ers-waffle-cuff-knit", { waitUntil: "networkidle" });
+    const tabs = page.locator('[role="tablist"][aria-label="Choose a view"] [role="tab"]');
+    expect((await tabs.count()) === 4, "expected 4 thumbnails");
+    expect((await page.locator('img[src*="assets%2Fbeanies"], img[src*="/assets/beanies/"]').count()) >= 4, "beanie photos missing");
+    await page.click('button[aria-label="Next view"]');
+    await page.waitForFunction(() => document.querySelector('[data-testid="view-label"]').textContent.includes("Back"));
+    await page.goto(BASE + "/shop?type=beanie", { waitUntil: "networkidle" });
+    expect((await page.locator('[data-testid="shop-beanies"] a[href^="/beanies/"]').count()) >= 6, "beanie strip missing in shop");
+  });
+
   await check("snapback gallery: four views, thumbnails and arrows change the main image", async () => {
     await page.goto(BASE + "/snapbacks/kansas-city-royals", { waitUntil: "networkidle" });
     const tabs = page.locator('[role="tablist"][aria-label="Choose a view"] [role="tab"]');
