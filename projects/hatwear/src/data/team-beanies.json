@@ -51,6 +51,46 @@
    "description": "Red waffle-knit crown with a black cuff and an embroidered SF patch."
   },
   {
+   "slug": "49ers-red-black-cuff-knit",
+   "team": "San Francisco 49ers",
+   "league": "NFL",
+   "name": "49ers Red and Black Cuff Knit",
+   "pom": false,
+   "description": "Red ribbed crown with a black cuff and an embroidered SF patch."
+  },
+  {
+   "slug": "49ers-black-band-pom-knit",
+   "team": "San Francisco 49ers",
+   "league": "NFL",
+   "name": "49ers Black Band Pom Knit",
+   "pom": true,
+   "description": "Red knit with 49ERS on a black band between gold stripes, a black cuff with the SF patch and a red and black pom."
+  },
+  {
+   "slug": "49ers-grey-crown-pom-knit",
+   "team": "San Francisco 49ers",
+   "league": "NFL",
+   "name": "49ers Grey Crown Pom Knit",
+   "pom": true,
+   "description": "Grey crown, red body with 49ERS knit in white between white stripes, the SF patch on the cuff and a red pom."
+  },
+  {
+   "slug": "49ers-gold-stripe-cuff-knit",
+   "team": "San Francisco 49ers",
+   "league": "NFL",
+   "name": "49ers Gold Stripe Cuff Knit",
+   "pom": false,
+   "description": "Red cuffed knit with a gold band between white stripes and the SF patch on the cuff."
+  },
+  {
+   "slug": "49ers-double-stripe-cuff-knit",
+   "team": "San Francisco 49ers",
+   "league": "NFL",
+   "name": "49ers Double Gold Stripe Cuff Knit",
+   "pom": false,
+   "description": "Red cuffed knit with two gold bands and white stripes, and the SF patch on the cuff."
+  },
+  {
    "slug": "arizona-cardinals-beanie",
    "team": "Arizona Cardinals",
    "league": "NFL",
@@ -110,36 +150,105 @@
    "slug": "kansas-city-chiefs-beanie",
    "team": "Kansas City Chiefs",
    "league": "NFL",
-   "name": "Kansas City Chiefs Beanie",
-   "description": "Kansas City Chiefs knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Chiefs Red and Gold Pom Knit",
+   "description": "Red knit with CHIEFS on a gold band, white stripes, the arrowhead logo on the cuff and a red pom.",
+   "pom": true
+  },
+  {
+   "slug": "chiefs-red-gold-stripe-cuff-knit",
+   "team": "Kansas City Chiefs",
+   "league": "NFL",
+   "name": "Chiefs Red Gold Stripe Cuff Knit",
+   "pom": false,
+   "description": "Red ribbed cuffed knit with two gold stripes and the arrowhead logo on the cuff."
   },
   {
    "slug": "las-vegas-raiders-beanie",
    "team": "Las Vegas Raiders",
    "league": "NFL",
-   "name": "Las Vegas Raiders Beanie",
-   "description": "Las Vegas Raiders knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Raiders Grey and Black Pom Knit",
+   "description": "Heather grey knit with RAIDERS on a black band, white stripes, the shield logo on the cuff and a black pom.",
+   "pom": true
   },
   {
    "slug": "los-angeles-chargers-beanie",
    "team": "Los Angeles Chargers",
    "league": "NFL",
-   "name": "Los Angeles Chargers Beanie",
-   "description": "Los Angeles Chargers knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Chargers Navy and Gold Pom Knit",
+   "description": "Navy knit with CHARGERS on a gold band, white stripes, the bolt logo on the cuff and a gold pom.",
+   "pom": true
+  },
+  {
+   "slug": "chargers-navy-gold-stripe-pom-knit",
+   "team": "Los Angeles Chargers",
+   "league": "NFL",
+   "name": "Chargers Navy Gold Stripe Pom Knit",
+   "pom": true,
+   "description": "Navy knit with CHARGERS in gold between gold stripes, the bolt logo on the cuff and a gold pom."
+  },
+  {
+   "slug": "chargers-powder-blue-pom-knit",
+   "team": "Los Angeles Chargers",
+   "league": "NFL",
+   "name": "Chargers Powder Blue Pom Knit",
+   "pom": true,
+   "description": "Gold crown with CHARGERS in white on a powder blue band, a powder blue cuff with the bolt logo and a blue and gold pom."
+  },
+  {
+   "slug": "chargers-gold-crown-pom-knit",
+   "team": "Los Angeles Chargers",
+   "league": "NFL",
+   "name": "Chargers Gold Crown Pom Knit",
+   "pom": true,
+   "description": "Gold crown with powder blue and white stripes, a powder blue cuff with the bolt logo and a powder blue pom."
   },
   {
    "slug": "los-angeles-rams-beanie",
    "team": "Los Angeles Rams",
    "league": "NFL",
-   "name": "Los Angeles Rams Beanie",
-   "description": "Los Angeles Rams knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Rams Gold Band Pom Knit",
+   "description": "Royal blue knit with RAMS in blue on a gold band, white stripes, the LA logo on the cuff and a blue and gold pom.",
+   "pom": true
+  },
+  {
+   "slug": "rams-royal-band-pom-knit",
+   "team": "Los Angeles Rams",
+   "league": "NFL",
+   "name": "Rams Royal Band Pom Knit",
+   "pom": true,
+   "description": "RAMS in white on a royal blue band, gold stripes, a gold cuff with the LA logo and a blue and gold pom."
+  },
+  {
+   "slug": "rams-gold-cuff-stripe-pom-knit",
+   "team": "Los Angeles Rams",
+   "league": "NFL",
+   "name": "Rams Gold Cuff Striped Pom Knit",
+   "pom": true,
+   "description": "Royal blue crown with gold and white stripes, a gold cuff with the LA logo and a gold pom."
+  },
+  {
+   "slug": "minnesota-vikings-beanie",
+   "team": "Minnesota Vikings",
+   "league": "NFL",
+   "name": "Vikings Purple and Gold Pom Knit",
+   "pom": true,
+   "description": "Purple knit with VIKINGS on a gold band, white stripes, the Vikings logo on the cuff and a purple and gold pom."
   },
   {
    "slug": "miami-dolphins-beanie",
    "team": "Miami Dolphins",
    "league": "NFL",
-   "name": "Miami Dolphins Beanie",
-   "description": "Miami Dolphins knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Dolphins Aqua Pom Knit",
+   "description": "Aqua knit with an orange band between white stripes, the Dolphins logo on the cuff and an orange pom.",
+   "pom": true
+  },
+  {
+   "slug": "dolphins-orange-cuff-pom-knit",
+   "team": "Miami Dolphins",
+   "league": "NFL",
+   "name": "Dolphins Orange Cuff Pom Knit",
+   "pom": true,
+   "description": "Aqua crown with white and orange stripes, an orange cuff with the Dolphins logo and an aqua and orange pom."
   },
   {
    "slug": "philadelphia-eagles-beanie",
@@ -166,15 +275,25 @@
    "slug": "tampa-bay-buccaneers-beanie",
    "team": "Tampa Bay Buccaneers",
    "league": "NFL",
-   "name": "Tampa Bay Buccaneers Beanie",
-   "description": "Tampa Bay Buccaneers knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Buccaneers Red and Black Pom Knit",
+   "description": "Red knit with a black BUCCANEERS band between grey stripes, the flag logo on the cuff and a red pom.",
+   "pom": true
+  },
+  {
+   "slug": "buccaneers-grey-pom-knit",
+   "team": "Tampa Bay Buccaneers",
+   "league": "NFL",
+   "name": "Buccaneers Grey Pom Knit",
+   "pom": true,
+   "description": "Heather grey knit with BUCCANEERS on a red band, white and black stripes, the flag logo on the cuff and a red pom."
   },
   {
    "slug": "tennessee-titans-beanie",
    "team": "Tennessee Titans",
    "league": "NFL",
-   "name": "Tennessee Titans Beanie",
-   "description": "Tennessee Titans knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Titans Navy and Light Blue Pom Knit",
+   "description": "Navy knit with TITANS on a light blue band, white stripes, the Titans logo on the cuff and a navy and light blue pom.",
+   "pom": true
   },
   {
    "slug": "brooklyn-nets-beanie",
