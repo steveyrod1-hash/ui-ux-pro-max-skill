@@ -187,15 +187,25 @@
    "slug": "chicago-bulls-beanie",
    "team": "Chicago Bulls",
    "league": "NBA",
-   "name": "Chicago Bulls Beanie",
-   "description": "Chicago Bulls knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Bulls Wheat Cuff Knit",
+   "description": "Wheat-colour ribbed cuffed knit with the Chicago Bulls logo on the cuff.",
+   "pom": false
   },
   {
    "slug": "golden-state-warriors-beanie",
    "team": "Golden State Warriors",
    "league": "NBA",
-   "name": "Golden State Warriors Beanie",
-   "description": "Golden State Warriors knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Warriors Wheat Cuff Knit",
+   "description": "Wheat-colour ribbed cuffed knit with the Golden State Warriors bridge logo on the cuff.",
+   "pom": false
+  },
+  {
+   "slug": "golden-state-warriors-royal-gold-cuff-knit",
+   "team": "Golden State Warriors",
+   "league": "NBA",
+   "name": "Warriors Royal and Gold Cuff Knit",
+   "pom": false,
+   "description": "Royal blue waffle-knit crown with a gold cuff and the Golden State Warriors bridge logo."
   },
   {
    "slug": "los-angeles-clippers-beanie",
@@ -208,22 +218,25 @@
    "slug": "los-angeles-lakers-beanie",
    "team": "Los Angeles Lakers",
    "league": "NBA",
-   "name": "Los Angeles Lakers Beanie",
-   "description": "Los Angeles Lakers knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Lakers Wheat Cuff Knit",
+   "description": "Wheat-colour ribbed cuffed knit with the Los Angeles Lakers logo on the cuff.",
+   "pom": false
   },
   {
    "slug": "sacramento-kings-beanie",
    "team": "Sacramento Kings",
    "league": "NBA",
-   "name": "Sacramento Kings Beanie",
-   "description": "Sacramento Kings knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Kings Wheat Cuff Knit",
+   "description": "Wheat-colour ribbed cuffed knit with the Sacramento Kings logo on the cuff.",
+   "pom": false
   },
   {
    "slug": "chicago-white-sox-beanie",
    "team": "Chicago White Sox",
    "league": "MLB",
-   "name": "Chicago White Sox Beanie",
-   "description": "Chicago White Sox knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "White Sox Sport Pom Knit",
+   "description": "Black and heather grey knit with WHITE SOX knit in, black and white stripes, a Sox patch on the cuff and a black pom.",
+   "pom": true
   },
   {
    "slug": "los-angeles-dodgers-beanie",
@@ -243,8 +256,9 @@
    "slug": "new-york-yankees-beanie",
    "team": "New York Yankees",
    "league": "MLB",
-   "name": "New York Yankees Beanie",
-   "description": "New York Yankees knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Yankees Wheat Cuff Knit",
+   "description": "Wheat-colour ribbed cuffed knit with the NY logo embroidered in white on the cuff.",
+   "pom": false
   },
   {
    "slug": "oakland-athletics-beanie",
@@ -257,8 +271,9 @@
    "slug": "san-diego-padres-beanie",
    "team": "San Diego Padres",
    "league": "MLB",
-   "name": "San Diego Padres Beanie",
-   "description": "San Diego Padres knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Padres Wheat Cuff Knit",
+   "description": "Wheat-colour ribbed cuffed knit with the SD logo embroidered in gold on the cuff.",
+   "pom": false
   }
  ]
 }
