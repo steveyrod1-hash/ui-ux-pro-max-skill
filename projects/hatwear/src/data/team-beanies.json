@@ -122,8 +122,9 @@
    "slug": "detroit-lions-beanie",
    "team": "Detroit Lions",
    "league": "NFL",
-   "name": "Detroit Lions Beanie",
-   "description": "Detroit Lions knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Lions Blue Pom Knit",
+   "description": "Blue knit with LIONS in white between white stripes, the leaping lion logo on the cuff and a blue and white pom.",
+   "pom": true
   },
   {
    "slug": "green-bay-packers-beanie",
@@ -254,15 +255,65 @@
    "slug": "philadelphia-eagles-beanie",
    "team": "Philadelphia Eagles",
    "league": "NFL",
-   "name": "Philadelphia Eagles Beanie",
-   "description": "Philadelphia Eagles knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Eagles Black Band Pom Knit",
+   "description": "Midnight green knit with EAGLES in white on a black band, white stripes, the eagle logo on the cuff and a green and white pom.",
+   "pom": true
+  },
+  {
+   "slug": "eagles-white-band-pom-knit",
+   "team": "Philadelphia Eagles",
+   "league": "NFL",
+   "name": "Eagles White Band Pom Knit",
+   "pom": true,
+   "description": "Midnight green knit with EAGLES in green on a white band, the eagle logo on the cuff and a green pom."
+  },
+  {
+   "slug": "eagles-green-black-stripe-pom-knit",
+   "team": "Philadelphia Eagles",
+   "league": "NFL",
+   "name": "Eagles Striped Pom Knit",
+   "pom": true,
+   "description": "Midnight green knit with a black stripe between white stripes, the eagle logo on the cuff and a green and white pom."
+  },
+  {
+   "slug": "eagles-green-black-cuff-knit",
+   "team": "Philadelphia Eagles",
+   "league": "NFL",
+   "name": "Eagles Green and Black Cuff Knit",
+   "pom": false,
+   "description": "Midnight green ribbed crown with a black cuff and the eagle logo."
   },
   {
    "slug": "pittsburgh-steelers-beanie",
    "team": "Pittsburgh Steelers",
    "league": "NFL",
-   "name": "Pittsburgh Steelers Beanie",
-   "description": "Pittsburgh Steelers knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Steelers Black and Gold Pom Knit",
+   "description": "Black knit with STEELERS in gold between white and gold stripes, the Steelers logo on the cuff and a black and gold pom.",
+   "pom": true
+  },
+  {
+   "slug": "steelers-gold-band-pom-knit",
+   "team": "Pittsburgh Steelers",
+   "league": "NFL",
+   "name": "Steelers Gold Band Pom Knit",
+   "pom": true,
+   "description": "Black knit with STEELERS in black on a gold band, white stripes, the Steelers logo on the cuff and a black and gold pom."
+  },
+  {
+   "slug": "steelers-grey-band-pom-knit",
+   "team": "Pittsburgh Steelers",
+   "league": "NFL",
+   "name": "Steelers Grey Band Pom Knit",
+   "pom": true,
+   "description": "Grey crown with STEELERS in black between gold stripes, a black cuff with the Steelers logo and a black and grey pom."
+  },
+  {
+   "slug": "steelers-grey-stripe-pom-knit",
+   "team": "Pittsburgh Steelers",
+   "league": "NFL",
+   "name": "Steelers Grey Striped Pom Knit",
+   "pom": true,
+   "description": "Grey knit with black and gold stripes, a black cuff with the Steelers logo and a black and grey pom."
   },
   {
    "slug": "seattle-seahawks-beanie",
