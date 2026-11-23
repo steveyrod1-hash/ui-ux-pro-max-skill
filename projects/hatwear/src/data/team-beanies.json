@@ -91,27 +91,6 @@
    "description": "Red cuffed knit with two gold bands and white stripes, and the SF patch on the cuff."
   },
   {
-   "slug": "arizona-cardinals-beanie",
-   "team": "Arizona Cardinals",
-   "league": "NFL",
-   "name": "Arizona Cardinals Beanie",
-   "description": "Arizona Cardinals knit beanie. Photos are coming soon; the store can show it to you in person."
-  },
-  {
-   "slug": "baltimore-ravens-beanie",
-   "team": "Baltimore Ravens",
-   "league": "NFL",
-   "name": "Baltimore Ravens Beanie",
-   "description": "Baltimore Ravens knit beanie. Photos are coming soon; the store can show it to you in person."
-  },
-  {
-   "slug": "buffalo-bills-beanie",
-   "team": "Buffalo Bills",
-   "league": "NFL",
-   "name": "Buffalo Bills Beanie",
-   "description": "Buffalo Bills knit beanie. Photos are coming soon; the store can show it to you in person."
-  },
-  {
    "slug": "chicago-bears-beanie",
    "team": "Chicago Bears",
    "league": "NFL",
@@ -120,33 +99,12 @@
    "description": "Navy knit with BEARS in navy on an orange band, white stripes, the bear head logo on the cuff and a navy, orange and white pom."
   },
   {
-   "slug": "denver-broncos-beanie",
-   "team": "Denver Broncos",
-   "league": "NFL",
-   "name": "Denver Broncos Beanie",
-   "description": "Denver Broncos knit beanie. Photos are coming soon; the store can show it to you in person."
-  },
-  {
    "slug": "detroit-lions-beanie",
    "team": "Detroit Lions",
    "league": "NFL",
    "name": "Lions Blue Pom Knit",
    "description": "Blue knit with LIONS in white between white stripes, the leaping lion logo on the cuff and a blue and white pom.",
    "pom": true
-  },
-  {
-   "slug": "green-bay-packers-beanie",
-   "team": "Green Bay Packers",
-   "league": "NFL",
-   "name": "Green Bay Packers Beanie",
-   "description": "Green Bay Packers knit beanie. Photos are coming soon; the store can show it to you in person."
-  },
-  {
-   "slug": "houston-texans-beanie",
-   "team": "Houston Texans",
-   "league": "NFL",
-   "name": "Houston Texans Beanie",
-   "description": "Houston Texans knit beanie. Photos are coming soon; the store can show it to you in person."
   },
   {
    "slug": "indianapolis-colts-beanie",
@@ -365,13 +323,6 @@
    "pom": true
   },
   {
-   "slug": "brooklyn-nets-beanie",
-   "team": "Brooklyn Nets",
-   "league": "NBA",
-   "name": "Brooklyn Nets Beanie",
-   "description": "Brooklyn Nets knit beanie. Photos are coming soon; the store can show it to you in person."
-  },
-  {
    "slug": "chicago-bulls-beanie",
    "team": "Chicago Bulls",
    "league": "NBA",
@@ -394,13 +345,6 @@
    "name": "Warriors Royal and Gold Cuff Knit",
    "pom": false,
    "description": "Royal blue waffle-knit crown with a gold cuff and the Golden State Warriors bridge logo."
-  },
-  {
-   "slug": "los-angeles-clippers-beanie",
-   "team": "Los Angeles Clippers",
-   "league": "NBA",
-   "name": "Los Angeles Clippers Beanie",
-   "description": "Los Angeles Clippers knit beanie. Photos are coming soon; the store can show it to you in person."
   },
   {
    "slug": "los-angeles-lakers-beanie",
@@ -427,33 +371,12 @@
    "pom": true
   },
   {
-   "slug": "los-angeles-dodgers-beanie",
-   "team": "Los Angeles Dodgers",
-   "league": "MLB",
-   "name": "Los Angeles Dodgers Beanie",
-   "description": "Los Angeles Dodgers knit beanie. Photos are coming soon; the store can show it to you in person."
-  },
-  {
-   "slug": "miami-marlins-beanie",
-   "team": "Miami Marlins",
-   "league": "MLB",
-   "name": "Miami Marlins Beanie",
-   "description": "Miami Marlins knit beanie. Photos are coming soon; the store can show it to you in person."
-  },
-  {
    "slug": "new-york-yankees-beanie",
    "team": "New York Yankees",
    "league": "MLB",
    "name": "Yankees Wheat Cuff Knit",
    "description": "Wheat-colour ribbed cuffed knit with the NY logo embroidered in white on the cuff.",
    "pom": false
-  },
-  {
-   "slug": "oakland-athletics-beanie",
-   "team": "Oakland Athletics (A's)",
-   "league": "MLB",
-   "name": "Oakland Athletics (A's) Beanie",
-   "description": "Oakland Athletics (A's) knit beanie. Photos are coming soon; the store can show it to you in person."
   },
   {
    "slug": "san-diego-padres-beanie",
