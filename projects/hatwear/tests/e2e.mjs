@@ -327,9 +327,9 @@ const browser = await chromium.launch();
 
   await check("team beanies: six 49ers beanies with four-view galleries, shown in the shop", async () => {
     await page.goto(BASE + "/beanies", { waitUntil: "networkidle" });
-    expect((await page.locator('[data-testid="snap-card"]').count()) === 36, "expected 36 beanies");
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 37, "expected 37 beanies");
     await page.click('[role="tab"]:has-text("NBA")');
-    expect((await page.locator('[data-testid="snap-card"]').count()) === 6, "expected 6 NBA beanies");
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 7, "expected 7 NBA beanies");
     await page.click('[role="tab"]:has-text("MLB")');
     expect((await page.locator('[data-testid="snap-card"]').count()) === 6, "expected 6 MLB beanies");
     await page.goto(BASE + "/beanies/denver-broncos-beanie", { waitUntil: "networkidle" });
