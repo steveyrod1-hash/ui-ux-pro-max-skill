@@ -327,13 +327,12 @@ const browser = await chromium.launch();
 
   await check("team beanies: six 49ers beanies with four-view galleries, shown in the shop", async () => {
     await page.goto(BASE + "/beanies", { waitUntil: "networkidle" });
-    expect((await page.locator('[data-testid="snap-card"]').count()) === 59, "expected 59 beanies");
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 48, "expected 48 beanies");
     await page.click('[role="tab"]:has-text("NBA")');
-    expect((await page.locator('[data-testid="snap-card"]').count()) === 7, "expected 7 NBA beanies");
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 5, "expected 5 NBA beanies");
     await page.click('[role="tab"]:has-text("MLB")');
-    expect((await page.locator('[data-testid="snap-card"]').count()) === 6, "expected 6 MLB beanies");
-    await page.goto(BASE + "/beanies/denver-broncos-beanie", { waitUntil: "networkidle" });
-    expect((await page.locator('[data-testid="view-label"]').textContent()).includes("photo coming soon"), "placeholder missing");
+    expect((await page.locator('[data-testid="snap-card"]').count()) === 3, "expected 3 MLB beanies");
+    expect((await page.goto(BASE + "/beanies/denver-broncos-beanie")).status() === 404, "removed beanie should 404");
     await page.goto(BASE + "/beanies/49ers-waffle-cuff-knit", { waitUntil: "networkidle" });
     const tabs = page.locator('[role="tablist"][aria-label="Choose a view"] [role="tab"]');
     expect((await tabs.count()) === 4, "expected 4 thumbnails");
