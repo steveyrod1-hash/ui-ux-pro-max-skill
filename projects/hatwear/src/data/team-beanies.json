@@ -112,6 +112,14 @@
    "description": "Buffalo Bills knit beanie. Photos are coming soon; the store can show it to you in person."
   },
   {
+   "slug": "chicago-bears-beanie",
+   "team": "Chicago Bears",
+   "league": "NFL",
+   "name": "Bears Navy and Orange Pom Knit",
+   "pom": true,
+   "description": "Navy knit with BEARS in navy on an orange band, white stripes, the bear head logo on the cuff and a navy, orange and white pom."
+  },
+  {
    "slug": "denver-broncos-beanie",
    "team": "Denver Broncos",
    "league": "NFL",
@@ -144,8 +152,9 @@
    "slug": "indianapolis-colts-beanie",
    "team": "Indianapolis Colts",
    "league": "NFL",
-   "name": "Indianapolis Colts Beanie",
-   "description": "Indianapolis Colts knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Colts Blue and White Pom Knit",
+   "description": "Royal blue knit with COLTS in blue on a white band, the horseshoe logo on the cuff and a blue and white pom.",
+   "pom": true
   },
   {
    "slug": "kansas-city-chiefs-beanie",
@@ -316,11 +325,20 @@
    "description": "Grey knit with black and gold stripes, a black cuff with the Steelers logo and a black and grey pom."
   },
   {
+   "slug": "steelers-gold-crown-pom-knit",
+   "team": "Pittsburgh Steelers",
+   "league": "NFL",
+   "name": "Steelers Gold Crown Pom Knit",
+   "pom": true,
+   "description": "Gold crown with STEELERS in gold on a black band, white stripes, a black cuff with the Steelers logo and a black and gold pom."
+  },
+  {
    "slug": "seattle-seahawks-beanie",
    "team": "Seattle Seahawks",
    "league": "NFL",
-   "name": "Seattle Seahawks Beanie",
-   "description": "Seattle Seahawks knit beanie. Photos are coming soon; the store can show it to you in person."
+   "name": "Seahawks Navy and Grey Pom Knit",
+   "description": "Navy knit with SEAHAWKS on a grey band between lime green stripes, the Seahawks logo on the cuff and a navy, green and grey pom.",
+   "pom": true
   },
   {
    "slug": "tampa-bay-buccaneers-beanie",
